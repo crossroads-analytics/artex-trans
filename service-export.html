@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KFZ-Aufbereitung – Artex-Trans Autoagentur</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --blue:#13206f;
+      --ink:#0c1326;
+      --muted:#5b6685;
+      --bg:#f3f4f6;
+      --card:#ffffff;
+      --radius:16px;
+      --shadow:0 10px 30px rgba(0,0,0,.08);
+      --max:1100px;
+      --hdr-h:72px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-padding-top:var(--hdr-h)}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--ink);
+      background:#fff;
+      padding-top:var(--hdr-h);
+    }
+    header.atx-header{position:fixed !important; top:0; left:0; right:0; z-index:1000}
+
+    .hero{
+      position:relative; height:46vh; min-height:380px;
+      background:url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=2100&auto=format&fit=crop") center/cover no-repeat;
+      display:grid; place-items:center; overflow:hidden;
+    }
+    .hero::before{
+      content:""; position:absolute; inset:0;
+      background:linear-gradient(180deg, rgba(19,32,111,.55) 0%, rgba(19,32,111,.82) 55%, rgba(19,32,111,.92) 100%);
+    }
+    .hero h1{
+      position:relative; margin:0; color:#fff; font-weight:900;
+      letter-spacing:.06em; text-transform:uppercase; text-align:center; line-height:1.05; font-size:48px;
+    }
+
+    main{background:var(--bg)}
+    .wrap{
+      max-width:var(--max); margin:26px auto 48px; padding:0 16px;
+      display:grid; grid-template-columns:1fr 360px; gap:24px;
+    }
+    .card{background:var(--card); border:1px solid #e6e8f1; border-radius:var(--radius); box-shadow:var(--shadow)}
+    .card h2{margin:0; padding:16px 18px 0; color:var(--blue); font-weight:800; font-size:22px}
+    .card-body{padding:14px 16px 18px}
+    .list{display:grid; gap:12px}
+    .li{background:#fafbff; border:1px solid #e6e8f1; border-radius:12px; padding:12px 14px; font-weight:700; color:#0e1744}
+
+    /* Export info card */
+    .export-info{
+      background:#fff;
+      border:1px solid #e6e8f1;
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      margin-top:24px;
+      padding:22px 24px;
+      line-height:1.6;
+      color:#0e1744;
+      font-weight:600;
+      font-size:15px;
+    }
+    .export-info p{margin:0 0 14px}
+    .export-info p:last-child{margin-bottom:0}
+
+    /* Sidebar form */
+    .rcard h3{margin:0; padding:16px; color:var(--blue); font-weight:900; text-align:center}
+    .form-row{display:grid; grid-template-columns:1fr; gap:10px}
+    .input{width:100%; padding:12px; border:1px solid #d8dff0; border-radius:10px; background:#fff; font:inherit}
+    .btn{width:100%; padding:12px 14px; background:var(--blue); color:#fff; border:none; border-radius:10px; font-weight:800; cursor:pointer}
+    .btn:hover{opacity:.92}
+    .note{font-size:.9rem; color:#5b6685; margin-top:8px; text-align:center}
+
+    @media (max-width:980px){
+      .hero{min-height:320px; height:40vh}
+      .hero h1{font-size:40px}
+      .wrap{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+
+  <div id="header"></div>
+
+  <section class="hero" aria-label="KFZ-Aufbereitung">
+    <h1>KFZ-Aufbereitung</h1>
+  </section>
+
+  <main>
+    <div class="wrap">
+      <div>
+        <section class="card">
+          <h2>Unsere Leistungen</h2>
+          <div class="card-body">
+            <div class="list">
+              <div class="li">Professionelle Innenraumreinigung inkl. Polster- und Lederpflege</div>
+              <div class="li">Außenaufbereitung: Vorwäsche, Lackreinigung, maschinelles Polieren</div>
+              <div class="li">Lackversiegelung / Wachs für langanhaltenden Glanz & Schutz</div>
+              <div class="li">Felgen- & Reifenpflege, Kunststoff- und Gummiaufbereitung</div>
+              <div class="li">Geruchsneutralisation & Ozonbehandlung (auf Wunsch)</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Export information section -->
+        <section class="export-info">
+          <p>– Zum Zwecke des Exports erhalten unsere Kunden alle notwendigen Zolldokumente (z.B. Ausfuhranmeldung). Auf Wunsch können die entsprechenden Ausfuhrkennzeichen besorgt werden.</p>
+          <p>– Kunden aus nicht EU-Ländern entrichten den Netto – Export – Preis und eine Kaution in Höhe der gesetzlichen MwSt. von 19%. Nach der automatischen elektronischen Benachrichtigung des EU-Zolls an unsere Firma über die Ausfuhr des Fahrzeuges aus dem Geltungsbereich der EU wird die Kaution unverzüglich ausgezahlt.</p>
+          <p>– Unsere Kunden aus den benachbarten EU-Ländern bezahlen nur den Netto – Export – Preis inkl. unverzüglich der Kaution in Höhe von 19% der gesetzlichen MwSt.</p>
+          <p>– Dies gilt nur für Gewerbeträger mit gültiger EU-Umsatzsteuernummer / nicht Gewerbebetreibende zahlen den Brutto-Kaufpreis.</p>
+        </section>
+      </div>
+
+      <aside class="card rcard">
+        <h3>Rückruf-Service</h3>
+        <div class="card-body">
+          <form onsubmit="return fakeSubmit(this)">
+            <div class="form-row">
+              <input class="input" type="text" name="name" placeholder="Ihr Name" required>
+              <input class="input" type="tel"  name="tel"  placeholder="Ihre Telefonnummer" pattern="[0-9()#&+\-*. ]+">
+              <input class="input" type="email" name="email" placeholder="Ihre E-Mail" required>
+              <textarea class="input" name="msg" rows="5" placeholder="Ihr Anliegen"></textarea>
+              <button class="btn" type="submit">Senden</button>
+            </div>
+            <p id="formNote" class="note" style="display:none">Danke! Wir melden uns zeitnah.</p>
+          </form>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <!-- Load header/footer dynamically -->
+  <script>
+    (function () {
+      function loadScript(src, cb){
+        var s=document.createElement('script');
+        s.src=src; s.defer=true;
+        s.onload=function(){ cb && cb(true); };
+        s.onerror=function(){ cb && cb(false); };
+        document.head.appendChild(s);
+      }
+
+      loadScript('js/header.js', function(ok){ if(!ok){ loadScript('assets/js/header.js'); } });
+      loadScript('js/footer.js', function(ok){ if(!ok){ loadScript('assets/js/footer.js'); } });
+    })();
+
+    function fakeSubmit(form){
+      const note = form.parentElement.querySelector('#formNote');
+      if (note) note.style.display = 'block';
+      form.reset();
+      return false;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aufbereitung – Artex-Trans Autoagentur</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --brand:#13206f;
+      --ink:#0c1326;
+      --muted:#5b6685;
+      --bg:#f3f4f6;
+      --card:#ffffff;
+      --radius:16px;
+      --shadow:0 10px 30px rgba(0,0,0,.08);
+      --max:1100px;
+      --hdr-h:72px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-padding-top:var(--hdr-h)}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--ink);
+      background:#fff;
+      padding-top:var(--hdr-h);
+    }
+
+    header.atx-header{position:fixed !important; top:0; left:0; right:0; z-index:1000}
+
+    /* Titel-Bereich */
+    .titleband{
+      background:var(--brand);
+      padding:26px 16px 34px;
+      display:grid; place-items:center;
+    }
+    .title-chip{
+      background:#fff; color:var(--brand);
+      border:3px solid #02083e;
+      box-shadow:0 8px 0 #02083e;
+      border-radius:12px;
+      padding:10px 22px;
+      font-family:"Bebas Neue", system-ui, sans-serif;
+      font-size:44px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    /* Hauptlayout */
+    main{background:var(--bg)}
+    .wrap{max-width:var(--max); margin:26px auto 48px; padding:0 16px}
+
+    .grid-2{
+      display:grid; grid-template-columns:1fr 1fr; gap:20px;
+    }
+    .card{
+      background:var(--card);
+      border:1px solid #e6e8f1;
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .card img{display:block; width:100%; height:100%; object-fit:cover}
+
+    /* blauer Infoblock */
+    .blue-note{
+      margin-top:18px;
+      background:var(--brand);
+      color:#fff;
+      border-radius:12px;
+      padding:18px 18px;
+      line-height:1.55;
+      font-weight:800;
+      box-shadow:var(--shadow);
+      border:1px solid rgba(0,0,0,.05);
+    }
+    .blue-note p{margin:10px 0}
+    .blue-note p:first-child{margin-top:0}
+    .blue-note p:last-child{margin-bottom:0}
+
+    @media (max-width:1024px){
+      .grid-2{grid-template-columns:1fr}
+      .title-chip{font-size:38px}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div id="header"></div>
+
+  <!-- Titel -->
+  <section class="titleband">
+    <div class="title-chip">– Aufbereitung –</div>
+  </section>
+
+  <main>
+    <div class="wrap">
+      <!-- Bildreihe -->
+      <div class="grid-2">
+        <figure class="card">
+          <img src="https://artex-trans.de/wp-content/uploads/2021/10/IMG_2204-768x627.jpg" alt="Poseidon Detailing – Partneraufbereitung">
+        </figure>
+        <figure class="card">
+          <img src="https://artex-trans.de/wp-content/uploads/2021/10/IMG_2205-768x471.jpg" alt="Fahrzeugaufbereitung – Pflege innen und außen">
+        </figure>
+      </div>
+
+      <!-- Infoblock -->
+      <section class="blue-note">
+        <p>Sie möchten sich wieder richtig wohl fühlen in Ihrem Auto, wie damals beim Kauf? Oder Sie möchten Ihr Auto verkaufen, aber es befindet sich aktuell nicht in einem verkaufswürdigen Zustand? Kein Problem – unsere Partner-Aufbereitung finden Sie direkt bei uns vor Ort!</p>
+        <p>Unsere Jungs von <strong>Poseidon-Detailing</strong> besitzen seit vielen Jahren professionelle Erfahrung in Sachen Kratzer/Dellen-Entfernung, Außen- und Innenreinigung, Hochglanzpolitur, Versiegelung, Lederpflege und vieles mehr – sowohl private als auch gewerbliche Kunden sind bei uns willkommen!</p>
+        <p>Rufen oder schreiben Sie uns direkt an und vereinbaren Sie ein <strong>kostenloses Beratungsgespräch</strong> mit unverbindlichem <strong>Kostenvoranschlag vor Ort</strong>.</p>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <div id="footer"></div>
+
+  <!-- Header/Footer Loader -->
+  <script>
+    (function () {
+      function loadScript(src, cb){
+        const s=document.createElement('script');
+        s.src=src; s.defer=true;
+        s.onload=()=>cb && cb(true);
+        s.onerror=()=>cb && cb(false);
+        document.head.appendChild(s);
+      }
+      loadScript('js/header.js', ok=>{ if(!ok) loadScript('assets/js/header.js'); });
+      loadScript('js/footer.js', ok=>{ if(!ok) loadScript('assets/js/footer.js'); });
+    })();
+  </script>
+
+</body>
+</html>

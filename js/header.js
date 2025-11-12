@@ -1,6 +1,6 @@
 // assets/js/header.js
 (function () {
-  // Ensure font loaded
+  // Ensure Inter once
   function ensureHeadAsset(href, rel = "stylesheet") {
     if (![...document.querySelectorAll(`link[rel="${rel}"]`)].some(l => l.href.includes(href))) {
       const link = document.createElement("link");
@@ -9,7 +9,7 @@
       document.head.appendChild(link);
     }
   }
-  ensureHeadAsset("fonts.googleapis.com/css2?family=Inter:wght@400;600;700");
+  ensureHeadAsset("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700");
 
   const html = `
 <header class="atx-header">
@@ -19,13 +19,13 @@
     </a>
 
     <nav class="hdr-nav" aria-label="Hauptnavigation">
-      <a class="hdr-link" href="unser-autohaus.html">🏠 Unser Autohaus</a>
-      <a class="hdr-link" href="fahrzeugbestand.html">🚗 Fahrzeugbestand</a>
+      <a class="hdr-link" href="unser-autohaus.html">Unser Autohaus</a>
+      <a class="hdr-link" href="fahrzeugbestand.html">Fahrzeugbestand</a>
 
       <!-- Service dropdown -->
       <div class="hdr-dd" data-dd>
         <button class="hdr-link hdr-dd-toggle" aria-haspopup="true" aria-expanded="false">
-          🛠️ Service <span class="dd-caret">▾</span>
+          Service <span class="dd-caret">▾</span>
         </button>
         <div class="hdr-dd-menu" role="menu">
           <a class="hdr-dd-item" role="menuitem" href="service-inzahlungnahme.html">Inzahlungnahme</a>
@@ -34,7 +34,7 @@
         </div>
       </div>
 
-      <a class="hdr-link" href="kontakt.html">☎️ Kontakt</a>
+      <a class="hdr-link" href="kontakt.html">Kontakt</a>
     </nav>
 
     <a class="hdr-cta" href="https://www.instagram.com/artextrans/" target="_blank" rel="noopener">
@@ -44,15 +44,18 @@
 </header>`;
 
   const style = `
-.atx-header {
+.atx-header{
   background:#13206f;
   color:#fff;
   position:sticky;
   top:0;
   z-index:1000;
   box-shadow:0 2px 10px rgba(0,0,0,.08);
+  border:none;
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; /* force Inter everywhere in header */
 }
-.hdr {
+
+.hdr{
   display:flex;
   align-items:center;
   gap:18px;
@@ -60,16 +63,20 @@
   margin:0 auto;
   padding:12px 18px;
 }
-.hdr-logo img {height:44px}
-.hdr-nav {
+.hdr-logo img{height:44px}
+
+.hdr-nav{
   display:flex;
-  align-items:center;
+  align-items:center; /* same baseline for all items */
   gap:18px;
   flex:1;
   margin-left:6px;
   flex-wrap:wrap;
 }
-.hdr-link {
+
+/* unify link & button look */
+.hdr-link,
+.hdr-dd-toggle{
   display:inline-flex;
   align-items:center;
   gap:8px;
@@ -82,8 +89,29 @@
   text-decoration:none;
   white-space:nowrap;
 }
-.hdr-link:hover {background:rgba(255,255,255,.12);color:#fff;}
-.hdr-cta {
+
+.hdr-link:hover,
+.hdr-dd-toggle:hover{ background:rgba(255,255,255,.12); color:#fff; }
+
+/* remove native button styling so it truly matches anchors */
+.hdr-dd-toggle{
+  background:transparent;
+  border:0;
+  cursor:pointer;
+  appearance:none;
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  font:inherit; /* keep Inter + weight */
+  padding:8px 10px; /* same as .hdr-link */
+}
+
+.dd-caret{
+  font-size:.8em;
+  opacity:.9;
+  line-height:1;
+}
+
+.hdr-cta{
   margin-left:auto;
   background:#fff;
   color:#0a1770;
@@ -96,30 +124,14 @@
   gap:8px;
   text-decoration:none;
 }
-.hdr-dd {
+
+/* Dropdown */
+.hdr-dd{
   position:relative;
   display:inline-flex;
   align-items:center;
-  padding-top:8px;
 }
-.hdr-dd-toggle {
-  background:transparent;
-  border:none;
-  cursor:pointer;
-  font:inherit;
-  color:inherit;
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-}
-.dd-caret {
-  font-size:0.75em;
-  opacity:0.9;
-  line-height:1;
-  display:inline-block;
-  transform:translateY(1px);
-}
-.hdr-dd-menu {
+.hdr-dd-menu{
   position:absolute;
   top:100%;
   left:0;
@@ -133,8 +145,8 @@
   display:none;
   z-index:1001;
 }
-.hdr-dd.open .hdr-dd-menu {display:block;}
-.hdr-dd-item {
+.hdr-dd.open .hdr-dd-menu{display:block}
+.hdr-dd-item{
   display:block;
   padding:10px 12px;
   border-radius:8px;
@@ -143,11 +155,11 @@
   font-weight:700;
   font-size:15px;
 }
-.hdr-dd-item:hover {background:#f1f3ff;}
+.hdr-dd-item:hover{background:#f1f3ff}
 
-/* hover behaviour */
+/* Keep open on hover for pointer devices */
 @media (hover:hover){
-  .hdr-dd:hover .hdr-dd-menu{display:block;}
+  .hdr-dd:hover .hdr-dd-menu{display:block}
 }
 `;
 
@@ -168,22 +180,21 @@
       document.body.prepend(wrapper.firstElementChild);
     }
 
-    // dropdown JS for mobile/touch
+    // Dropdown behavior for touch/click + close rules
     const dd = document.querySelector('[data-dd]');
     const toggle = dd?.querySelector('.hdr-dd-toggle');
-    function closeDD(){ dd?.classList.remove('open'); toggle?.setAttribute('aria-expanded','false'); }
-    function openDD(){ dd?.classList.add('open'); toggle?.setAttribute('aria-expanded','true'); }
 
-    toggle?.addEventListener('click', e=>{
+    function closeDD(){ if(dd){ dd.classList.remove('open'); toggle?.setAttribute('aria-expanded','false'); } }
+    function openDD(){ if(dd){ dd.classList.add('open'); toggle?.setAttribute('aria-expanded','true'); } }
+
+    toggle?.addEventListener('click', (e)=>{
       e.stopPropagation();
       dd.classList.contains('open') ? closeDD() : openDD();
     });
-    dd?.addEventListener('mouseenter', openDD);
-    dd?.addEventListener('mouseleave', closeDD);
-    document.addEventListener('click', e=>{
-      if (!dd.contains(e.target)) closeDD();
+    document.addEventListener('click', (e)=>{
+      if (dd && !dd.contains(e.target)) closeDD();
     });
-    document.addEventListener('keydown', e=>{
+    document.addEventListener('keydown', (e)=>{
       if (e.key === 'Escape') closeDD();
     });
   }
