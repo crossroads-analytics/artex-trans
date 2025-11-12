@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kontakt – Artex-Trans Autoagentur</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --brand:#13206f;
+      --accent:#0a1770;
+      --ink:#111827;
+      --bg:#f5f6fa;
+      --card:#ffffff;
+      --border:#e5e7eb;
+      --shadow:0 4px 12px rgba(0,0,0,0.05);
+      --radius:14px;
+      --max:1100px;
+      --hdr-h:72px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;
+      background:var(--bg);
+      color:var(--ink);
+      padding-top:var(--hdr-h);
+    }
+    header.atx-header{position:fixed !important;top:0;left:0;right:0;z-index:1000;}
+    html{scroll-padding-top:var(--hdr-h)}
+
+    .titleband{
+      background:var(--brand);color:#fff;text-align:center;
+      padding:22px 12px 28px;border-bottom:1px solid rgba(255,255,255,.1)
+    }
+    .titleband h1{
+      margin:0;font-family:"Bebas Neue",sans-serif;
+      letter-spacing:.08em;font-size:42px;text-transform:uppercase
+    }
+
+    main{width:min(100%,var(--max));margin:auto;padding:32px 16px}
+    .contacts{
+      display:flex;flex-wrap:wrap;justify-content:center;gap:40px;margin-bottom:40px;
+    }
+    .person{text-align:center;background:var(--card);border:1px solid var(--border);
+      border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);width:320px;}
+    .person img{width:160px;height:auto;border-radius:10px;margin-bottom:10px}
+    .person h3{margin:8px 0 4px;color:var(--brand)}
+    .person .role{font-weight:600;font-size:15px;color:#4b587c;margin-bottom:6px}
+    .contact-line{display:flex;align-items:center;justify-content:center;gap:6px;margin:4px 0;font-size:14px}
+    .contact-line i{color:var(--brand)}
+    .contact-line a{text-decoration:none;color:var(--brand);font-weight:600}
+
+    form{background:var(--card);padding:24px;border:1px solid var(--border);
+      border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:40px;}
+    form .row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:14px}
+    input,textarea{
+      width:100%;padding:10px 12px;border:1px solid var(--border);
+      border-radius:8px;font-family:inherit;font-size:15px;
+    }
+    textarea{min-height:100px;resize:vertical}
+    button{
+      background:var(--brand);color:#fff;border:none;border-radius:8px;
+      padding:12px 18px;font-weight:700;cursor:pointer;width:100%;
+    }
+    button:hover{opacity:.92}
+
+    .map{border-radius:12px;overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow);margin-bottom:10px}
+
+    /* Routenplaner Button */
+    .route-btn{
+      display:inline-flex;align-items:center;gap:10px;
+      background:#ffffff;border:3px solid #02083e;border-radius:12px;
+      box-shadow:0 8px 0 #02083e;padding:12px 18px;
+      color:var(--brand);font-weight:900;letter-spacing:.02em;text-decoration:none;
+    }
+    .route-btn:hover{transform:translateY(1px)}
+    .route-btn:active{transform:translateY(3px);box-shadow:0 5px 0 #02083e}
+
+    @media(max-width:700px){
+      .row{grid-template-columns:1fr!important}
+      .person{width:100%}
+      .titleband h1{font-size:34px}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div id="header"></div>
+
+  <div class="titleband">
+    <h1>- Kontakt -</h1>
+  </div>
+
+  <main>
+    <!-- Ansprechpartner -->
+    <div class="contacts">
+      <div class="person">
+        <img src="https://artex-trans.de/wp-content/uploads/2021/08/thumbnail_Outlook-f3u0kp1r-1.png" alt="Aram Tatoyan">
+        <h3>Aram Tatoyan</h3>
+        <div class="role">Geschäftsführer</div>
+        <div class="contact-line"><i class="fa-solid fa-phone"></i> <a href="tel:01711298637">0171 / 1298637</a></div>
+        <div class="contact-line"><i class="fa-solid fa-fax"></i> <a href="tel:05318289644">0531 / 8289644</a></div>
+        <div class="contact-line"><i class="fa-solid fa-envelope"></i> <a href="mailto:aram.tatoyan@artex-trans.de">aram.tatoyan@artex-trans.de</a></div>
+      </div>
+
+      <div class="person">
+        <img src="https://artex-trans.de/wp-content/uploads/2021/08/thumbnail_Outlook-f3u0kp1r2.png" alt="Eduard Gutjahr">
+        <h3>Eduard Gutjahr</h3>
+        <div class="role">Geschäftsführer</div>
+        <div class="contact-line"><i class="fa-solid fa-phone"></i> <a href="tel:01711298637">0171 / 1298637</a></div>
+        <div class="contact-line"><i class="fa-solid fa-fax"></i> <a href="tel:05318289644">0531 / 8289644</a></div>
+        <div class="contact-line"><i class="fa-solid fa-envelope"></i> <a href="mailto:eduard.gutjahr@artex-trans.de">eduard.gutjahr@artex-trans.de</a></div>
+      </div>
+    </div>
+
+    <!-- Kontaktformular -->
+    <form>
+      <div class="row">
+        <input type="text" name="vorname" placeholder="Vorname" required>
+        <input type="text" name="nachname" placeholder="Nachname" required>
+      </div>
+      <div class="row">
+        <input type="tel" name="telefon" placeholder="Telefonnummer">
+        <input type="email" name="email" placeholder="E-Mail" required>
+      </div>
+      <textarea name="nachricht" placeholder="Nachricht"></textarea>
+      <button type="submit">Senden</button>
+    </form>
+
+    <!-- Karte -->
+    <div class="map">
+      <iframe
+        src="https://www.google.com/maps?&q=Artex-Trans%20Autoagentur%2C%20Norderneystra%C3%9Fe%207%2C%2028217%20Bremen&output=embed"
+        width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+
+    <!-- Expliziter Routenplaner-Button (öffnet Google Maps mit Ziel) -->
+    <a class="route-btn" href="https://www.google.com/maps/dir/?api=1&destination=Artex-Trans+Autoagentur%2C+Norderneystra%C3%9Fe+7%2C+28217+Bremen" target="_blank" rel="noopener">
+      <i class="fa-solid fa-location-arrow"></i> Routenplaner
+    </a>
+  </main>
+
+  <!-- Footer -->
+  <div id="footer"></div>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js" defer></script>
+  <script src="js/header.js" defer></script>
+  <script src="js/footer.js" defer></script>
+</body>
+</html>
