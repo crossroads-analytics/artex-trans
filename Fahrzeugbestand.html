@@ -8,46 +8,46 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --blue:#0a1770;
+      --blue:#13206f;          /* match the other pages */
       --ink:#0c1326;
       --bg:#f5f6fa;
       --card:#ffffff;
-      --hdr-h:72px;
+      --hdr-h:72px;            /* updated at runtime */
       --max:1100px;
+      --border:#e6e8f1;
     }
     *{box-sizing:border-box}
     html,body{
-      margin:0;padding:0;background:#fff;color:var(--ink);
-      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif
+      margin:0; padding:0; color:var(--ink);
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;
+      background:#fff;
     }
     a{color:inherit;text-decoration:none}
-    img{max-width:100%;height:auto;display:block}
+    img{max-width:100%;height:auto;display:block;border-radius:12px}
 
-    /* Header positioning fix */
+    /* Use the shared header (no overrides that change its look) */
     header.atx-header{
       position:fixed !important;
-      top:0;left:0;right:0;z-index:1000;
-      background:#0a1770 !important;
-      box-shadow:none !important;
-      border:none !important;
+      top:0; left:0; right:0;
+      z-index:1000;
+      border:0;
     }
-    body{padding-top:var(--hdr-h);background:#0a1770;}
-    html{scroll-padding-top:var(--hdr-h);}
-    #header,.atx-header,.atx-header+*{border:none!important;margin:0!important;padding:0!important;}
+    html{ scroll-padding-top: var(--hdr-h); }
+    body{ padding-top:var(--hdr-h); }
 
-    /* Titleband */
+    /* Title band (identical to Autohaus page, no white line) */
     .titleband{
       background:var(--blue);
       color:#fff;
       text-align:center;
       padding:22px 12px 28px;
-      border:none!important;
-      margin-top:-1px;
+      border:0;
+      margin-top:0;
     }
     .titleband h1{
       margin:0;
@@ -58,33 +58,15 @@
       text-transform:uppercase;
     }
 
-    /* CTA style */
-    .cta-top{
-      text-decoration:none;
-      background:#ffffff;
-      color:var(--blue);
-      font-weight:900;
-      letter-spacing:.02em;
-      padding:12px 18px;
-      border-radius:12px;
-      border:3px solid #02083e;
-      box-shadow:0 8px 0 #02083e;
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      transition:transform .1s ease;
-    }
-    .cta-top:hover{transform:translateY(1px)}
-    .cta-top:active{transform:translateY(3px);box-shadow:0 5px 0 #02083e}
-
     /* Main layout */
     main{background:var(--bg)}
     .content{max-width:var(--max);margin:24px auto;padding:0 16px 40px}
     .hero-wrap{display:grid;grid-template-columns:1fr 360px;gap:24px}
+
     .card{
       background:var(--card);
       border-radius:18px;
-      border:1px solid #e6e8f1;
+      border:1px solid var(--border);
       box-shadow:0 10px 30px rgba(0,0,0,.06);
     }
     .card h3{margin:0;padding:16px 18px 0;font-size:20px;color:var(--blue);font-weight:800}
@@ -96,9 +78,19 @@
     .cta-wrap{
       margin-top:14px;
       display:flex;
-      justify-content:center; /* center horizontally */
+      justify-content:center;
       align-items:center;
     }
+    .cta-top{
+      background:#ffffff; color:var(--blue);
+      font-weight:900; letter-spacing:.02em;
+      padding:12px 18px; border-radius:12px;
+      border:3px solid #02083e; box-shadow:0 8px 0 #02083e;
+      display:inline-flex; align-items:center; gap:10px;
+      transition:transform .1s ease;
+    }
+    .cta-top:hover{transform:translateY(1px)}
+    .cta-top:active{transform:translateY(3px);box-shadow:0 5px 0 #02083e}
 
     /* Instagram card */
     .insta-card .card-body{padding:6px 10px 14px}
@@ -113,9 +105,10 @@
 </head>
 <body>
 
-  <!-- Header -->
+  <!-- Header injected by js/header.js -->
   <div id="header"></div>
 
+  <!-- Title band -->
   <div class="titleband">
     <h1>- Unser Fahrzeugbestand -</h1>
   </div>
@@ -151,7 +144,7 @@
       <section class="card insta-card" style="margin-top:22px;">
         <div class="insta-header">
           <h3>Instagram</h3>
-          <a class="pill" href="https://www.instagram.com/artextrans/" target="_blank" rel="noopener">@artextrans folgen</a>
+          <a class="cta-top" href="https://www.instagram.com/artextrans/" target="_blank" rel="noopener">@artextrans folgen</a>
         </div>
         <div class="card-body">
           <script src="https://elfsightcdn.com/platform.js" async></script>
@@ -161,9 +154,26 @@
     </div>
   </main>
 
+  <!-- Footer injected by js/footer.js -->
   <div id="footer"></div>
 
+  <!-- Components (shared) -->
   <script src="js/header.js" defer></script>
   <script src="js/footer.js" defer></script>
+
+  <!-- Sync header height to body padding (prevents overlap, same as Autohaus) -->
+  <script>
+    (function syncHeaderOffset(){
+      function apply(){
+        const hdr = document.querySelector('header.atx-header');
+        if (!hdr) return;
+        const h = Math.round(hdr.getBoundingClientRect().height);
+        document.documentElement.style.setProperty('--hdr-h', h + 'px');
+        document.body.style.paddingTop = h + 'px';
+      }
+      window.addEventListener('load', apply);
+      window.addEventListener('resize', apply);
+    })();
+  </script>
 </body>
 </html>
