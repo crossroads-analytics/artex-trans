@@ -1,45 +1,331 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artex-Trans - Ihr Autohaus in Bremen</title>
-    <meta name="description" content="10 Jahre mobile.de-Partner. Gebrauchtwagen, PKW, LKW in Bremen. Finanzierung, Inzahlungnahme, Export-Service.">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
-    
-    <!-- CSS -->
-    <link rel="stylesheet" href="/assets/css/variables.css">
-    <link rel="stylesheet" href="/assets/css/style.css">
-    <link rel="stylesheet" href="/assets/css/components.css">
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Artex-Trans Autoagentur – An- & Verkauf seit über einem Jahrzehnt</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --brand:#13206f;
+      --brand-light:#182a9c;
+      --ink:#1f2937;
+      --muted:#5b6685;
+      --bg:#f3f4f6;
+      --card:#ffffff;
+      --radius:18px;
+      --radius-lg:26px;
+      --shadow:0 8px 30px rgba(0,0,0,.08);
+      --max:1180px;
+      --hdr-h:72px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-padding-top:var(--hdr-h)}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--ink);
+      background:var(--bg);
+      padding-top:var(--hdr-h);
+    }
+
+    header.atx-header{position:fixed !important; top:0; left:0; right:0; z-index:1000}
+
+    /* ---------- HERO ---------- */
+    .hero{
+      position:relative;
+      min-height:70vh;
+      display:grid;
+      place-items:center;
+      overflow:hidden;
+      background:url("https://artex-trans.de/wp-content/uploads/2021/08/IMG_3819-1536x2048.jpg") center/cover no-repeat;
+    }
+    .hero::before{
+      content:""; position:absolute; inset:0;
+      background:linear-gradient(180deg, rgba(19,32,111,.8) 0%, rgba(19,32,111,.92) 100%);
+    }
+    .hero-inner{
+      position:relative; text-align:center; color:#fff; padding:0 16px;
+      max-width:var(--max);
+    }
+    .hero h1{
+      margin:0 0 10px;
+      font-family:"Bebas Neue", sans-serif;
+      font-size:clamp(2.2rem, 5vw, 3.6rem);
+      letter-spacing:.06em;
+      text-transform:uppercase;
+    }
+    .hero p{
+      margin:0 0 18px;
+      font-weight:800;
+      letter-spacing:.02em;
+      font-size:1.1rem;
+    }
+    .chev{
+      position:absolute;
+      left:50%;
+      bottom:20px;
+      transform:translateX(-50%);
+      width:46px;
+      height:46px;
+      border-radius:999px;
+      border:2px solid #fff;
+      display:grid;
+      place-items:center;
+      color:#fff;
+      text-decoration:none;
+      font-size:22px;
+      box-shadow:0 6px 14px rgba(0,0,0,.25);
+      animation:chev 1.6s ease-in-out infinite;
+    }
+    @keyframes chev{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,5px)}}
+
+    /* ---------- SECTIONS ---------- */
+    .section{padding:clamp(28px, 6vw, 60px) 16px;}
+    .wrap{width:min(100%,var(--max)); margin-inline:auto;}
+
+    .h2{
+      font-family:"Bebas Neue", sans-serif;
+      font-size:clamp(1.8rem, 3.2vw, 2.4rem);
+      letter-spacing:.05em;
+      text-transform:uppercase;
+      margin:0 0 24px;
+      text-align:center;
+      color:var(--brand);
+    }
+
+    /* ---------- SERVICES ---------- */
+    .services{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:clamp(12px, 2vw, 18px);
+    }
+    .svc{
+      background:var(--card);
+      border-radius:var(--radius-lg);
+      box-shadow:var(--shadow);
+      padding:22px 18px;
+      text-align:center;
+      border:1px solid #e5e7eb;
+      transition:transform .25s ease, box-shadow .25s ease;
+    }
+    .svc:hover{
+      transform:translateY(-3px);
+      box-shadow:0 14px 35px rgba(0,0,0,.12);
+    }
+    .icon{font-size:28px; margin-bottom:8px; color:var(--brand)}
+    .svc h3{
+      margin:0 0 6px;
+      color:var(--brand);
+      font-size:1.1rem;
+    }
+    .svc p{
+      margin:0 0 14px;
+      color:var(--muted);
+      font-size:.95rem;
+    }
+    .svc a{
+      display:inline-block;
+      font-weight:700;
+      color:var(--brand);
+      border:2px solid var(--brand);
+      border-radius:999px;
+      padding:.5rem .9rem;
+      text-decoration:none;
+    }
+    .svc a:hover{background:var(--brand); color:#fff;}
+
+    /* ---------- VEHICLES BAND ---------- */
+    .band{
+      position:relative;
+      overflow:hidden;
+      background:var(--brand);
+      color:#fff;
+      border-radius:var(--radius-lg);
+      box-shadow:var(--shadow);
+    }
+    .band::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:url("https://artex-trans.de/wp-content/uploads/2021/08/IMG_3811-1536x2048.jpg") center/cover no-repeat;
+      opacity:.15;
+    }
+    .band-inner{
+      position:relative;
+      z-index:1;
+      text-align:center;
+      padding:clamp(28px, 5vw, 48px) 18px;
+    }
+    .band p{
+      max-width:820px;
+      margin:0 auto 18px;
+      font-weight:600;
+    }
+    .btn{
+      display:inline-block;
+      background:#fff;
+      color:var(--brand);
+      border:3px solid #02083e;
+      box-shadow:0 6px 0 #02083e;
+      border-radius:12px;
+      padding:.75rem 1rem;
+      font-weight:900;
+      text-decoration:none;
+      transition:transform .2s ease;
+    }
+    .btn:hover{transform:translateY(1px);}
+
+    /* ---------- MAP + CONTACT ---------- */
+    .grid-2{
+      display:grid;
+      grid-template-columns:1.4fr .6fr;
+      gap:22px;
+    }
+    .card{
+      background:var(--card);
+      border:1px solid #e6e8f1;
+      border-radius:var(--radius-lg);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .card h3{
+      margin:0;
+      padding:16px 18px;
+      color:var(--brand);
+      font-weight:900;
+    }
+    .card-body{padding:16px 18px;}
+    .map-embed{width:100%; height:370px; border:0;}
+
+    @media (max-width:1100px){
+      .services{grid-template-columns:repeat(2,1fr);}
+      .grid-2{grid-template-columns:1fr;}
+    }
+    @media (max-width:640px){
+      .services{grid-template-columns:1fr;}
+    }
+
+    @media (prefers-reduced-motion:reduce){
+      .chev{animation:none;}
+      .svc, .btn{transition:none;}
+    }
+  </style>
 </head>
-<body class="page-home">
-    
-    <!-- Header -->
-    <div id="header"></div>
+<body>
 
-    <!-- Main Content -->
-    <main id="main-content">
-        <!-- Quick redirect to Unser-Autohaus -->
-        <script>
-            window.location.href = '/Unser-Autohaus.html';
-        </script>
-        
-        <div style="padding: 4rem 2rem; text-align: center;">
-            <h1>Willkommen bei Artex-Trans</h1>
-            <p>Sie werden weitergeleitet...</p>
+  <!-- Header mount -->
+  <div id="header"></div>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-inner">
+      <h1>IHR PARTNER IN SACHEN AUTOMOBIL</h1>
+      <p>AN- UND VERKAUF SEIT ÜBER EINEM JAHRZEHNT!</p>
+    </div>
+    <a class="chev" href="#services" aria-label="Weiter nach unten">⌄</a>
+  </header>
+
+  <!-- SERVICES -->
+  <section id="services" class="section">
+    <div class="wrap">
+      <h2 class="h2">Unsere Serviceleistungen</h2>
+      <div class="services">
+        <article class="svc">
+          <div class="icon">💶</div>
+          <h3>Inzahlungnahme</h3>
+          <p>Wir verrechnen Ihr aktuelles Fahrzeug bequem beim Neukauf.</p>
+          <a href="inzahlungnahme.html">Mehr erfahren</a>
+        </article>
+
+        <article class="svc">
+          <div class="icon">🚚</div>
+          <h3>Fahrzeugauslieferung</h3>
+          <p>Deutschlandweite Lieferung Ihres neuen Fahrzeugs.</p>
+          <a href="export-service.html">Mehr erfahren</a>
+        </article>
+
+        <article class="svc">
+          <div class="icon">🪪</div>
+          <h3>Zulassungs-Service</h3>
+          <p>Auf Wunsch übernehmen wir die Zulassung in Bremen & Umgebung.</p>
+          <a href="kontakt.html">Kontakt aufnehmen</a>
+        </article>
+
+        <article class="svc">
+          <div class="icon">✨</div>
+          <h3>Aufbereitung</h3>
+          <p>Innen & außen mit unseren Profi-Partnern – wie neu!</p>
+          <a href="service-aufbereitung.html">Mehr erfahren</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- VEHICLE BAND -->
+  <section class="section">
+    <div class="wrap">
+      <div class="band">
+        <div class="band-inner">
+          <h2 class="h2" style="color:#fff;">Unsere Fahrzeuge</h2>
+          <p>Von SUV bis Kleinwagen, vom Kombi bis zum Transporter – jedes Fahrzeug erhält
+             einen gründlichen Qualitätscheck vor Übergabe.</p>
+          <a class="btn" href="fahrzeugbestand.html">🚗 Fahrzeugauswahl</a>
         </div>
-    </main>
+      </div>
+    </div>
+  </section>
 
-    <!-- Footer -->
-    <div id="footer"></div>
+  <!-- MAP + CONTACT -->
+  <section class="section">
+    <div class="wrap grid-2">
+      <div class="card">
+        <h3>Anfahrt</h3>
+        <iframe class="map-embed"
+          src="https://www.google.com/maps?q=Norderneystra%C3%9Fe%207%2C%2028217%20Bremen&output=embed"
+          loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          title="Karte – Artex-Trans Autoagentur"></iframe>
+        <div class="card-body">
+          <a class="btn" href="https://www.google.com/maps/dir/?api=1&destination=Norderneystra%C3%9Fe+7%2C+28217+Bremen"
+             target="_blank" rel="noopener">Routenplaner</a>
+        </div>
+      </div>
 
-    <!-- Scripts -->
-    <script src="/assets/js/include.js"></script>
-    <script src="/assets/js/main.js"></script>
+      <div class="card">
+        <h3>Kontakt</h3>
+        <div class="card-body" style="font-weight:700;">
+          Norderneystraße&nbsp;7<br>
+          28217&nbsp;Bremen<br>
+          Deutschland<br><br>
+          Tel.: +49&nbsp;(0)&nbsp;421&nbsp;3965171<br>
+          E-Mail: info@artex-trans.de
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer mount -->
+  <div id="footer"></div>
+
+  <!-- Smart loader -->
+  <script>
+    (function () {
+      function loadScript(src, cb){
+        var s=document.createElement('script');
+        s.src=src; s.defer=true;
+        s.onload=function(){cb&&cb(true)};
+        s.onerror=function(){cb&&cb(false)};
+        document.head.appendChild(s);
+      }
+      loadScript('js/header.js',ok=>{if(!ok)loadScript('assets/js/header.js')});
+      loadScript('js/footer.js',ok=>{if(!ok)loadScript('assets/js/footer.js')});
+    })();
+  </script>
 </body>
 </html>

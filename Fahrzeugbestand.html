@@ -8,13 +8,13 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 
   <style>
     :root{
       --blue:#0a1770;
       --ink:#0c1326;
-      --ink-60:#4b587c;
       --bg:#f5f6fa;
       --card:#ffffff;
       --hdr-h:72px;
@@ -25,25 +25,29 @@
       margin:0;padding:0;background:#fff;color:var(--ink);
       font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif
     }
-    a{color:inherit}
+    a{color:inherit;text-decoration:none}
     img{max-width:100%;height:auto;display:block}
 
-    /* Keep JS header fixed */
+    /* Header positioning fix */
     header.atx-header{
       position:fixed !important;
-      top:0; left:0; right:0;
-      z-index:1000;
+      top:0;left:0;right:0;z-index:1000;
+      background:#0a1770 !important;
+      box-shadow:none !important;
+      border:none !important;
     }
-    body{ padding-top:var(--hdr-h); }
-    html{ scroll-padding-top: var(--hdr-h); }
+    body{padding-top:var(--hdr-h);background:#0a1770;}
+    html{scroll-padding-top:var(--hdr-h);}
+    #header,.atx-header,.atx-header+*{border:none!important;margin:0!important;padding:0!important;}
 
-    /* Unified title band */
+    /* Titleband */
     .titleband{
       background:var(--blue);
       color:#fff;
       text-align:center;
       padding:22px 12px 28px;
-      border-bottom:1px solid rgba(255,255,255,.1);
+      border:none!important;
+      margin-top:-1px;
     }
     .titleband h1{
       margin:0;
@@ -54,31 +58,54 @@
       text-transform:uppercase;
     }
 
-    /* CTA inside cards only */
+    /* CTA style */
     .cta-top{
-      text-decoration:none;background:#ffffff;color:var(--blue);
-      font-weight:900;letter-spacing:.02em;padding:12px 18px;border-radius:12px;
-      border:3px solid #02083e;box-shadow:0 8px 0 #02083e;display:inline-flex;align-items:center;gap:10px
+      text-decoration:none;
+      background:#ffffff;
+      color:var(--blue);
+      font-weight:900;
+      letter-spacing:.02em;
+      padding:12px 18px;
+      border-radius:12px;
+      border:3px solid #02083e;
+      box-shadow:0 8px 0 #02083e;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      transition:transform .1s ease;
     }
     .cta-top:hover{transform:translateY(1px)}
     .cta-top:active{transform:translateY(3px);box-shadow:0 5px 0 #02083e}
 
-    /* Main */
+    /* Main layout */
     main{background:var(--bg)}
     .content{max-width:var(--max);margin:24px auto;padding:0 16px 40px}
     .hero-wrap{display:grid;grid-template-columns:1fr 360px;gap:24px}
-    .card{background:var(--card);border-radius:18px;border:1px solid #e6e8f1;box-shadow:0 10px 30px rgba(0,0,0,.06)}
+    .card{
+      background:var(--card);
+      border-radius:18px;
+      border:1px solid #e6e8f1;
+      box-shadow:0 10px 30px rgba(0,0,0,.06);
+    }
     .card h3{margin:0;padding:16px 18px 0;font-size:20px;color:var(--blue);font-weight:800}
     .card-body{padding:12px 12px 16px}
     .showroom{overflow:hidden}
     .showroom img{border-radius:16px;border:1px solid #dfe3f3}
+
+    /* Centered CTA under image */
+    .cta-wrap{
+      margin-top:14px;
+      display:flex;
+      justify-content:center; /* center horizontally */
+      align-items:center;
+    }
 
     /* Instagram card */
     .insta-card .card-body{padding:6px 10px 14px}
     .insta-header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px 0}
     .insta-header h3{padding:0}
 
-    @media (max-width: 980px){
+    @media (max-width:980px){
       .hero-wrap{grid-template-columns:1fr}
       .titleband h1{font-size:36px}
     }
@@ -86,37 +113,41 @@
 </head>
 <body>
 
-  <!-- JS header mount point -->
+  <!-- Header -->
   <div id="header"></div>
 
-  <!-- Title band only -->
   <div class="titleband">
     <h1>- Unser Fahrzeugbestand -</h1>
   </div>
 
   <main>
     <div class="content">
-      <!-- Showcase + right CTA -->
       <div class="hero-wrap">
+
+        <!-- Left: Showroom image -->
         <section class="card showroom">
           <h3>Ausstellung</h3>
           <div class="card-body">
             <img src="https://artex-trans.de/wp-content/uploads/2021/10/214F9280-2C5F-400F-88E5-8F555A07B33E_1_201_a-768x621.jpeg" alt="Ausstellung – Artex-Trans Autoagentur">
+            <div class="cta-wrap">
+              <a class="cta-top" href="https://home.mobile.de/ARTEXTRANSGBR?gclid=Cj0KCQjwt-6LBhDlARIsAIPRQcLv5Gw98keQxjOwxFQ5HP9jmykj4vYBoiICBlMNFqxr5-QyaEVbU9YaAoWAEALw_wcB#ses" target="_blank" rel="noopener">
+                🚗 Fahrzeugauswahl
+              </a>
+            </div>
           </div>
         </section>
 
+        <!-- Right: Google Reviews -->
         <aside class="card">
-          <h3>Direkt zur Auswahl</h3>
+          <h3>Kundenbewertungen</h3>
           <div class="card-body">
-            <p>Hier gelangen Sie direkt zu unseren aktuellen Fahrzeugen bei mobile.de.</p>
-            <a class="cta-top" style="display:inline-flex" href="https://home.mobile.de/ARTEXTRANSGBR?gclid=Cj0KCQjwt-6LBhDlARIsAIPRQcLv5Gw98keQxjOwxFQ5HP9jmykj4vYBoiICBlMNFqxr5-QyaEVbU9YaAoWAEALw_wcB#ses" target="_blank" rel="noopener">
-              🚗 Fahrzeugauswahl
-            </a>
+            <script src="https://elfsightcdn.com/platform.js" async></script>
+            <div class="elfsight-app-20f1db99-e699-4af8-ba5d-e71b18660505" data-elfsight-app-lazy></div>
           </div>
         </aside>
       </div>
 
-      <!-- Instagram widget (Elfsight) -->
+      <!-- Instagram -->
       <section class="card insta-card" style="margin-top:22px;">
         <div class="insta-header">
           <h3>Instagram</h3>
@@ -130,10 +161,8 @@
     </div>
   </main>
 
-  <!-- JS footer mount point -->
   <div id="footer"></div>
 
-  <!-- Components -->
   <script src="js/header.js" defer></script>
   <script src="js/footer.js" defer></script>
 </body>
