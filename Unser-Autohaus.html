@@ -226,21 +226,23 @@
     <div class="grid">
       <section class="card">
         <h2>10 Jahre mobile.de-Partner</h2>
-        <img class="certificate" src="https://artex-trans.de/wp-content/uploads/2021/08/Unbenannt.jpg" alt="Urkunde mobile.de – 10 Jahre Partner">
+        <!-- FIXED PATH -->
+        <img class="certificate" src="assets/images/Unser_Autohaus/Urkunde.jpg" alt="Urkunde mobile.de – 10 Jahre Partner">
       </section>
 
       <section class="card">
         <h2>Unser Standort</h2>
         <div class="slider" id="standort">
           <div class="slides">
-            <img src="https://artex-trans.de/wp-content/uploads/2022/10/IMG_1313-1536x2048.jpeg" alt="Standort 1">
-            <img src="https://artex-trans.de/wp-content/uploads/2021/08/IMG_3811-1536x2048.jpg" alt="Standort 2">
-            <img src="https://artex-trans.de/wp-content/uploads/2022/10/IMG_1335-1536x2048.jpeg" alt="Standort 3">
-            <img src="https://artex-trans.de/wp-content/uploads/2021/08/IMG_3819-1536x2048.jpg" alt="Standort 4">
-            <img src="https://artex-trans.de/wp-content/uploads/2021/08/IMG_3787-2-1-1536x2048.jpg" alt="Standort 5">
-            <img src="https://artex-trans.de/wp-content/uploads/2021/08/IMG_3842-1536x2048.jpg" alt="Standort 6">
-            <img src="https://artex-trans.de/wp-content/uploads/2021/08/IMG_3821-1536x2048.jpg" alt="Standort 7">
-            <img src="https://artex-trans.de/wp-content/uploads/2021/08/IMG_3814-1536x2048.jpg" alt="Standort 8">
+            <!-- FIXED PATHS + bmw.jpeg extension -->
+            <img src="assets/images/Unser_Autohaus/banner.jpg"        alt="Standort 1">
+            <img src="assets/images/Unser_Autohaus/bmw.jpeg"          alt="Standort 2">
+            <img src="assets/images/Unser_Autohaus/buroschild.jpg"    alt="Standort 3">
+            <img src="assets/images/Unser_Autohaus/banner2.jpg"       alt="Standort 4">
+            <img src="assets/images/Unser_Autohaus/infinity.jpg"      alt="Standort 5">
+            <img src="assets/images/Unser_Autohaus/banner3.jpg"       alt="Standort 6">
+            <img src="assets/images/Unser_Autohaus/schreibtisch.jpg"  alt="Standort 7">
+            <img src="assets/images/Unser_Autohaus/toyota.jpeg"        alt="Standort 8">
           </div>
           <button class="ctrl prev" aria-label="Zurück">‹</button>
           <button class="ctrl next" aria-label="Weiter">›</button>
@@ -270,13 +272,15 @@
   <!-- Standort-Slider -->
   <script>
     (function(){
-      const root=document.getElementById('standort');
-      const track=root.querySelector('.slides');
-      const slides=[...track.children];
-      const prev=root.querySelector('.prev'), next=root.querySelector('.next');
-      const dotsWrap=document.getElementById('standort-dots');
+      const root  = document.getElementById('standort');
+      const track = root.querySelector('.slides');
+      const slides= [...track.children];
+      const prev  = root.querySelector('.prev');
+      const next  = root.querySelector('.next');
+      const dotsWrap = document.getElementById('standort-dots');
       let i=0, timer;
 
+      // build dots
       slides.forEach((_,idx)=>{
         const d=document.createElement('span');
         d.className='dot'+(idx===0?' active':'');
@@ -286,8 +290,8 @@
       const dots=[...dotsWrap.children];
 
       function update(){
-        track.style.transform=\`translateX(-\${i*100}%)\`;
-        dots.forEach((d,idx)=>d.classList.toggle('active',idx===i));
+        track.style.transform = `translateX(-${i*100}%)`;
+        dots.forEach((d,idx)=>d.classList.toggle('active', idx===i));
       }
       function go(idx){ i=idx; update(); }
       function step(n){ i=(i+n+slides.length)%slides.length; update(); }
