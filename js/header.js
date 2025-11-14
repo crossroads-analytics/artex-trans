@@ -25,7 +25,7 @@
 
     <nav class="hdr-nav" id="mainNav" aria-label="Hauptnavigation">
       <a class="hdr-link" href="unser_autohaus.html">Unser Autohaus</a>
-      <a class="hdr-link" href="fahrzeugbestand.html">Fahrzeugbestand</a>
+      <a class="hdr-link" href="Fahrzeugbestand.html">Fahrzeugbestand</a>
 
       <!-- Service dropdown -->
       <div class="hdr-dd" data-dd>
@@ -39,7 +39,7 @@
         </div>
       </div>
 
-      <a class="hdr-link" href="kontakt.html">Kontakt</a>
+      <a class="hdr-link" href="Kontakt.html">Kontakt</a>
 
       <!-- CTA stays right on desktop, moves into panel on mobile -->
       <a class="hdr-cta" href="https://www.instagram.com/artextrans/" target="_blank" rel="noopener">
