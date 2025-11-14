@@ -24,7 +24,7 @@
     </button>
 
     <nav class="hdr-nav" id="mainNav" aria-label="Hauptnavigation">
-      <a class="hdr-link" href="unser-autohaus.html">Unser Autohaus</a>
+      <a class="hdr-link" href="unser_autohaus.html">Unser Autohaus</a>
       <a class="hdr-link" href="fahrzeugbestand.html">Fahrzeugbestand</a>
 
       <!-- Service dropdown -->
@@ -33,9 +33,9 @@
           Service <span class="dd-caret">▾</span>
         </button>
         <div class="hdr-dd-menu" role="menu">
-          <a class="hdr-dd-item" role="menuitem" href="service-inzahlungnahme.html">Inzahlungnahme</a>
-          <a class="hdr-dd-item" role="menuitem" href="service-export.html">Export-Service</a>
-          <a class="hdr-dd-item" role="menuitem" href="service-aufbereitung.html">KFZ-Aufbereitung</a>
+          <a class="hdr-dd-item" role="menuitem" href="service_inzahlungnahme.html">Inzahlungnahme</a>
+          <a class="hdr-dd-item" role="menuitem" href="service_export.html">Export-Service</a>
+          <a class="hdr-dd-item" role="menuitem" href="service_aufbereitung.html">KFZ-Aufbereitung</a>
         </div>
       </div>
 
