@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Terminbuchung – Artex-Trans Autoagentur</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --brand:#13206f;
+      --border:#e5e7eb;
+      --bg:#f5f6fa;
+      --card:#ffffff;
+      --radius:18px;
+      --shadow:0 6px 24px rgba(0,0,0,.06);
+      --max:1100px;
+      --hdr-h:72px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:var(--bg);
+      padding-top:var(--hdr-h);
+    }
+    header.atx-header{position:fixed !important; top:0; left:0; right:0; z-index:1000;}
+
+    html{scroll-padding-top:var(--hdr-h)}
+
+    .titleband{
+      background:var(--brand);
+      color:#fff;
+      text-align:center;
+      padding:26px 12px 34px;
+    }
+    .titleband h1{
+      margin:0;
+      font-family:"Bebas Neue",sans-serif;
+      letter-spacing:.08em;
+      font-size:44px;
+      text-transform:uppercase;
+    }
+
+    /* PAGE LAYOUT */
+    main{
+      width:min(100%,var(--max));
+      margin:auto;
+      padding:32px 16px 60px;
+    }
+
+    /* CARD */
+    .card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:30px 26px 40px;
+      margin-bottom:40px;
+    }
+    .card h2{
+      margin-top:0;
+      font-size:24px;
+      font-weight:800;
+      color:var(--brand);
+    }
+    .card ul{
+      margin:0 0 28px 20px;   /* ← mehr Abstand nach Bulletliste */
+      padding:0;
+    }
+
+    /* BUTTON ROW */
+    .cta-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:16px;
+      margin-top:32px;        /* ← deutlich mehr Abstand */
+    }
+
+    .cta{
+      flex:1;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:16px 18px;
+      font-size:17px;
+      font-weight:700;
+      text-decoration:none;
+      border-radius:12px;
+      border:2px solid var(--brand);
+      transition:.2s ease;
+    }
+    .cta.phone{
+      background:var(--brand);
+      color:#fff;
+    }
+    .cta.phone:hover{opacity:.92;}
+
+    .cta.whatsapp{
+      background:#fff;
+      color:var(--brand);
+      border:2px solid #1aaa55;
+    }
+    .cta.whatsapp:hover{
+      background:#1aaa55;
+      color:#fff;
+    }
+
+    /* FORM CARD */
+    .form-card{
+      background:#fff;
+      border:1px solid var(--border);
+      box-shadow:var(--shadow);
+      border-radius:var(--radius);
+      padding:26px;
+    }
+
+    .form-card h3{
+      margin-top:0;
+      color:var(--brand);
+      font-size:22px;
+      font-weight:800;
+    }
+    .row{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+      margin-bottom:16px;
+    }
+    input,textarea{
+      width:100%;
+      padding:12px;
+      border:1px solid var(--border);
+      border-radius:10px;
+      font-family:inherit;
+      font-size:15px;
+    }
+    textarea{min-height:120px; resize:vertical;}
+
+    button{
+      background:var(--brand);
+      border:none;
+      border-radius:10px;
+      width:100%;
+      padding:14px;
+      color:#fff;
+      font-weight:700;
+      cursor:pointer;
+      font-size:16px;
+      transition:.2s;
+    }
+    button:hover{opacity:.92;}
+
+    @media(max-width:700px){
+      .row{grid-template-columns:1fr}
+      .cta{font-size:15px;}
+    }
+  </style>
+
+</head>
+<body>
+
+  <!-- Header -->
+  <div id="header"></div>
+
+  <div class="titleband">
+    <h1>- Terminbuchung -</h1>
+  </div>
+
+  <main>
+
+    <section class="card">
+      <h2>Besichtigungstermin vereinbaren</h2>
+
+      <p>Sie möchten eines unserer Fahrzeuge vor Ort anschauen oder eine Probefahrt vereinbaren? 
+        Wählen Sie einfach eine der folgenden Möglichkeiten, um schnell einen Termin zu buchen.</p>
+
+      <ul>
+        <li><strong>Telefonisch anfragen</strong> – wir finden gemeinsam einen passenden Termin.</li>
+        <li><strong>Per WhatsApp schreiben</strong> – ideal, wenn Sie kurz Daten oder Bilder mitschicken möchten.</li>
+        <li><strong>Rückruf-Wunsch</strong> – nutzen Sie das Formular im Footer, wir melden uns bei Ihnen.</li>
+      </ul>
+
+      <!-- BUTTONS -->
+      <div class="cta-row">
+        <a class="cta phone" href="tel:+491712759067">
+          📞 Jetzt anrufen &nbsp; +49&nbsp;171&nbsp;2759067
+        </a>
+
+        <a class="cta whatsapp" href="https://wa.me/491712759067?text=Hallo%2C%20ich%20möchte%20gerne%20einen%20Besichtigungstermin%20vereinbaren." target="_blank">
+          💬 WhatsApp Termin
+        </a>
+      </div>
+
+    </section>
+
+
+  </main>
+
+  <div id="footer"></div>
+
+  <!-- Scripts -->
+  <script src="js/header.js" defer></script>
+  <script src="js/footer.js" defer></script>
+
+</body>
+</html>

@@ -40,6 +40,8 @@
       </div>
 
       <a class="hdr-link" href="Kontakt.html">Kontakt</a>
+      <a class="hdr-link" href="terminbuchung.html">Terminbuchung</a>
+
 
       <!-- CTA stays right on desktop, moves into panel on mobile -->
       <a class="hdr-cta" href="https://www.instagram.com/artextrans/" target="_blank" rel="noopener">
