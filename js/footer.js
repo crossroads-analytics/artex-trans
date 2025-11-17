@@ -111,3 +111,171 @@
     render();
   }
 })();
+
+
+
+// --- Quick Contact FAB (Phone + WhatsApp) with custom icons & rotate animation ---
+(function () {
+  if (!document.getElementById('atx-quickcontact-style')) {
+    const css = `
+      .qc-wrap {
+        position: fixed;
+        right: 18px;
+        bottom: 18px;
+        z-index: 1500;
+        font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      }
+
+      /* List is non-clickable until opened (prevents accidental taps) */
+      .qc-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin: 0 0 10px 0;
+        padding: 0;
+        list-style: none;
+        align-items: flex-end;
+        pointer-events: none;
+      }
+      .qc-wrap.open .qc-list { pointer-events: auto; }
+
+      .qc-item {
+        transform: translateY(10px);
+        opacity: 0;
+        transition: all 0.25s ease;
+        position: relative;
+      }
+      .qc-wrap.open .qc-item { transform: translateY(0); opacity: 1; }
+
+      .qc-btn, .qc-toggle {
+        width: 56px; height: 56px;
+        border-radius: 999px; border: none;
+        cursor: pointer; display: grid; place-items: center;
+        box-shadow: 0 10px 30px rgba(0,0,0,.2);
+        text-decoration: none;
+      }
+      .qc-btn img, .qc-btn svg, .qc-toggle img, .qc-toggle svg {
+        width: 28px; height: 28px; display: block;
+      }
+
+      /* Larger WhatsApp image */
+      .qc-btn.qc-wa img { width: 52px; height: 52px; object-fit: contain; }
+
+      .qc-phone { background: #25d366; color: #fff; }
+      .qc-wa { background: #1ebe5d; color: #fff; }
+      .qc-toggle { background: #13206f; color: #fff; position: relative; }
+
+      /* Toggle animation: chat icon rotates; close icon crossfades in */
+      .qc-toggle .qc-chat-icon {
+        transition: transform .25s ease, opacity .2s ease;
+        transform: rotate(0deg);
+        opacity: 1;
+      }
+      .qc-toggle .qc-close-icon {
+        position: absolute;
+        width: 24px; height: 24px;
+        opacity: 0;
+        transition: opacity .2s ease, transform .25s ease;
+        transform: rotate(-90deg);
+      }
+      .qc-toggle[aria-expanded="true"] .qc-chat-icon {
+        transform: rotate(135deg);
+        opacity: 0;
+      }
+      .qc-toggle[aria-expanded="true"] .qc-close-icon {
+        opacity: 1;
+        transform: rotate(0deg);
+      }
+
+      /* Hover label (desktop) */
+      .qc-label {
+        position: absolute;
+        right: 66px;
+        background: #ffffff;
+        color: #13206f;
+        border: 1px solid #e5e7eb;
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-weight: 700;
+        font-size: 12px;
+        box-shadow: 0 8px 20px rgba(0,0,0,.12);
+        opacity: 0;
+        transition: opacity .2s ease;
+        pointer-events: none;
+        white-space: nowrap;
+      }
+      .qc-wrap.open .qc-item:hover .qc-label { opacity: 1; }
+
+      @media (max-width: 480px) {
+        .qc-wrap { right: 14px; bottom: 14px; }
+        .qc-btn, .qc-toggle { width: 52px; height: 52px; }
+      }
+    `;
+    const s = document.createElement('style');
+    s.id = 'atx-quickcontact-style';
+    s.textContent = css;
+    document.head.appendChild(s);
+  }
+
+  const wrap = document.createElement('div');
+  wrap.className = 'qc-wrap';
+  wrap.innerHTML = `
+    <ul class="qc-list" aria-label="Schnellkontakt">
+      <li class="qc-item">
+        <a class="qc-btn qc-phone" href="tel:+491712759067"
+           aria-label="Anrufen: +49 171 2759067" rel="nofollow">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M6.6 10.8c1.4 2.7 3.9 5.1 6.6 6.6l2.2-2.2c.3-.3.8-.4 1.2-.3 1 .3 2 .5 3.1.5.7 0 1.3.6 1.3 1.3v3.5c0 .7-.6 1.3-1.3 1.3C9.9 21.5 2.5 14.1 2.5 4.3c0-.7.6-1.3 1.3-1.3H7c.7 0 1.3.6 1.3 1.3 0 1.1.2 2.1.5 3.1.1.4 0 .9-.3 1.2L6.6 10.8z" fill="#fff"/>
+          </svg>
+        </a>
+        <span class="qc-label" role="presentation">Anrufen</span>
+      </li>
+
+      <li class="qc-item">
+        <a class="qc-btn qc-wa"
+           href="https://wa.me/491712759067?text=Hallo%20Artex-Trans%2C%20ich%20habe%20eine%20Frage."
+           target="_blank" rel="noopener nofollow"
+           aria-label="WhatsApp Nachricht senden">
+          <img src="assets/images/footer/whatsapp.png" alt="" loading="lazy">
+        </a>
+        <span class="qc-label" role="presentation">WhatsApp</span>
+      </li>
+    </ul>
+
+    <button class="qc-toggle" type="button"
+            aria-label="Schnellkontakt öffnen" aria-expanded="false">
+      <img class="qc-chat-icon" src="assets/images/footer/chat.png" alt="" />
+      <svg class="qc-close-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M6 6l12 12M18 6L6 18" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+  `;
+  document.body.appendChild(wrap);
+
+  const toggle = wrap.querySelector('.qc-toggle');
+
+  // open/close on toggle click
+  toggle.addEventListener('click', () => {
+    const open = wrap.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    toggle.setAttribute('aria-label', open ? 'Schnellkontakt schließen' : 'Schnellkontakt öffnen');
+  });
+
+  // close when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!wrap.contains(e.target) && wrap.classList.contains('open')) {
+      wrap.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Schnellkontakt öffnen');
+    }
+  });
+
+  // close on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && wrap.classList.contains('open')) {
+      wrap.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Schnellkontakt öffnen');
+    }
+  });
+})();
