@@ -13,12 +13,10 @@
   <style>
     :root{
       --brand:#13206f;
-      --brand-light:#182a9c;
       --ink:#1f2937;
       --muted:#5b6685;
       --bg:#f3f4f6;
       --card:#ffffff;
-      --radius:18px;
       --radius-lg:26px;
       --shadow:0 8px 30px rgba(0,0,0,.08);
       --max:1180px;
@@ -46,22 +44,40 @@
       display:grid;
       place-items:center;
       overflow:hidden;
-      background:url("https://artex-trans.de/wp-content/uploads/2021/08/IMG_3819-1536x2048.jpg") center/cover no-repeat;
-      will-change:background-position;
     }
+
+    /* ❤️ UPDATED: more transparent blue overlay */
     .hero::before{
-      content:""; position:absolute; inset:0;
-      background:linear-gradient(180deg, rgba(19,32,111,.8) 0%, rgba(19,32,111,.92) 100%);
+      content:""; position:absolute; inset:0; z-index:2;
+      background:linear-gradient(
+        180deg,
+        rgba(19,32,111,.55) 0%,
+        rgba(19,32,111,.70) 100%
+      );
+      pointer-events:none;
     }
+
+    .hero-stack{
+      position:absolute; inset:0; z-index:0;
+    }
+    .hero-stack img{
+      position:absolute; inset:0;
+      width:100%; height:100%;
+      object-fit:cover; object-position:center;
+      opacity:0; transition:opacity .8s ease-in-out; /* ❤️ faster fade */
+      will-change:opacity, transform;
+    }
+    .hero-stack img.is-visible{opacity:1}
+
     .hero-inner{
-      position:relative; text-align:center; color:#fff; padding:0 16px;
+      position:relative; z-index:3;
+      text-align:center; color:#fff; padding:0 16px;
       max-width:var(--max);
       opacity:0; transform:translateY(14px);
       animation:hero-in .9s var(--reveal-ease) .15s forwards;
     }
-    @keyframes hero-in{
-      to{opacity:1; transform:none}
-    }
+    @keyframes hero-in{ to{opacity:1; transform:none} }
+
     .hero h1{
       margin:0 0 10px;
       font-family:"Bebas Neue", sans-serif;
@@ -77,20 +93,12 @@
       opacity:0; transform:translateY(10px);
       animation:hero-in .9s var(--reveal-ease) .3s forwards;
     }
+
     .chev{
-      position:absolute;
-      left:50%;
-      bottom:20px;
-      transform:translateX(-50%);
-      width:46px;
-      height:46px;
-      border-radius:999px;
-      border:2px solid #fff;
-      display:grid;
-      place-items:center;
-      color:#fff;
-      text-decoration:none;
-      font-size:22px;
+      position:absolute; z-index:3;
+      left:50%; bottom:20px; transform:translateX(-50%);
+      width:46px; height:46px; border-radius:999px; border:2px solid #fff;
+      display:grid; place-items:center; color:#fff; text-decoration:none; font-size:22px;
       box-shadow:0 6px 14px rgba(0,0,0,.25);
       animation:chev 1.6s ease-in-out infinite;
     }
@@ -124,118 +132,58 @@
       text-align:center;
       border:1px solid #e5e7eb;
       transition:transform .25s ease, box-shadow .25s ease;
-      /* reveal base */
       opacity:0; transform:translateY(18px);
     }
-    .svc:hover{
-      transform:translateY(-3px);
-      box-shadow:0 14px 35px rgba(0,0,0,.12);
-    }
+    .svc:hover{ transform:translateY(-3px); box-shadow:0 14px 35px rgba(0,0,0,.12); }
     .svc.reveal-in{animation:reveal-up var(--reveal-dur) var(--reveal-ease) forwards}
     .svc.reveal-in[data-i]{animation-delay:calc(var(--i,0) * 90ms)}
     .icon{font-size:28px; margin-bottom:8px; color:var(--brand)}
-    .svc h3{
-      margin:0 0 6px;
-      color:var(--brand);
-      font-size:1.1rem;
-    }
-    .svc p{
-      margin:0 0 14px;
-      color:var(--muted);
-      font-size:.95rem;
-    }
+    .svc h3{ margin:0 0 6px; color:var(--brand); font-size:1.1rem; }
+    .svc p{ margin:0 0 14px; color:var(--muted); font-size:.95rem; }
     .svc a{
-      display:inline-block;
-      font-weight:700;
-      color:var(--brand);
-      border:2px solid var(--brand);
-      border-radius:999px;
-      padding:.5rem .9rem;
-      text-decoration:none;
+      display:inline-block; font-weight:700; color:var(--brand);
+      border:2px solid var(--brand); border-radius:999px; padding:.5rem .9rem; text-decoration:none;
     }
     .svc a:hover{background:var(--brand); color:#fff;}
 
-    /* ---------- VEHICLES BAND ---------- */
+    /* ---------- VEHICLE BAND ---------- */
     .band{
-      position:relative;
-      overflow:hidden;
-      background:var(--brand);
-      color:#fff;
-      border-radius:var(--radius-lg);
-      box-shadow:var(--shadow);
+      position:relative; overflow:hidden; background:var(--brand); color:#fff;
+      border-radius:var(--radius-lg); box-shadow:var(--shadow);
       opacity:0; transform:translateY(16px);
     }
     .band::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:url("https://artex-trans.de/wp-content/uploads/2021/08/IMG_3811-1536x2048.jpg") center/cover no-repeat;
+      content:""; position:absolute; inset:0;
+      background:url("assets/images/Unser_Autohaus/banner2.jpg") center/cover no-repeat;
       opacity:.15;
     }
     .band.reveal-in{animation:reveal-up var(--reveal-dur) var(--reveal-ease) .08s forwards}
-    .band-inner{
-      position:relative;
-      z-index:1;
-      text-align:center;
-      padding:clamp(28px, 5vw, 48px) 18px;
-    }
-    .band p{
-      max-width:820px;
-      margin:0 auto 18px;
-      font-weight:600;
-    }
+    .band-inner{ position:relative; z-index:1; text-align:center; padding:clamp(28px, 5vw, 48px) 18px; }
+    .band p{ max-width:820px; margin:0 auto 18px; font-weight:600; }
     .btn{
-      display:inline-block;
-      background:#fff;
-      color:var(--brand);
-      border:3px solid #02083e;
-      box-shadow:0 6px 0 #02083e;
-      border-radius:12px;
-      padding:.75rem 1rem;
-      font-weight:900;
-      text-decoration:none;
-      transition:transform .2s ease;
+      display:inline-block; background:#fff; color:var(--brand);
+      border:3px solid #02083e; box-shadow:0 6px 0 #02083e; border-radius:12px;
+      padding:.75rem 1rem; font-weight:900; text-decoration:none; transition:transform .2s ease;
     }
     .btn:hover{transform:translateY(1px);}
 
     /* ---------- MAP + CONTACT ---------- */
-    .grid-2{
-      display:grid;
-      grid-template-columns:1.4fr .6fr;
-      gap:22px;
-    }
+    .grid-2{ display:grid; grid-template-columns:1.4fr .6fr; gap:22px; }
     .card{
-      background:var(--card);
-      border:1px solid #e6e8f1;
-      border-radius:var(--radius-lg);
-      box-shadow:var(--shadow);
-      overflow:hidden;
+      background:var(--card); border:1px solid #e6e8f1; border-radius:var(--radius-lg);
+      box-shadow:var(--shadow); overflow:hidden;
       opacity:0; transform:translateY(18px);
     }
     .card.reveal-in{animation:reveal-up var(--reveal-dur) var(--reveal-ease) forwards}
     .card.reveal-in[data-i]{animation-delay:calc(var(--i,0) * 120ms)}
-    .card h3{
-      margin:0;
-      padding:16px 18px;
-      color:var(--brand);
-      font-weight:900;
-    }
-    .card-body{padding:16px 18px;}
-    .map-embed{width:100%; height:370px; border:0;}
+    .card h3{ margin:0; padding:16px 18px; color:var(--brand); font-weight:900; }
+    .card-body{ padding:16px 18px; }
+    .map-embed{ width:100%; height:370px; border:0; }
 
-    /* Reveal keyframes */
-    @keyframes reveal-up{
-      from{opacity:0; transform:translateY(18px)}
-      to{opacity:1; transform:none}
-    }
+    @keyframes reveal-up{ from{opacity:0; transform:translateY(18px)} to{opacity:1; transform:none} }
 
-    @media (max-width:1100px){
-      .services{grid-template-columns:repeat(2,1fr);}
-      .grid-2{grid-template-columns:1fr;}
-    }
-    @media (max-width:640px){
-      .services{grid-template-columns:1fr;}
-    }
+    @media (max-width:1100px){ .services{grid-template-columns:repeat(2,1fr);} .grid-2{grid-template-columns:1fr;} }
+    @media (max-width:640px){ .services{grid-template-columns:1fr;} }
 
     @media (prefers-reduced-motion:reduce){
       .chev{animation:none;}
@@ -249,8 +197,13 @@
   <!-- Header mount -->
   <div id="header"></div>
 
-  <!-- HERO -->
+  <!-- HERO with rotating images -->
   <header class="hero" id="hero">
+    <div class="hero-stack" aria-hidden="true">
+      <img id="heroImgA" alt="">
+      <img id="heroImgB" alt="">
+    </div>
+
     <div class="hero-inner">
       <h1>IHR PARTNER IN SACHEN AUTOMOBIL</h1>
       <p>AN- UND VERKAUF SEIT ÜBER EINEM JAHRZEHNT!</p>
@@ -267,14 +220,14 @@
           <div class="icon">💶</div>
           <h3>Inzahlungnahme</h3>
           <p>Wir verrechnen Ihr aktuelles Fahrzeug bequem beim Neukauf.</p>
-          <a href="inzahlungnahme.html">Mehr erfahren</a>
+          <a href="service-inzahlungnahme.html">Mehr erfahren</a>
         </article>
 
         <article class="svc" data-i>
           <div class="icon">🚚</div>
           <h3>Fahrzeugauslieferung</h3>
           <p>Deutschlandweite Lieferung Ihres neuen Fahrzeugs.</p>
-          <a href="export-service.html">Mehr erfahren</a>
+          <a href="service-export.html">Mehr erfahren</a>
         </article>
 
         <article class="svc" data-i>
@@ -354,50 +307,81 @@
     })();
   </script>
 
-  <!-- Reveal on scroll + parallax -->
+  <!-- Reveal on scroll + HERO rotation -->
   <script>
     (function(){
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      // Assign stagger index to items with [data-i]
+      // Stagger indices
       document.querySelectorAll('.js-stagger').forEach(group => {
-        [...group.querySelectorAll('[data-i]')].forEach((el, i) => {
-          el.style.setProperty('--i', i);
-        });
+        [...group.querySelectorAll('[data-i]')].forEach((el, i) => el.style.setProperty('--i', i));
       });
 
+      // Reveal on scroll
       if (!reduce && 'IntersectionObserver' in window) {
         const io = new IntersectionObserver((entries) => {
-          entries.forEach(e => {
-            if (e.isIntersecting) {
-              e.target.classList.add('reveal-in');
-              io.unobserve(e.target);
-            }
-          });
+          entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('reveal-in'); io.unobserve(e.target);} });
         }, {rootMargin:'-5% 0px -10% 0px', threshold:0.1});
-
-        // observe service cards, band, and cards
         document.querySelectorAll('.svc, .band, .card').forEach(el => io.observe(el));
       } else {
-        // Fallback: make everything visible
         document.querySelectorAll('.svc, .band, .card').forEach(el=>{
-          el.classList.add('reveal-in');
-          el.style.opacity = 1; el.style.transform = 'none';
+          el.classList.add('reveal-in'); el.style.opacity = 1; el.style.transform = 'none';
         });
       }
 
-      // Subtle hero parallax (background-position)
-      const hero = document.getElementById('hero');
-      if (hero && !reduce) {
-        const onScroll = () => {
-          const y = window.scrollY || window.pageYOffset;
-          // move background a tiny bit
-          hero.style.backgroundPosition = `center calc(50% + ${Math.min(y*0.08, 40)}px)`;
+      /* ---------- HERO IMAGE ROTATION (UPDATED SPEED) ---------- */
+      const A = document.getElementById('heroImgA');
+      const B = document.getElementById('heroImgB');
+      if (!A || !B) return;
+
+      const base = 'assets/images/Unser_Autohaus/';
+      const slides = [
+        'banner.jpg',
+        'bmw.jpeg',
+        'buroschild.jpg',
+        'banner2.jpg',
+        'infinity.jpg',
+        'banner3.jpg',
+        'schreibtisch.jpg',
+        'toyota.jpg'
+      ].map(n => base + n);
+
+      slides.forEach(src => { const im = new Image(); im.src = src; });
+
+      let i = 0, showA = true;
+
+      const DURATION = 3000; // ❤️ faster rotation: every 4 seconds
+      const FADE = 800;      // ❤️ faster fade: 0.8s
+
+      function setImg(el, src){ el.src = src; }
+
+      setImg(A, slides[i]);
+      A.classList.add('is-visible');
+
+      if (reduce || slides.length < 2) return;
+
+      function next(){
+        const nextIndex = (i + 1) % slides.length;
+        const showEl = showA ? B : A;
+        const hideEl = showA ? A : B;
+
+        const tmp = new Image();
+        tmp.onload = () => {
+          showEl.src = tmp.src;
+          showEl.classList.add('is-visible');
+          hideEl.classList.remove('is-visible');
+          setTimeout(() => { showA = !showA; i = nextIndex; }, FADE);
         };
-        onScroll();
-        window.addEventListener('scroll', onScroll, {passive:true});
+        tmp.src = slides[nextIndex] + '?v=' + nextIndex;
       }
+
+      let timer = setInterval(next, DURATION);
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) clearInterval(timer);
+        else timer = setInterval(next, DURATION);
+      }, {passive:true});
     })();
   </script>
+
 </body>
 </html>
