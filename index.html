@@ -35,20 +35,27 @@
       padding-top:var(--hdr-h);
     }
 
-    header.atx-header{position:fixed !important; top:0; left:0; right:0; z-index:1000}
+    header.atx-header{
+      position:fixed !important;
+      top:0; left:0; right:0;
+      z-index:1000;
+    }
 
     /* ---------- HERO ---------- */
     .hero{
       position:relative;
-      min-height:70vh;
+      min-height:60vh;              /* smaller hero */
       display:grid;
       place-items:center;
       overflow:hidden;
     }
 
-    /* ❤️ UPDATED: more transparent blue overlay */
+    /* Blaues Overlay – transparenter */
     .hero::before{
-      content:""; position:absolute; inset:0; z-index:2;
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:2;
       background:linear-gradient(
         180deg,
         rgba(19,32,111,.55) 0%,
@@ -58,25 +65,37 @@
     }
 
     .hero-stack{
-      position:absolute; inset:0; z-index:0;
+      position:absolute;
+      inset:0;
+      z-index:0;
     }
     .hero-stack img{
-      position:absolute; inset:0;
-      width:100%; height:100%;
-      object-fit:cover; object-position:center;
-      opacity:0; transition:opacity .8s ease-in-out; /* ❤️ faster fade */
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:center;
+      opacity:0;
+      transition:opacity .8s ease-in-out;
       will-change:opacity, transform;
     }
-    .hero-stack img.is-visible{opacity:1}
+    .hero-stack img.is-visible{opacity:1;}
 
     .hero-inner{
-      position:relative; z-index:3;
-      text-align:center; color:#fff; padding:0 16px;
+      position:relative;
+      z-index:3;
+      text-align:center;
+      color:#fff;
+      padding:0 16px 24px;          /* etwas weniger Padding unten */
       max-width:var(--max);
-      opacity:0; transform:translateY(14px);
+      opacity:0;
+      transform:translateY(14px);
       animation:hero-in .9s var(--reveal-ease) .15s forwards;
     }
-    @keyframes hero-in{ to{opacity:1; transform:none} }
+    @keyframes hero-in{
+      to{opacity:1; transform:none}
+    }
 
     .hero h1{
       margin:0 0 10px;
@@ -86,25 +105,16 @@
       text-transform:uppercase;
     }
     .hero p{
-      margin:0 0 18px;
+      margin:0 0 10px;
       font-weight:800;
       letter-spacing:.02em;
-      font-size:1.1rem;
-      opacity:0; transform:translateY(10px);
+      font-size:1.05rem;
+      opacity:0;
+      transform:translateY(10px);
       animation:hero-in .9s var(--reveal-ease) .3s forwards;
     }
 
-    .chev{
-      position:absolute; z-index:3;
-      left:50%; bottom:20px; transform:translateX(-50%);
-      width:46px; height:46px; border-radius:999px; border:2px solid #fff;
-      display:grid; place-items:center; color:#fff; text-decoration:none; font-size:22px;
-      box-shadow:0 6px 14px rgba(0,0,0,.25);
-      animation:chev 1.6s ease-in-out infinite;
-    }
-    @keyframes chev{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,5px)}}
-
-    /* ---------- SECTIONS ---------- */
+    /* ---------- GENERIC SECTIONS ---------- */
     .section{padding:clamp(28px, 6vw, 60px) 16px;}
     .wrap{width:min(100%,var(--max)); margin-inline:auto;}
 
@@ -118,7 +128,24 @@
       color:var(--brand);
     }
 
-    /* ---------- SERVICES ---------- */
+    /* ---------- SERVICES (eigenes Panel unter Hero) ---------- */
+    .section-services{
+      padding-top:0;
+      margin-top:-60px;         /* Überlappt den Hero leicht */
+      position:relative;
+      z-index:5;
+    }
+    .services-panel{
+      background:#ffffff;
+      border-radius:34px;
+      box-shadow:var(--shadow);
+      border:1px solid #e5e7eb;
+      padding:26px 18px 30px;
+    }
+    .section-services .h2{
+      margin-bottom:18px;
+    }
+
     .services{
       display:grid;
       grid-template-columns:repeat(4,1fr);
@@ -126,68 +153,155 @@
     }
     .svc{
       background:var(--card);
-      border-radius:var(--radius-lg);
-      box-shadow:var(--shadow);
-      padding:22px 18px;
+      border-radius:22px;
+      box-shadow:0 4px 16px rgba(0,0,0,.05);
+      padding:20px 16px 18px;
       text-align:center;
       border:1px solid #e5e7eb;
       transition:transform .25s ease, box-shadow .25s ease;
-      opacity:0; transform:translateY(18px);
+      opacity:0;
+      transform:translateY(18px);
     }
-    .svc:hover{ transform:translateY(-3px); box-shadow:0 14px 35px rgba(0,0,0,.12); }
-    .svc.reveal-in{animation:reveal-up var(--reveal-dur) var(--reveal-ease) forwards}
-    .svc.reveal-in[data-i]{animation-delay:calc(var(--i,0) * 90ms)}
-    .icon{font-size:28px; margin-bottom:8px; color:var(--brand)}
-    .svc h3{ margin:0 0 6px; color:var(--brand); font-size:1.1rem; }
-    .svc p{ margin:0 0 14px; color:var(--muted); font-size:.95rem; }
+    .svc:hover{
+      transform:translateY(-3px);
+      box-shadow:0 12px 28px rgba(0,0,0,.10);
+    }
+    .svc.reveal-in{
+      animation:reveal-up var(--reveal-dur) var(--reveal-ease) forwards;
+    }
+    .svc.reveal-in[data-i]{
+      animation-delay:calc(var(--i,0) * 90ms);
+    }
+    .icon{
+      font-size:28px;
+      margin-bottom:8px;
+      color:var(--brand);
+    }
+    .svc h3{
+      margin:0 0 6px;
+      color:var(--brand);
+      font-size:1.05rem;
+    }
+    .svc p{
+      margin:0 0 14px;
+      color:var(--muted);
+      font-size:.9rem;
+    }
     .svc a{
-      display:inline-block; font-weight:700; color:var(--brand);
-      border:2px solid var(--brand); border-radius:999px; padding:.5rem .9rem; text-decoration:none;
+      display:inline-block;
+      font-weight:700;
+      color:var(--brand);
+      border:2px solid var(--brand);
+      border-radius:999px;
+      padding:.45rem .9rem;
+      text-decoration:none;
+      font-size:.9rem;
     }
-    .svc a:hover{background:var(--brand); color:#fff;}
+    .svc a:hover{
+      background:var(--brand);
+      color:#fff;
+    }
 
     /* ---------- VEHICLE BAND ---------- */
     .band{
-      position:relative; overflow:hidden; background:var(--brand); color:#fff;
-      border-radius:var(--radius-lg); box-shadow:var(--shadow);
-      opacity:0; transform:translateY(16px);
+      position:relative;
+      overflow:hidden;
+      background:var(--brand);
+      color:#fff;
+      border-radius:var(--radius-lg);
+      box-shadow:var(--shadow);
+      opacity:0;
+      transform:translateY(16px);
     }
     .band::before{
-      content:""; position:absolute; inset:0;
+      content:"";
+      position:absolute;
+      inset:0;
       background:url("assets/images/Unser_Autohaus/banner2.jpg") center/cover no-repeat;
       opacity:.15;
     }
-    .band.reveal-in{animation:reveal-up var(--reveal-dur) var(--reveal-ease) .08s forwards}
-    .band-inner{ position:relative; z-index:1; text-align:center; padding:clamp(28px, 5vw, 48px) 18px; }
-    .band p{ max-width:820px; margin:0 auto 18px; font-weight:600; }
+    .band.reveal-in{
+      animation:reveal-up var(--reveal-dur) var(--reveal-ease) .08s forwards;
+    }
+    .band-inner{
+      position:relative;
+      z-index:1;
+      text-align:center;
+      padding:clamp(28px, 5vw, 48px) 18px;
+    }
+    .band p{
+      max-width:820px;
+      margin:0 auto 18px;
+      font-weight:600;
+    }
     .btn{
-      display:inline-block; background:#fff; color:var(--brand);
-      border:3px solid #02083e; box-shadow:0 6px 0 #02083e; border-radius:12px;
-      padding:.75rem 1rem; font-weight:900; text-decoration:none; transition:transform .2s ease;
+      display:inline-block;
+      background:#fff;
+      color:var(--brand);
+      border:3px solid #02083e;
+      box-shadow:0 6px 0 #02083e;
+      border-radius:12px;
+      padding:.75rem 1rem;
+      font-weight:900;
+      text-decoration:none;
+      transition:transform .2s ease;
     }
     .btn:hover{transform:translateY(1px);}
 
     /* ---------- MAP + CONTACT ---------- */
-    .grid-2{ display:grid; grid-template-columns:1.4fr .6fr; gap:22px; }
-    .card{
-      background:var(--card); border:1px solid #e6e8f1; border-radius:var(--radius-lg);
-      box-shadow:var(--shadow); overflow:hidden;
-      opacity:0; transform:translateY(18px);
+    .grid-2{
+      display:grid;
+      grid-template-columns:1.4fr .6fr;
+      gap:22px;
     }
-    .card.reveal-in{animation:reveal-up var(--reveal-dur) var(--reveal-ease) forwards}
-    .card.reveal-in[data-i]{animation-delay:calc(var(--i,0) * 120ms)}
-    .card h3{ margin:0; padding:16px 18px; color:var(--brand); font-weight:900; }
-    .card-body{ padding:16px 18px; }
-    .map-embed{ width:100%; height:370px; border:0; }
+    .card{
+      background:var(--card);
+      border:1px solid #e6e8f1;
+      border-radius:var(--radius-lg);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      opacity:0;
+      transform:translateY(18px);
+    }
+    .card.reveal-in{
+      animation:reveal-up var(--reveal-dur) var(--reveal-ease) forwards;
+    }
+    .card.reveal-in[data-i]{
+      animation-delay:calc(var(--i,0) * 120ms);
+    }
+    .card h3{
+      margin:0;
+      padding:16px 18px;
+      color:var(--brand);
+      font-weight:900;
+    }
+    .card-body{padding:16px 18px;}
+    .map-embed{
+      width:100%;
+      height:370px;
+      border:0;
+    }
 
-    @keyframes reveal-up{ from{opacity:0; transform:translateY(18px)} to{opacity:1; transform:none} }
+    @keyframes reveal-up{
+      from{opacity:0; transform:translateY(18px)}
+      to{opacity:1; transform:none}
+    }
 
-    @media (max-width:1100px){ .services{grid-template-columns:repeat(2,1fr);} .grid-2{grid-template-columns:1fr;} }
-    @media (max-width:640px){ .services{grid-template-columns:1fr;} }
+    @media (max-width:1100px){
+      .services{grid-template-columns:repeat(2,1fr);}
+      .grid-2{grid-template-columns:1fr;}
+    }
+    @media (max-width:640px){
+      .services{grid-template-columns:1fr;}
+      .section-services{margin-top:-40px;}
+    }
 
     @media (prefers-reduced-motion:reduce){
-      .chev{animation:none;}
-      .hero-inner,.hero p,.svc,.band,.card{animation:none!important; opacity:1!important; transform:none!important}
+      .hero-inner,.hero p,.svc,.band,.card{
+        animation:none!important;
+        opacity:1!important;
+        transform:none!important;
+      }
       .btn,.svc{transition:none;}
     }
   </style>
@@ -208,41 +322,42 @@
       <h1>IHR PARTNER IN SACHEN AUTOMOBIL</h1>
       <p>AN- UND VERKAUF SEIT ÜBER EINEM JAHRZEHNT!</p>
     </div>
-    <a class="chev" href="#services" aria-label="Weiter nach unten">⌄</a>
   </header>
 
-  <!-- SERVICES -->
-  <section id="services" class="section">
+  <!-- SERVICES (Panel unter Hero) -->
+  <section id="services" class="section section-services">
     <div class="wrap">
-      <h2 class="h2">Unsere Serviceleistungen</h2>
-      <div class="services js-stagger">
-        <article class="svc" data-i>
-          <div class="icon">💶</div>
-          <h3>Inzahlungnahme</h3>
-          <p>Wir verrechnen Ihr aktuelles Fahrzeug bequem beim Neukauf.</p>
-          <a href="service-inzahlungnahme.html">Mehr erfahren</a>
-        </article>
+      <div class="services-panel">
+        <h2 class="h2">Unsere Serviceleistungen</h2>
+        <div class="services js-stagger">
+          <article class="svc" data-i>
+            <div class="icon">💶</div>
+            <h3>Inzahlungnahme</h3>
+            <p>Wir verrechnen Ihr aktuelles Fahrzeug bequem beim Neukauf.</p>
+            <a href="service_inzahlungnahme.html">Mehr erfahren</a>
+          </article>
 
-        <article class="svc" data-i>
-          <div class="icon">🚚</div>
-          <h3>Fahrzeugauslieferung</h3>
-          <p>Deutschlandweite Lieferung Ihres neuen Fahrzeugs.</p>
-          <a href="service-export.html">Mehr erfahren</a>
-        </article>
+          <article class="svc" data-i>
+            <div class="icon">🚚</div>
+            <h3>Fahrzeugauslieferung</h3>
+            <p>Deutschlandweite Lieferung Ihres neuen Fahrzeugs.</p>
+            <a href="service_export.html">Mehr erfahren</a>
+          </article>
 
-        <article class="svc" data-i>
-          <div class="icon">🪪</div>
-          <h3>Zulassungs-Service</h3>
-          <p>Auf Wunsch übernehmen wir die Zulassung in Bremen & Umgebung.</p>
-          <a href="kontakt.html">Kontakt aufnehmen</a>
-        </article>
+          <article class="svc" data-i>
+            <div class="icon">🪪</div>
+            <h3>Zulassungs-Service</h3>
+            <p>Auf Wunsch übernehmen wir die Zulassung in Bremen & Umgebung.</p>
+            <a href="kontakt.html">Kontakt aufnehmen</a>
+          </article>
 
-        <article class="svc" data-i>
-          <div class="icon">✨</div>
-          <h3>Aufbereitung</h3>
-          <p>Innen & außen mit unseren Profi-Partnern – wie neu!</p>
-          <a href="service-aufbereitung.html">Mehr erfahren</a>
-        </article>
+          <article class="svc" data-i>
+            <div class="icon">✨</div>
+            <h3>Aufbereitung</h3>
+            <p>Innen & außen mit unseren Profi-Partnern – wie neu!</p>
+            <a href="service_aufbereitung.html">Mehr erfahren</a>
+          </article>
+        </div>
       </div>
     </div>
   </section>
@@ -268,7 +383,8 @@
         <h3>Anfahrt</h3>
         <iframe class="map-embed"
           src="https://www.google.com/maps?q=Norderneystra%C3%9Fe%207%2C%2028217%20Bremen&output=embed"
-          loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
           title="Karte – Artex-Trans Autoagentur"></iframe>
         <div class="card-body">
           <a class="btn" href="https://www.google.com/maps/dir/?api=1&destination=Norderneystra%C3%9Fe+7%2C+28217+Bremen"
@@ -297,7 +413,8 @@
     (function () {
       function loadScript(src, cb){
         var s=document.createElement('script');
-        s.src=src; s.defer=true;
+        s.src=src;
+        s.defer=true;
         s.onload=function(){cb&&cb(true)};
         s.onerror=function(){cb&&cb(false)};
         document.head.appendChild(s);
@@ -312,24 +429,34 @@
     (function(){
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      // Stagger indices
+      // Stagger-Index für alle [data-i]
       document.querySelectorAll('.js-stagger').forEach(group => {
-        [...group.querySelectorAll('[data-i]')].forEach((el, i) => el.style.setProperty('--i', i));
+        [...group.querySelectorAll('[data-i]')].forEach((el, i) => {
+          el.style.setProperty('--i', i);
+        });
       });
 
       // Reveal on scroll
       if (!reduce && 'IntersectionObserver' in window) {
         const io = new IntersectionObserver((entries) => {
-          entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('reveal-in'); io.unobserve(e.target);} });
+          entries.forEach(e => {
+            if (e.isIntersecting) {
+              e.target.classList.add('reveal-in');
+              io.unobserve(e.target);
+            }
+          });
         }, {rootMargin:'-5% 0px -10% 0px', threshold:0.1});
+
         document.querySelectorAll('.svc, .band, .card').forEach(el => io.observe(el));
       } else {
         document.querySelectorAll('.svc, .band, .card').forEach(el=>{
-          el.classList.add('reveal-in'); el.style.opacity = 1; el.style.transform = 'none';
+          el.classList.add('reveal-in');
+          el.style.opacity = 1;
+          el.style.transform = 'none';
         });
       }
 
-      /* ---------- HERO IMAGE ROTATION (UPDATED SPEED) ---------- */
+      /* ---------- HERO IMAGE ROTATION ---------- */
       const A = document.getElementById('heroImgA');
       const B = document.getElementById('heroImgB');
       if (!A || !B) return;
@@ -346,12 +473,13 @@
         'toyota.jpg'
       ].map(n => base + n);
 
+      // Preload
       slides.forEach(src => { const im = new Image(); im.src = src; });
 
       let i = 0, showA = true;
 
-      const DURATION = 3000; // ❤️ faster rotation: every 4 seconds
-      const FADE = 800;      // ❤️ faster fade: 0.8s
+      const DURATION = 3000;
+      const FADE = 800;
 
       function setImg(el, src){ el.src = src; }
 
@@ -370,7 +498,10 @@
           showEl.src = tmp.src;
           showEl.classList.add('is-visible');
           hideEl.classList.remove('is-visible');
-          setTimeout(() => { showA = !showA; i = nextIndex; }, FADE);
+          setTimeout(() => {
+            showA = !showA;
+            i = nextIndex;
+          }, FADE);
         };
         tmp.src = slides[nextIndex] + '?v=' + nextIndex;
       }
