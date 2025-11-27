@@ -91,31 +91,29 @@
   transition:box-shadow .25s ease, transform .25s ease;
 }
 
-/* EIN Blauton + BMW-Hintergrund (etwas nach links verschoben) */
+/* EIN Blauton + BMW-Hintergrund (leicht nach links verschoben) */
 .atx-header::before{
   content:"";
   position:absolute;
   inset:0;
   background:url("assets/images/Unser_Autohaus/bmw.jpeg") 65% 65%/cover no-repeat;
-  /* 65% statt center → Bild wandert optisch nach links, Kennzeichen besser im Fokus */
   z-index:-2;
 }
 .atx-header::after{
   content:"";
   position:absolute;
   inset:0;
-  background:rgba(19,32,111,.40); /* transparenter Overlay in Brand-Blau */
+  background:rgba(19,32,111,.40); /* Overlay in Brand-Blau */
   z-index:-1;
 }
-  /* Auf der Startseite: Header liegt transparent auf dem Hero */
+
+/* Startseite: Header oben komplett transparent & ohne BMW (liegt auf dem Hero) */
 .page-home .atx-header::before{
   background:none;
 }
-
 .page-home .atx-header::after{
-  background:none;
+  background:transparent;
 }
-
 
 /* ---------------- TOP INFO BAR ---------------- */
 .hdr-top{
@@ -329,13 +327,13 @@
   letter-spacing:.18em;
   text-transform:uppercase;
 }
-  /* Startseite: Titelband komplett ausblenden + keinen Platz belegen */
-.page-home .hdr-title{
-  display:none !important;
-}
-
 .hdr-title-inner span{
   white-space:nowrap;
+}
+
+/* Startseite: Titelband komplett ausblenden + keinen Platz belegen */
+.page-home .hdr-title{
+  display:none !important;
 }
 
 /* Drop-in Animation */
@@ -355,8 +353,14 @@
 
 /* ---------------- SHRINK ANIMATION BEIM SCROLLEN ---------------- */
 .atx-header.is-shrink::after{
-  background:rgba(19,32,111,.99);
+  background:rgba(19,32,111,.40);
 }
+
+/* Startseite: beim Scrollen wieder blau (nicht durchsichtig) */
+.page-home .atx-header.is-shrink::after{
+  background:rgba(19,32,111,.990);
+}
+
 .atx-header.is-shrink .hdr{
   padding:6px 20px;               /* deutlich kompakter */
 }
