@@ -31,8 +31,11 @@
       margin:0;
       font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       color:var(--ink);
-      background:var(--bg);
-      padding-top:var(--hdr-h);
+      background:
+        radial-gradient(circle at top left, rgba(19,32,111,.16), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(19,32,111,.1), transparent 50%),
+        var(--bg);
+      padding-top:0;
     }
 
     header.atx-header{
@@ -44,13 +47,12 @@
     /* ---------- HERO ---------- */
     .hero{
       position:relative;
-      min-height:60vh;              /* smaller hero */
+      min-height:60vh;
       display:grid;
       place-items:center;
       overflow:hidden;
     }
 
-    /* Blaues Overlay – transparenter */
     .hero::before{
       content:"";
       position:absolute;
@@ -59,7 +61,7 @@
       background:linear-gradient(
         180deg,
         rgba(19,32,111,.55) 0%,
-        rgba(19,32,111,.70) 100%
+        rgba(19,32,111,.78) 100%
       );
       pointer-events:none;
     }
@@ -87,7 +89,7 @@
       z-index:3;
       text-align:center;
       color:#fff;
-      padding:0 16px 24px;          /* etwas weniger Padding unten */
+      padding:0 16px 30px;
       max-width:var(--max);
       opacity:0;
       transform:translateY(14px);
@@ -95,6 +97,25 @@
     }
     @keyframes hero-in{
       to{opacity:1; transform:none}
+    }
+
+    .hero-tag{
+      display:inline-flex;
+      align-items:center;
+      gap:.45rem;
+      padding:.25rem .8rem;
+      border-radius:999px;
+      background:rgba(15,23,42,.7);
+      border:1px solid rgba(255,255,255,.18);
+      font-size:.78rem;
+      font-weight:600;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+      margin-bottom:.7rem;
+      backdrop-filter:blur(10px);
+    }
+    .hero-tag span{
+      opacity:.85;
     }
 
     .hero h1{
@@ -105,13 +126,44 @@
       text-transform:uppercase;
     }
     .hero p{
-      margin:0 0 10px;
+      margin:0 0 12px;
       font-weight:800;
       letter-spacing:.02em;
       font-size:1.05rem;
       opacity:0;
       transform:translateY(10px);
       animation:hero-in .9s var(--reveal-ease) .3s forwards;
+    }
+
+    .hero-chips{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:.5rem;
+      margin:12px 0 18px;
+      opacity:0;
+      transform:translateY(10px);
+      animation:hero-in .9s var(--reveal-ease) .45s forwards;
+    }
+    .chip{
+      padding:.25rem .7rem;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.4);
+      font-size:.8rem;
+      font-weight:500;
+      background:rgba(15,23,42,.6);
+      backdrop-filter:blur(8px);
+      white-space:nowrap;
+    }
+
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:.7rem;
+      opacity:0;
+      transform:translateY(10px);
+      animation:hero-in .9s var(--reveal-ease) .6s forwards;
     }
 
     /* ---------- GENERIC SECTIONS ---------- */
@@ -127,11 +179,18 @@
       text-align:center;
       color:var(--brand);
     }
+    .section-sub{
+      margin:-18px auto 24px;
+      max-width:640px;
+      text-align:center;
+      color:var(--muted);
+      font-size:.95rem;
+    }
 
-    /* ---------- SERVICES (eigenes Panel unter Hero) ---------- */
+    /* ---------- SERVICES ---------- */
     .section-services{
       padding-top:0;
-      margin-top:-60px;         /* Überlappt den Hero leicht */
+      margin-top:-60px;
       position:relative;
       z-index:5;
     }
@@ -163,8 +222,8 @@
       transform:translateY(18px);
     }
     .svc:hover{
-      transform:translateY(-3px);
-      box-shadow:0 12px 28px rgba(0,0,0,.10);
+      transform:translateY(-4px);
+      box-shadow:0 14px 30px rgba(0,0,0,.14);
     }
     .svc.reveal-in{
       animation:reveal-up var(--reveal-dur) var(--reveal-ease) forwards;
@@ -202,6 +261,73 @@
       color:#fff;
     }
 
+    /* ---------- BUTTONS (global) ---------- */
+    .btn{
+      display:inline-block;
+      background:#fff;
+      color:var(--brand);
+      border:3px solid #02083e;
+      box-shadow:0 6px 0 #02083e;
+      border-radius:12px;
+      padding:.75rem 1rem;
+      font-weight:900;
+      text-decoration:none;
+      transition:transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
+      font-size:.9rem;
+    }
+    .btn:hover{
+      transform:translateY(1px);
+      box-shadow:0 4px 0 #02083e;
+    }
+
+    .btn-small{
+      padding:.55rem .85rem;
+      font-size:.82rem;
+      box-shadow:0 4px 0 #02083e;
+    }
+
+/* ---------- HERO CTA SPEZIFISCH (FINAL VERSION) ---------- */
+
+/* Basisgrößen */
+.btn-hero{
+  min-width:190px;
+}
+
+/* Einheitliche Hero-Button-Optik */
+/* ---------- HERO CTA SPEZIFISCH (FINAL FUNCTIONAL VERSION) ---------- */
+
+/* Grundstil für beide CTA-Buttons */
+.hero-actions .btn,
+.hero-actions .btn-ghost {
+  border-radius: 999px;
+  border: 2px solid #fff;
+  background: #fff;
+  color: var(--brand);
+  padding: .7rem 1.4rem;
+  font-weight: 800;
+  box-shadow: none;
+  transition: all .25s ease;
+  min-width: 190px;
+}
+
+/* Hover-Effekt für beide Buttons */
+.hero-actions .btn:hover,
+.hero-actions .btn-ghost:hover {
+  background: transparent !important;
+  color: #fff !important;
+  border-color: #fff !important;
+}
+
+
+/* Button, der früher Ghost war → jetzt auch weiß */
+.hero-actions .btn-ghost {
+  background: #fff !important;
+  color: var(--brand) !important;
+  border: 2px solid #fff !important;
+}
+
+
+
     /* ---------- VEHICLE BAND ---------- */
     .band{
       position:relative;
@@ -234,19 +360,6 @@
       margin:0 auto 18px;
       font-weight:600;
     }
-    .btn{
-      display:inline-block;
-      background:#fff;
-      color:var(--brand);
-      border:3px solid #02083e;
-      box-shadow:0 6px 0 #02083e;
-      border-radius:12px;
-      padding:.75rem 1rem;
-      font-weight:900;
-      text-decoration:none;
-      transition:transform .2s ease;
-    }
-    .btn:hover{transform:translateY(1px);}
 
     /* ---------- MAP + CONTACT ---------- */
     .grid-2{
@@ -262,6 +375,7 @@
       overflow:hidden;
       opacity:0;
       transform:translateY(18px);
+      transition:transform .2s ease, box-shadow .2s ease;
     }
     .card.reveal-in{
       animation:reveal-up var(--reveal-dur) var(--reveal-ease) forwards;
@@ -269,17 +383,44 @@
     .card.reveal-in[data-i]{
       animation-delay:calc(var(--i,0) * 120ms);
     }
+    .card:hover{
+      transform:translateY(-3px);
+      box-shadow:0 18px 40px rgba(15,23,42,.16);
+    }
     .card h3{
       margin:0;
       padding:16px 18px;
       color:var(--brand);
       font-weight:900;
+      border-bottom:1px solid #e5e7eb;
     }
     .card-body{padding:16px 18px;}
     .map-embed{
       width:100%;
       height:370px;
       border:0;
+    }
+
+    .contact-lines{
+      line-height:1.6;
+      font-weight:600;
+    }
+    .contact-lines span{
+      display:block;
+      margin-bottom:2px;
+    }
+    .contact-label{
+      font-size:.8rem;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:var(--muted);
+      margin-bottom:6px;
+    }
+    .contact-actions{
+      margin-top:16px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:.5rem;
     }
 
     @keyframes reveal-up{
@@ -294,19 +435,32 @@
     @media (max-width:640px){
       .services{grid-template-columns:1fr;}
       .section-services{margin-top:-40px;}
+      .hero-inner{
+        padding-bottom:26px;
+      }
+      .btn{
+        width:100%;
+        justify-content:center;
+        text-align:center;
+      }
+      .hero-actions{
+        gap:.5rem;
+      }
     }
 
     @media (prefers-reduced-motion:reduce){
-      .hero-inner,.hero p,.svc,.band,.card{
+      .hero-inner,.hero p,.hero-chips,.hero-actions,.svc,.band,.card{
         animation:none!important;
         opacity:1!important;
         transform:none!important;
       }
-      .btn,.svc{transition:none;}
+      .btn,.svc,.card{transition:none;}
     }
   </style>
 </head>
-<body>
+<body class="page-home">
+
+
 
   <!-- Header mount -->
   <div id="header"></div>
@@ -319,16 +473,31 @@
     </div>
 
     <div class="hero-inner">
+
+
       <h1>IHR PARTNER IN SACHEN AUTOMOBIL</h1>
       <p>AN- UND VERKAUF SEIT ÜBER EINEM JAHRZEHNT!</p>
+
+      <div class="hero-chips">
+        <div class="chip">✔ Persönliche Beratung</div>
+        <div class="chip">✔ Transparente Abwicklung</div>
+        <div class="chip">✔ Geprüfte Fahrzeuge</div>
+      </div>
+
+      <div class="hero-actions">
+        <a class="btn btn-hero" href="fahrzeugbestand.html">Fahrzeugbestand ansehen</a>
+        <a class="btn btn-ghost" href="#services">Unsere Serviceleistungen</a>
+      </div>
     </div>
   </header>
 
-  <!-- SERVICES (Panel unter Hero) -->
+  <!-- SERVICES -->
   <section id="services" class="section section-services">
     <div class="wrap">
       <div class="services-panel">
         <h2 class="h2">Unsere Serviceleistungen</h2>
+        <p class="section-sub">Von der Inzahlungnahme bis zur Auslieferung: Wir begleiten Sie Schritt für Schritt zum nächsten Fahrzeug.</p>
+
         <div class="services js-stagger">
           <article class="svc" data-i>
             <div class="icon">💶</div>
@@ -387,19 +556,25 @@
           referrerpolicy="no-referrer-when-downgrade"
           title="Karte – Artex-Trans Autoagentur"></iframe>
         <div class="card-body">
-          <a class="btn" href="https://www.google.com/maps/dir/?api=1&destination=Norderneystra%C3%9Fe+7%2C+28217+Bremen"
-             target="_blank" rel="noopener">Routenplaner</a>
+          <a class="btn btn-small" href="https://www.google.com/maps/dir/?api=1&destination=Norderneystra%C3%9Fe+7%2C+28217+Bremen"
+             target="_blank" rel="noopener">📍 Routenplaner öffnen</a>
         </div>
       </div>
 
       <div class="card" data-i>
         <h3>Kontakt</h3>
-        <div class="card-body" style="font-weight:700;">
-          Norderneystraße&nbsp;7<br>
-          28217&nbsp;Bremen<br>
-          Deutschland<br><br>
-          Tel.: +49&nbsp;(0)&nbsp;421&nbsp;3965171<br>
-          E-Mail: info@artex-trans.de
+        <div class="card-body">
+          <div class="contact-label">Direkt zu uns</div>
+          <div class="contact-lines">
+            <span>📍 Norderneystraße 7</span>
+            <span>28217 Bremen, Deutschland</span>
+            <span>📞 Tel.: +49&nbsp;(0)&nbsp;421&nbsp;3965171</span>
+            <span>✉️ E-Mail: info@artex-trans.de</span>
+          </div>
+          <div class="contact-actions">
+            <a class="btn btn-small" href="tel:+494213965171">Jetzt anrufen</a>
+            <a class="btn btn-small btn-ghost" href="mailto:info@artex-trans.de">E-Mail schreiben</a>
+          </div>
         </div>
       </div>
     </div>
