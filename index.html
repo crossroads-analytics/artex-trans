@@ -286,47 +286,39 @@
       box-shadow:0 4px 0 #02083e;
     }
 
-/* ---------- HERO CTA SPEZIFISCH (FINAL VERSION) ---------- */
+    /* ---------- HERO CTA SPEZIFISCH ---------- */
 
-/* Basisgrößen */
-.btn-hero{
-  min-width:190px;
-}
+    .btn-hero{
+      min-width:190px;
+    }
 
-/* Einheitliche Hero-Button-Optik */
-/* ---------- HERO CTA SPEZIFISCH (FINAL FUNCTIONAL VERSION) ---------- */
+    /* Grundstil für beide CTA-Buttons */
+    .hero-actions .btn,
+    .hero-actions .btn-ghost {
+      border-radius: 999px;
+      border: 2px solid #fff;
+      background: #fff;
+      color: var(--brand);
+      padding: .7rem 1.4rem;
+      font-weight: 800;
+      box-shadow: none;
+      transition: all .25s ease;
+      min-width: 190px;
+    }
 
-/* Grundstil für beide CTA-Buttons */
-.hero-actions .btn,
-.hero-actions .btn-ghost {
-  border-radius: 999px;
-  border: 2px solid #fff;
-  background: #fff;
-  color: var(--brand);
-  padding: .7rem 1.4rem;
-  font-weight: 800;
-  box-shadow: none;
-  transition: all .25s ease;
-  min-width: 190px;
-}
+    /* Hover-Effekt für beide Buttons */
+    .hero-actions .btn:hover,
+    .hero-actions .btn-ghost:hover {
+      background: transparent !important;
+      color: #fff !important;
+      border-color: #fff !important;
+    }
 
-/* Hover-Effekt für beide Buttons */
-.hero-actions .btn:hover,
-.hero-actions .btn-ghost:hover {
-  background: transparent !important;
-  color: #fff !important;
-  border-color: #fff !important;
-}
-
-
-/* Button, der früher Ghost war → jetzt auch weiß */
-.hero-actions .btn-ghost {
-  background: #fff !important;
-  color: var(--brand) !important;
-  border: 2px solid #fff !important;
-}
-
-
+    .hero-actions .btn-ghost {
+      background: #fff !important;
+      color: var(--brand) !important;
+      border: 2px solid #fff !important;
+    }
 
     /* ---------- VEHICLE BAND ---------- */
     .band{
@@ -432,12 +424,17 @@
       .services{grid-template-columns:repeat(2,1fr);}
       .grid-2{grid-template-columns:1fr;}
     }
+
     @media (max-width:640px){
       .services{grid-template-columns:1fr;}
       .section-services{margin-top:-40px;}
+
+      /* WICHTIG: Mehr Abstand zwischen Header (Logo + Infozeile)
+         und Hero-Text auf dem Handy, damit nichts überlappt */
       .hero-inner{
-        padding-bottom:26px;
+        padding:110px 16px 26px;
       }
+
       .btn{
         width:100%;
         justify-content:center;
@@ -460,8 +457,6 @@
 </head>
 <body class="page-home">
 
-
-
   <!-- Header mount -->
   <div id="header"></div>
 
@@ -473,8 +468,6 @@
     </div>
 
     <div class="hero-inner">
-
-
       <h1>IHR PARTNER IN SACHEN AUTOMOBIL</h1>
       <p>AN- UND VERKAUF SEIT ÜBER EINEM JAHRZEHNT!</p>
 
