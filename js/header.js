@@ -42,6 +42,9 @@
         <img src="https://artex-trans.de/wp-content/uploads/2021/07/LOGO-ARTEX-TRANS-2-300x67.jpg" alt="Artex-Trans Logo">
       </a>
 
+      <!-- Inline-Page-Title (nur mobil im Shrink sichtbar) -->
+      <div class="hdr-title-inline" id="hdrTitleInline" aria-hidden="true"></div>
+
       <!-- Burger for small screens -->
       <button class="hdr-burger" aria-label="Menü öffnen" aria-controls="mainNav" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -180,6 +183,17 @@
 .hdr-logo img{
   height:48px;
   transition:height .25s ease, transform .25s ease;
+}
+
+/* Inline-Seitentitel (für Mobile-Shrink) */
+.hdr-title-inline{
+  display:none; /* Standard: ausgeblendet, wird im Mobile-Shrink genutzt */
+  font-family:"Bebas Neue", system-ui, sans-serif;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:#ffffff;
+  font-size:1.1rem;
+  white-space:nowrap;
 }
 
 /* Desktop nav */
@@ -352,34 +366,38 @@
   }
 }
 
-/* ---------------- SHRINK ANIMATION BEIM SCROLLEN ---------------- */
+/* --- SHRINK BACKGROUND (alle Geräte) --- */
 .atx-header.is-shrink::after{
   background:rgba(19,32,111,.40);
 }
-
-/* Startseite: beim Scrollen wieder kräftig blau */
 .page-home .atx-header.is-shrink::after{
   background:rgba(19,32,111,.99);
 }
 
-/* stärkerer Shrink */
-.atx-header.is-shrink .hdr{
-  padding:4px 16px;               /* noch kompakter */
-}
-.atx-header.is-shrink .hdr-logo img{
-  height:28px;                    /* kleineres Logo */
-  transform:translateY(1px);
-}
-.atx-header.is-shrink .hdr-top-inner{
-  padding:1px 16px;
-}
-.atx-header.is-shrink .hdr-top-item{
-  font-size:11px;
-}
-.atx-header.is-shrink .hdr-title-inner{
-  padding:6px 20px 8px;
-  font-size:clamp(1.1rem, 2vw, 1.4rem);
-  letter-spacing:.12em;
+/* ===== DESKTOP-SHRINK (mild, Titel weiter oben) ===== */
+@media (min-width: 921px){
+  .atx-header.is-shrink .hdr{
+    padding:10px 20px;
+  }
+  .atx-header.is-shrink .hdr-logo img{
+    height:46px;      /* Logo bleibt groß */
+    transform:none;
+  }
+  .atx-header.is-shrink .hdr-top-inner{
+    padding:4px 18px;
+  }
+  .atx-header.is-shrink .hdr-top-item{
+    font-size:13px;
+  }
+  /* Titelband näher an die Navi ran ziehen */
+  .atx-header.is-shrink .hdr-title{
+    margin-top:-18px;
+  }
+  .atx-header.is-shrink .hdr-title-inner{
+    padding:4px 20px 6px;
+    font-size:clamp(1.3rem, 2.4vw, 1.9rem);
+    letter-spacing:.16em;
+  }
 }
 
 /* Burger (hidden on desktop) */
@@ -411,7 +429,6 @@
 @media (max-width: 920px){
 
   /* --- Nur Email + Telefon zeigen, Adresse ausblenden --- */
-
   .hdr-top-left{
     display:none !important;         /* Adresse weg */
   }
@@ -441,7 +458,7 @@
 
   /* ---------------- MAIN HEADER (Mobile) ---------------- */
   .hdr{
-    gap:14px;
+    gap:10px;
     padding:12px 16px;
   }
 
@@ -449,8 +466,44 @@
     display:none;
   }
 
+  /* Reihenfolge: Logo – Inline-Titel – Burger – (Nav offcanvas) */
+  .hdr-logo{ order:1; }
+  .hdr-title-inline{
+    order:2;
+    flex:1;
+    text-align:center;
+  }
   .hdr-burger{
+    order:3;
     display:inline-flex;
+  }
+  .hdr-nav{ order:4; }
+
+  /* SHRINK speziell für Mobile */
+  .atx-header.is-shrink .hdr{
+    padding:4px 12px;
+  }
+  .atx-header.is-shrink .hdr-logo img{
+    height:28px;
+    transform:translateY(1px);
+  }
+  .atx-header.is-shrink .hdr-top-inner{
+    padding:1px 12px;
+  }
+  .atx-header.is-shrink .hdr-top-item{
+    font-size:11px;
+  }
+  /* großes Titelband ausblenden, Inline-Titel zeigen */
+  .atx-header.is-shrink .hdr-title{
+    display:none;
+  }
+  .atx-header.is-shrink .hdr-title-inline{
+    display:block;
+  }
+  .atx-header.is-shrink .hdr-title-inner{
+    padding:6px 16px 8px;
+    font-size:1.2rem;
+    letter-spacing:.12em;
   }
 
   /* ---------------- MOBILE NAV ---------------- */
@@ -532,7 +585,7 @@
     box-shadow:none;
   }
 
-  /* ---------------- PAGE TITLE ---------------- */
+  /* ---------------- PAGE TITLE (mobile, wenn nicht shrink) ---------------- */
   .hdr-title-inner{
     padding:14px 16px 16px;
     font-size:1.4rem;
@@ -594,6 +647,7 @@
     const backdrop = document.querySelector(".hdr-backdrop");
     const nav = document.getElementById("mainNav");
     const titleEl = document.getElementById("hdrPageTitle");
+    const titleInlineEl = document.getElementById("hdrTitleInline");
 
     // For correct mobile panel top offset (inkl. Titelband)
     function setHdrH() {
@@ -679,7 +733,7 @@
     }
 
     // ------- Seitentitel setzen + Drop-Animation -------
-    if (titleEl) {
+    if (titleEl || titleInlineEl) {
       const titleMap = {
         'index.html': 'Willkommen',
         'unser_autohaus.html': 'Unser Autohaus',
@@ -692,11 +746,18 @@
       };
 
       const pageTitle = titleMap[file] || (document.title || 'Artex-Trans Autoagentur');
-      titleEl.innerHTML = '<div class="hdr-title-inner"><span>– ' + pageTitle + ' –</span></div>';
 
-      requestAnimationFrame(() => {
-        titleEl.classList.add('is-visible');
-      });
+      if (titleEl) {
+        titleEl.innerHTML = '<div class="hdr-title-inner"><span>– ' + pageTitle + ' –</span></div>';
+        requestAnimationFrame(() => {
+          titleEl.classList.add('is-visible');
+        });
+      }
+
+      // Inline-Title für Mobile-Shrink
+      if (titleInlineEl) {
+        titleInlineEl.textContent = pageTitle;
+      }
     }
 
     // ------- SHRINK ON SCROLL -------
