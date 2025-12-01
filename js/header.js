@@ -119,6 +119,7 @@
 .hdr-top{
   background:transparent;
   color:#ffffff;
+  border-bottom:1px solid rgba(255,255,255,.35); /* optischer Divider */
 }
 
 .hdr-top-inner{
@@ -127,7 +128,7 @@
   margin:0 auto;
 
   display:flex;
-  justify-content:center;     /* Zentriert alles insgesamt */
+  justify-content:center;
   align-items:center;
   gap:32px;
 
@@ -138,7 +139,7 @@
 .hdr-top-left,
 .hdr-top-right{
   display:flex;
-  flex-wrap:nowrap;           /* verhindert Umbruch innerhalb der Gruppe */
+  flex-wrap:nowrap;
   align-items:center;
   gap:18px;
 }
@@ -150,7 +151,7 @@
   font-size:14px;
   font-weight:600;
   color:#ffffff;
-  white-space:nowrap;         /* kein Zeilenumbruch innerhalb des Texts */
+  white-space:nowrap;
   text-decoration:none;
 }
 
@@ -173,7 +174,7 @@
   gap:28px;
   width:min(100%,1180px);
   margin:0 auto;
-  padding:16px 20px;              /* höherer Header */
+  padding:16px 20px;              /* höherer Header (unge-shrunk) */
   transition:padding .25s ease;
 }
 .hdr-logo img{
@@ -356,23 +357,24 @@
   background:rgba(19,32,111,.40);
 }
 
-/* Startseite: beim Scrollen wieder blau (nicht durchsichtig) */
+/* Startseite: beim Scrollen wieder kräftig blau */
 .page-home .atx-header.is-shrink::after{
-  background:rgba(19,32,111,.990);
+  background:rgba(19,32,111,.99);
 }
 
+/* stärkerer Shrink */
 .atx-header.is-shrink .hdr{
-  padding:6px 20px;               /* deutlich kompakter */
+  padding:4px 16px;               /* noch kompakter */
 }
 .atx-header.is-shrink .hdr-logo img{
-  height:32px;
+  height:28px;                    /* kleineres Logo */
   transform:translateY(1px);
 }
 .atx-header.is-shrink .hdr-top-inner{
-  padding:3px 18px;
+  padding:1px 16px;
 }
 .atx-header.is-shrink .hdr-top-item{
-  font-size:12px;
+  font-size:11px;
 }
 .atx-header.is-shrink .hdr-title-inner{
   padding:6px 20px 8px;
@@ -405,19 +407,39 @@
   transition:transform .2s ease, opacity .2s ease;
 }
 
-/* ---------------- MOBILE ---------------- */
+/* --- MOBILE (max-width: 920px) --- */
 @media (max-width: 920px){
-  .hdr-top-inner{
-    flex-direction:column;
-    align-items:flex-start;
-    gap:4px;
-    padding:4px 12px;
-  }
-  .hdr-top-left,
-  .hdr-top-right{
-    gap:12px;
+
+  /* --- Nur Email + Telefon zeigen, Adresse ausblenden --- */
+
+  .hdr-top-left{
+    display:none !important;         /* Adresse weg */
   }
 
+  .hdr-top-right a[href^="mailto"],
+  .hdr-top-right a[href^="tel"]{
+    display:inline-flex !important;
+  }
+
+  .hdr-top-inner{
+    justify-content:center !important;
+    gap:12px !important;
+    padding:4px 10px !important;
+    flex-wrap:nowrap !important;
+  }
+
+  .hdr-top-item{
+    font-size:12px !important;
+    gap:4px !important;
+    white-space:nowrap !important;
+  }
+
+  .hdr-icon{
+    width:13px !important;
+    height:13px !important;
+  }
+
+  /* ---------------- MAIN HEADER (Mobile) ---------------- */
   .hdr{
     gap:14px;
     padding:12px 16px;
@@ -431,6 +453,7 @@
     display:inline-flex;
   }
 
+  /* ---------------- MOBILE NAV ---------------- */
   .hdr-nav{
     position:fixed;
     top:var(--hdrH,72px);
@@ -463,7 +486,7 @@
 
   .hdr-link::after,
   .hdr-dd-toggle::after{
-    display:none; /* Unterstreich-Animation nur auf Desktop */
+    display:none;
   }
 
   .hdr-link:hover{
@@ -476,12 +499,14 @@
     flex-direction:column;
     align-items:stretch;
   }
+
   .hdr-dd-toggle{
     justify-content:space-between;
     width:100%;
     background:#f8fafc;
     border-radius:8px;
   }
+
   .hdr-dd-menu{
     position:static;
     display:none;
@@ -491,7 +516,10 @@
     margin-top:8px;
     box-shadow:none;
   }
-  .hdr-dd.open .hdr-dd-menu{display:block}
+
+  .hdr-dd.open .hdr-dd-menu{
+    display:block;
+  }
 
   .hdr-nav .hdr-cta{
     display:inline-flex;
@@ -504,12 +532,14 @@
     box-shadow:none;
   }
 
+  /* ---------------- PAGE TITLE ---------------- */
   .hdr-title-inner{
     padding:14px 16px 16px;
     font-size:1.4rem;
     letter-spacing:.14em;
   }
 
+  /* ---------------- OVERLAY ---------------- */
   .hdr-backdrop{
     position:fixed;
     inset:0;
@@ -519,15 +549,23 @@
     transition:opacity .25s ease;
     z-index:1001;
   }
-  .menu-open .hdr-nav{transform:translateX(0)}
-  .menu-open .hdr-backdrop{opacity:1;pointer-events:auto}
 
+  .menu-open .hdr-nav{
+    transform:translateX(0);
+  }
+
+  .menu-open .hdr-backdrop{
+    opacity:1;
+    pointer-events:auto;
+  }
+
+  /* Burger animation */
   .menu-open .hdr-burger span:nth-child(1){transform:translateY(6px) rotate(45deg)}
   .menu-open .hdr-burger span:nth-child(2){opacity:0}
   .menu-open .hdr-burger span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
 }
 
-/* Hover-open for dropdown on pointer devices (Desktop) */
+/* Hover-open for Dropdown auf Desktop */
 @media (hover:hover){
   .hdr-dd:hover .hdr-dd-menu{display:block}
 }
