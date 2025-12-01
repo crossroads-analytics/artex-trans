@@ -69,9 +69,14 @@
         <a class="hdr-link" href="Kontakt.html">Kontakt</a>
         <a class="hdr-link" href="terminbuchung.html">Terminbuchung</a>
 
-        <!-- CTA -->
-        <a class="hdr-cta" href="https://www.instagram.com/artextrans/" target="_blank" rel="noopener">
+        <!-- CTA Desktop: Instagram -->
+        <a class="hdr-cta hdr-cta-insta" href="https://www.instagram.com/artextrans/" target="_blank" rel="noopener">
           Folgen: @artextrans
+        </a>
+
+        <!-- CTA Mobile (im Burger unten): mobile.de Fahrzeugauswahl -->
+        <a class="hdr-cta hdr-cta-mobilede" href="https://home.mobile.de/ARTEXTRANSGBR?gclid=Cj0KCQjwt-6LBhDlARIsAIPRQcLv5Gw98keQxjOwxFQ5HP9jmykj4vYBoiICBlMNFqxr5-QyaEVbU9YaAoWAEALw_wcB#ses" target="_blank" rel="noopener">
+          🚗 Fahrzeugauswahl auf mobile.de
         </a>
       </nav>
     </div>
@@ -90,7 +95,7 @@
   z-index:1000;
   font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
   background:transparent;
-  overflow:hidden;
+  overflow:visible; /* wichtig für Dropdown */
   transition:box-shadow .25s ease, transform .25s ease;
 }
 
@@ -106,7 +111,7 @@
   content:"";
   position:absolute;
   inset:0;
-  background:rgba(19,32,111,.40); /* Overlay in Brand-Blau */
+  background:rgba(19,32,111,.40);
   z-index:-1;
 }
 
@@ -122,23 +127,18 @@
 .hdr-top{
   background:transparent;
   color:#ffffff;
-  border-bottom:1px solid rgba(255,255,255,.35); /* optischer Divider */
+  border-bottom:1px solid rgba(255,255,255,.35);
 }
-
 .hdr-top-inner{
   width:100%;
   max-width:1180px;
   margin:0 auto;
-
   display:flex;
   justify-content:center;
   align-items:center;
   gap:32px;
-
   padding:6px 18px;
 }
-
-/* linke & rechte Gruppe: immer eine Zeile */
 .hdr-top-left,
 .hdr-top-right{
   display:flex;
@@ -146,7 +146,6 @@
   align-items:center;
   gap:18px;
 }
-
 .hdr-top-item{
   display:flex;
   align-items:center;
@@ -157,8 +156,6 @@
   white-space:nowrap;
   text-decoration:none;
 }
-
-/* PNG-Icons in der Topbar */
 .hdr-icon{
   width:15px;
   height:15px;
@@ -177,7 +174,7 @@
   gap:28px;
   width:min(100%,1180px);
   margin:0 auto;
-  padding:16px 20px;              /* höherer Header (unge-shrunk) */
+  padding:16px 20px;
   transition:padding .25s ease;
 }
 .hdr-logo img{
@@ -187,7 +184,7 @@
 
 /* Inline-Seitentitel (für Mobile-Shrink) */
 .hdr-title-inline{
-  display:none; /* Standard: ausgeblendet, wird im Mobile-Shrink genutzt */
+  display:none;
   font-family:"Bebas Neue", system-ui, sans-serif;
   letter-spacing:.16em;
   text-transform:uppercase;
@@ -207,7 +204,7 @@
   justify-content:flex-end;
 }
 
-/* Links / Dropdown-Toggle – edel mit Unterstreichung */
+/* Links / Dropdown-Toggle – Unterstreichung */
 .hdr-link,
 .hdr-dd-toggle{
   position:relative;
@@ -226,7 +223,6 @@
   border:0;
   cursor:pointer;
 }
-
 .hdr-link::after,
 .hdr-dd-toggle::after{
   content:"";
@@ -242,20 +238,16 @@
   transition:transform .22s ease;
   opacity:.9;
 }
-
 .hdr-link:hover,
 .hdr-dd-toggle:hover{
   color:#ffffff;
 }
-
 .hdr-link:hover::after,
 .hdr-dd-toggle:hover::after,
 .hdr-link.is-active::after,
 .hdr-dd-toggle.is-active::after{
   transform:scaleX(1);
 }
-
-/* aktiver Menüpunkt stärker */
 .hdr-link.is-active,
 .hdr-dd-toggle.is-active{
   color:#ffffff;
@@ -287,6 +279,11 @@
 }
 .hdr-cta:hover{
   background:#e5ecff;
+}
+
+/* Varianten */
+.hdr-cta-mobilede{
+  display:none; /* nur im mobilen Menü sichtbar */
 }
 
 /* Dropdown (desktop) */
@@ -356,17 +353,11 @@
   animation:hdrTitleDrop .7s cubic-bezier(.22,.61,.36,1) forwards;
 }
 @keyframes hdrTitleDrop{
-  from{
-    opacity:0;
-    transform:translateY(-26px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
+  from{opacity:0;transform:translateY(-26px);}
+  to{opacity:1;transform:translateY(0);}
 }
 
-/* --- SHRINK BACKGROUND (alle Geräte) --- */
+/* ---------------- SHRINK ANIMATION BEIM SCROLLEN ---------------- */
 .atx-header.is-shrink::after{
   background:rgba(19,32,111,.40);
 }
@@ -380,7 +371,7 @@
     padding:10px 20px;
   }
   .atx-header.is-shrink .hdr-logo img{
-    height:46px;      /* Logo bleibt groß */
+    height:44px;
     transform:none;
   }
   .atx-header.is-shrink .hdr-top-inner{
@@ -389,14 +380,35 @@
   .atx-header.is-shrink .hdr-top-item{
     font-size:13px;
   }
-  /* Titelband näher an die Navi ran ziehen */
   .atx-header.is-shrink .hdr-title{
-    margin-top:-18px;
+    margin-top:-8px;
   }
   .atx-header.is-shrink .hdr-title-inner{
-    padding:4px 20px 6px;
-    font-size:clamp(1.3rem, 2.4vw, 1.9rem);
-    letter-spacing:.16em;
+    padding:4px 20px 8px;
+    font-size:clamp(1.25rem,2.2vw,1.8rem);
+    letter-spacing:.15em;
+  }
+}
+
+/* ===== MOBIL-SHRINK ===== */
+@media (max-width: 920px){
+  .atx-header.is-shrink .hdr{
+    padding:4px 12px;
+  }
+  .atx-header.is-shrink .hdr-logo img{
+    height:28px;
+    transform:translateY(1px);
+  }
+  .atx-header.is-shrink .hdr-top-inner{
+    padding:1px 12px;
+  }
+  .atx-header.is-shrink .hdr-top-item{
+    font-size:11px;
+  }
+  .atx-header.is-shrink .hdr-title-inner{
+    padding:6px 16px 8px;
+    font-size:1.2rem;
+    letter-spacing:.12em;
   }
 }
 
@@ -428,85 +440,46 @@
 /* --- MOBILE (max-width: 920px) --- */
 @media (max-width: 920px){
 
-  /* --- Nur Email + Telefon zeigen, Adresse ausblenden --- */
-  .hdr-top-left{
-    display:none !important;         /* Adresse weg */
-  }
-
+  /* Nur E-Mail + Telefon */
+  .hdr-top-left{display:none !important;}
   .hdr-top-right a[href^="mailto"],
-  .hdr-top-right a[href^="tel"]{
-    display:inline-flex !important;
-  }
-
+  .hdr-top-right a[href^="tel"]{display:inline-flex !important;}
   .hdr-top-inner{
     justify-content:center !important;
     gap:12px !important;
     padding:4px 10px !important;
     flex-wrap:nowrap !important;
   }
-
   .hdr-top-item{
     font-size:12px !important;
     gap:4px !important;
     white-space:nowrap !important;
   }
-
   .hdr-icon{
     width:13px !important;
     height:13px !important;
   }
 
-  /* ---------------- MAIN HEADER (Mobile) ---------------- */
+  /* Main header */
   .hdr{
     gap:10px;
     padding:12px 16px;
   }
-
   .hdr-cta{
     display:none;
   }
 
-  /* Reihenfolge: Logo – Inline-Titel – Burger – (Nav offcanvas) */
-  .hdr-logo{ order:1; }
-  .hdr-title-inline{
-    order:2;
-    flex:1;
-    text-align:center;
-  }
-  .hdr-burger{
-    order:3;
-    display:inline-flex;
-  }
-  .hdr-nav{ order:4; }
+  /* Reihenfolge im Header */
+  .hdr-logo{order:1;}
+  .hdr-title-inline{order:2;flex:1;text-align:center;}
+  .hdr-burger{order:3;display:inline-flex;}
+  .hdr-nav{order:4;}
 
-  /* SHRINK speziell für Mobile */
-  .atx-header.is-shrink .hdr{
-    padding:4px 12px;
-  }
-  .atx-header.is-shrink .hdr-logo img{
-    height:28px;
-    transform:translateY(1px);
-  }
-  .atx-header.is-shrink .hdr-top-inner{
-    padding:1px 12px;
-  }
-  .atx-header.is-shrink .hdr-top-item{
-    font-size:11px;
-  }
-  /* großes Titelband ausblenden, Inline-Titel zeigen */
-  .atx-header.is-shrink .hdr-title{
-    display:none;
-  }
-  .atx-header.is-shrink .hdr-title-inline{
-    display:block;
-  }
-  .atx-header.is-shrink .hdr-title-inner{
-    padding:6px 16px 8px;
-    font-size:1.2rem;
-    letter-spacing:.12em;
-  }
+  /* Shrink: Titelband ausblenden, Inline-Titel zeigen */
+  .atx-header.is-shrink .hdr-title{display:none;}
+  .atx-header.is-shrink .hdr-title-inline{display:block;}
 
-  /* ---------------- MOBILE NAV ---------------- */
+  /* Offcanvas Menü */
   .hdr-nav{
     position:fixed;
     top:var(--hdrH,72px);
@@ -537,29 +510,26 @@
     letter-spacing:.02em;
   }
 
-  .hdr-link::after,
-  .hdr-dd-toggle::after{
-    display:none;
-  }
-
-  .hdr-link:hover{
-    color:#0f172a;
-    background:#f1f5f9;
+  /* Hover / Active im Burger-Menü – DEUTLICH sichtbar */
+  .hdr-link:hover,
+  .hdr-dd-toggle:hover,
+  .hdr-link:active,
+  .hdr-dd-toggle:active{
+    background:#e5e7eb;
     border-radius:8px;
+    color:#0f172a;
   }
 
   .hdr-dd{
     flex-direction:column;
     align-items:stretch;
   }
-
   .hdr-dd-toggle{
     justify-content:space-between;
     width:100%;
     background:#f8fafc;
     border-radius:8px;
   }
-
   .hdr-dd-menu{
     position:static;
     display:none;
@@ -569,12 +539,19 @@
     margin-top:8px;
     box-shadow:none;
   }
+  .hdr-dd.open .hdr-dd-menu{display:block;}
 
-  .hdr-dd.open .hdr-dd-menu{
-    display:block;
+  /* Aktiver Link im Burger-Menü */
+  .hdr-nav .hdr-link.is-active,
+  .hdr-nav .hdr-dd-toggle.is-active{
+    color:#0f172a;
+    background:#e5e7eb;
+    border-radius:8px;
   }
 
-  .hdr-nav .hdr-cta{
+  /* CTA unten im Menü */
+  .hdr-nav .hdr-cta-insta{display:none;}
+  .hdr-nav .hdr-cta-mobilede{
     display:inline-flex;
     margin-top:auto;
     align-self:stretch;
@@ -583,16 +560,16 @@
     color:#f9fafb;
     border-radius:999px;
     box-shadow:none;
+    text-align:center;
+    padding:10px 16px;
   }
 
-  /* ---------------- PAGE TITLE (mobile, wenn nicht shrink) ---------------- */
   .hdr-title-inner{
     padding:14px 16px 16px;
     font-size:1.4rem;
     letter-spacing:.14em;
   }
 
-  /* ---------------- OVERLAY ---------------- */
   .hdr-backdrop{
     position:fixed;
     inset:0;
@@ -602,23 +579,18 @@
     transition:opacity .25s ease;
     z-index:1001;
   }
-
-  .menu-open .hdr-nav{
-    transform:translateX(0);
-  }
-
+  .menu-open .hdr-nav{transform:translateX(0);}
   .menu-open .hdr-backdrop{
     opacity:1;
     pointer-events:auto;
   }
 
-  /* Burger animation */
   .menu-open .hdr-burger span:nth-child(1){transform:translateY(6px) rotate(45deg)}
   .menu-open .hdr-burger span:nth-child(2){opacity:0}
   .menu-open .hdr-burger span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
 }
 
-/* Hover-open for Dropdown auf Desktop */
+/* Hover-open für Dropdown auf Desktop */
 @media (hover:hover){
   .hdr-dd:hover .hdr-dd-menu{display:block}
 }
@@ -649,7 +621,6 @@
     const titleEl = document.getElementById("hdrPageTitle");
     const titleInlineEl = document.getElementById("hdrTitleInline");
 
-    // For correct mobile panel top offset (inkl. Titelband)
     function setHdrH() {
       const h = headerEl?.offsetHeight || 72;
       root.style.setProperty("--hdrH", h + "px");
@@ -657,7 +628,6 @@
     setHdrH();
     window.addEventListener("resize", setHdrH);
 
-    // Dropdown behavior
     const dd = document.querySelector('[data-dd]');
     const toggle = dd?.querySelector('.hdr-dd-toggle');
 
@@ -667,14 +637,7 @@
         toggle?.setAttribute('aria-expanded','false');
       }
     }
-    function openDD(){
-      if(dd){
-        dd.classList.add('open');
-        toggle?.setAttribute('aria-expanded','true');
-      }
-    }
 
-    // On desktop, hover CSS handles it; on mobile, toggle on click
     toggle?.addEventListener('click', (e)=>{
       if (window.matchMedia("(max-width: 920px)").matches) {
         e.preventDefault();
@@ -684,7 +647,6 @@
       }
     });
 
-    // Burger open/close
     function openMenu(){
       document.body.classList.add('menu-open');
       burger?.setAttribute('aria-expanded','true');
@@ -701,7 +663,6 @@
     });
     backdrop?.addEventListener('click', closeMenu);
 
-    // Close mobile menu when navigating (except tapping Service toggle)
     nav?.addEventListener('click', (e)=>{
       if (window.matchMedia("(max-width: 920px)").matches) {
         const a = e.target.closest('a');
@@ -709,7 +670,7 @@
       }
     });
 
-    // ------- Aktive Menüpunkte automatisch setzen -------
+    // Aktive Links
     const path = window.location.pathname.toLowerCase();
     let file = path.substring(path.lastIndexOf('/') + 1);
     if (!file) file = 'index.html';
@@ -717,12 +678,9 @@
     const links = nav?.querySelectorAll('.hdr-link') || [];
     links.forEach(link => {
       const href = (link.getAttribute('href') || '').toLowerCase();
-      if (href === file) {
-        link.classList.add('is-active');
-      }
+      if (href === file) link.classList.add('is-active');
     });
 
-    // Service-Gruppe: wenn eine Service-Seite aktiv ist, Toggle hervorheben
     const serviceFiles = [
       'service_inzahlungnahme.html',
       'service_export.html',
@@ -732,7 +690,7 @@
       toggle.classList.add('is-active');
     }
 
-    // ------- Seitentitel setzen + Drop-Animation -------
+    // Seitentitel
     if (titleEl || titleInlineEl) {
       const titleMap = {
         'index.html': 'Willkommen',
@@ -744,23 +702,18 @@
         'service_export.html': 'Export-Service',
         'service_aufbereitung.html': 'KFZ-Aufbereitung'
       };
-
       const pageTitle = titleMap[file] || (document.title || 'Artex-Trans Autoagentur');
 
       if (titleEl) {
         titleEl.innerHTML = '<div class="hdr-title-inner"><span>– ' + pageTitle + ' –</span></div>';
-        requestAnimationFrame(() => {
-          titleEl.classList.add('is-visible');
-        });
+        requestAnimationFrame(() => titleEl.classList.add('is-visible'));
       }
-
-      // Inline-Title für Mobile-Shrink
       if (titleInlineEl) {
         titleInlineEl.textContent = pageTitle;
       }
     }
 
-    // ------- SHRINK ON SCROLL -------
+    // Scroll-Shrink
     function onScroll(){
       if (!headerEl) return;
       const shouldShrink = window.scrollY > 40;
@@ -770,7 +723,6 @@
     window.addEventListener('scroll', onScroll, {passive:true});
     onScroll();
 
-    // Global close rules
     document.addEventListener('keydown', (e)=>{
       if (e.key === 'Escape') {
         closeMenu();
@@ -778,7 +730,6 @@
       }
     });
     document.addEventListener('click', (e)=>{
-      // desktop outside-click close for dropdown
       if (!window.matchMedia("(max-width: 920px)").matches) {
         const ddEl = document.querySelector('[data-dd]');
         if (ddEl && !ddEl.contains(e.target)) closeDD();

@@ -89,7 +89,7 @@
       z-index:3;
       text-align:center;
       color:#fff;
-      padding:0 16px 30px;
+      padding:0 16px 34px; /* etwas mehr bottom-padding für mobile */
       max-width:var(--max);
       opacity:0;
       transform:translateY(14px);
@@ -190,7 +190,7 @@
     /* ---------- SERVICES ---------- */
     .section-services{
       padding-top:0;
-      margin-top:-60px;
+      margin-top:-60px;     /* Desktop: leicht ins Hero reinziehen */
       position:relative;
       z-index:5;
     }
@@ -286,11 +286,7 @@
       box-shadow:0 4px 0 #02083e;
     }
 
-    /* ---------- HERO CTA SPEZIFISCH ---------- */
-
-    .btn-hero{
-      min-width:190px;
-    }
+    /* ---------- HERO CTA SPEZIFISCH (FINAL FUNCTIONAL VERSION) ---------- */
 
     /* Grundstil für beide CTA-Buttons */
     .hero-actions .btn,
@@ -314,6 +310,7 @@
       border-color: #fff !important;
     }
 
+    /* Button, der früher Ghost war → jetzt auch weiß */
     .hero-actions .btn-ghost {
       background: #fff !important;
       color: var(--brand) !important;
@@ -425,25 +422,35 @@
       .grid-2{grid-template-columns:1fr;}
     }
 
-    @media (max-width:640px){
-      .services{grid-template-columns:1fr;}
-      .section-services{margin-top:-40px;}
-
-      /* WICHTIG: Mehr Abstand zwischen Header (Logo + Infozeile)
-         und Hero-Text auf dem Handy, damit nichts überlappt */
-      .hero-inner{
-        padding:110px 16px 26px;
-      }
-
-      .btn{
-        width:100%;
-        justify-content:center;
-        text-align:center;
-      }
-      .hero-actions{
-        gap:.5rem;
+    /* --------- MOBILE-TWEAKS: keine Überlappung mehr --------- */
+    @media (max-width:768px){
+      .section-services{
+        margin-top:-20px;   /* etwas weniger „reinschieben“ */
       }
     }
+
+ @media (max-width: 640px){
+
+  /* Header kompakter */
+  .hdr-logo img {
+    height: 34px !important;
+  }
+  .hdr {
+    padding: 6px 12px !important;
+  }
+
+  /* Hero weiter unten starten */
+  .hero-inner {
+    padding-top: 70px !important;
+    padding-bottom: 60px !important;
+  }
+
+  /* Services weiter nach unten */
+  .section-services {
+    margin-top: 10px !important;
+  }
+}
+
 
     @media (prefers-reduced-motion:reduce){
       .hero-inner,.hero p,.hero-chips,.hero-actions,.svc,.band,.card{
