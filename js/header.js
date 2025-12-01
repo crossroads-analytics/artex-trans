@@ -95,7 +95,7 @@
   z-index:1000;
   font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
   background:transparent;
-  overflow:visible; /* wichtig für Dropdown */
+  overflow:visible;
   transition:box-shadow .25s ease, transform .25s ease;
 }
 
@@ -464,6 +464,7 @@
   .hdr{
     gap:10px;
     padding:12px 16px;
+    position:relative;          /* Referenz für Burger-Position */
   }
   .hdr-cta{
     display:none;
@@ -472,12 +473,21 @@
   /* Reihenfolge im Header */
   .hdr-logo{order:1;}
   .hdr-title-inline{order:2;flex:1;text-align:center;}
-  .hdr-burger{order:3;display:inline-flex;}
-  .hdr-nav{order:4;}
 
-  /* Shrink: Titelband ausblenden, Inline-Titel zeigen */
-  .atx-header.is-shrink .hdr-title{display:none;}
-  .atx-header.is-shrink .hdr-title-inline{display:block;}
+  /* Burger-Layout – Sichtbarkeit erzwingen machen wir zusätzlich in JS */
+  .hdr-burger{
+    order:3;
+    position:absolute;
+    right:16px;
+    top:50%;
+    transform:translateY(-50%);
+    z-index:1003;
+  }
+
+  .hdr-nav{
+    order:4;
+    margin-left:0;
+  }
 
   /* Offcanvas Menü */
   .hdr-nav{
@@ -510,7 +520,7 @@
     letter-spacing:.02em;
   }
 
-  /* Hover / Active im Burger-Menü – DEUTLICH sichtbar */
+  /* Hover / Active im Burger-Menü – deutlich sichtbar */
   .hdr-link:hover,
   .hdr-dd-toggle:hover,
   .hdr-link:active,
@@ -620,6 +630,19 @@
     const nav = document.getElementById("mainNav");
     const titleEl = document.getElementById("hdrPageTitle");
     const titleInlineEl = document.getElementById("hdrTitleInline");
+
+    // *** NEU: Burger auf Mobile per Inline-Style erzwingen ***
+    function enforceMobileBurger(){
+      if (!burger) return;
+      if (window.matchMedia("(max-width: 920px)").matches) {
+        burger.style.setProperty('display','inline-flex','important');
+      } else {
+        burger.style.removeProperty('display');
+      }
+    }
+    enforceMobileBurger();
+    window.addEventListener('resize', enforceMobileBurger);
+    // *** ENDE NEU ***
 
     function setHdrH() {
       const h = headerEl?.offsetHeight || 72;
