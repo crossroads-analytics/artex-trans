@@ -429,7 +429,7 @@
       }
     }
 
- @media (max-width: 640px){
+@media (max-width: 640px){
 
   /* Header kompakter */
   .hdr-logo img {
@@ -445,11 +445,27 @@
     padding-bottom: 60px !important;
   }
 
-  /* Services weiter nach unten */
+  /* Allgemein etwas weniger Seiten-Padding */
+  .section{
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  /* Services-Panel enger + einspaltig */
   .section-services {
     margin-top: 10px !important;
   }
+  .services-panel{
+    padding: 20px 12px 24px;
+  }
+  .services{
+    grid-template-columns: 1fr;   /* 👉 nur noch 1 Karte pro Reihe */
+  }
+  .svc{
+    padding: 18px 14px;
+  }
 }
+
 
 
     @media (prefers-reduced-motion:reduce){
