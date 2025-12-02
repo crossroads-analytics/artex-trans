@@ -71,16 +71,39 @@
 
         <!-- CTA Desktop: Instagram -->
         <a class="hdr-cta hdr-cta-insta" href="https://www.instagram.com/artextrans/" target="_blank" rel="noopener">
-          Folgen: @artextrans
+        <img src="assets/images/emojis/instagram.png" alt="Instagram" class="hdr-cta-icon">
+        @artextrans
         </a>
+
+
+
+        <!-- CTA Desktop: Mobile.de -->
+        <a class="hdr-cta hdr-cta-mobile" 
+        href="https://home.mobile.de/ARTEXTRANSGBR?gclid=Cj0KCQjwt-6LBhDlARIsAIPRQcLv5Gw98keQxjOwxFQ5HP9jmykj4vYBoiICBlMNFqxr5-QyaEVbU9YaAoWAEALw_wcB#ses" 
+        target="_blank" rel="noopener">
+        <img class="hdr-cta-icon" src="assets/images/emojis/mobile.png" alt="mobile.de Icon"> Fahrzeugauswahl 
+        </a>
+
 
         <!-- CTA Mobile (im Burger unten): mobile.de Fahrzeugauswahl -->
         <a class="hdr-cta hdr-cta-mobilede" href="https://home.mobile.de/ARTEXTRANSGBR?gclid=Cj0KCQjwt-6LBhDlARIsAIPRQcLv5Gw98keQxjOwxFQ5HP9jmykj4vYBoiICBlMNFqxr5-QyaEVbU9YaAoWAEALw_wcB#ses" target="_blank" rel="noopener">
-          🚗 Fahrzeugauswahl auf mobile.de
+          <img class="hdr-cta-icon" src="assets/images/emojis/mobile.png" alt="mobile.de Icon"> Fahrzeugauswahl
         </a>
+
+        <!-- CTA Mobile (im Burger unten): Instagram -->
+        <a class="hdr-cta hdr-cta-mobile-insta" href="https://www.instagram.com/artextrans/" target="_blank" rel="noopener">
+        <img class="hdr-cta-icon" src="assets/images/emojis/instagram_farbe.png" alt="Instagram Icon">
+        Folge uns auf Instagram
+        </a>
+
       </nav>
     </div>
   </div>
+
+
+
+  
+
 
   <!-- Page title band (dynamic) -->
   <div class="hdr-title" id="hdrPageTitle" aria-live="polite"></div>
@@ -277,12 +300,22 @@
   text-transform:uppercase;
   letter-spacing:.08em;
 }
+/* Icon inside CTA buttons */
+.hdr-cta-icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  display: block;
+}
+
+
 .hdr-cta:hover{
   background:#e5ecff;
 }
 
 /* Varianten */
-.hdr-cta-mobilede{
+.hdr-cta-mobilede,
+.hdr-cta-mobile-insta {
   display:none; /* nur im mobilen Menü sichtbar */
 }
 
@@ -410,7 +443,16 @@
     font-size:1.2rem;
     letter-spacing:.12em;
   }
+
+  /* ⭐️ WICHTIG: Der eigentliche Fix */
+  .atx-header.is-shrink .hdr-title{
+    display:none !important;       /* großes Titelband ausblenden */
+  }
+  .atx-header.is-shrink .hdr-title-inline{
+    display:block !important;      /* kleiner Titel zwischen Logo & Burger */
+  }
 }
+
 
 /* Burger (hidden on desktop) */
 .hdr-burger{
@@ -439,6 +481,7 @@
 
 /* --- MOBILE (max-width: 920px) --- */
 @media (max-width: 920px){
+
 
   /* Nur E-Mail + Telefon */
   .hdr-top-left{display:none !important;}
@@ -473,6 +516,7 @@
   /* Reihenfolge im Header */
   .hdr-logo{order:1;}
   .hdr-title-inline{order:2;flex:1;text-align:center;}
+
 
   /* Burger-Layout – Sichtbarkeit erzwingen machen wir zusätzlich in JS */
   .hdr-burger{
@@ -573,6 +617,21 @@
     text-align:center;
     padding:10px 16px;
   }
+      .hdr-nav .hdr-cta-mobile-insta{
+    display:inline-flex;
+    margin-top:8px;
+    align-self:stretch;
+    justify-content:center;
+    background:#13206f;
+    color:#f9fafb;
+    border-radius:999px;
+    box-shadow:none;
+    text-align:center;
+    padding:10px 16px;
+    font-size:14px;
+    font-weight:700;
+  }
+
 
   .hdr-title-inner{
     padding:14px 16px 16px;
