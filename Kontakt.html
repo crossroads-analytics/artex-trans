@@ -12,6 +12,7 @@
 
   <style>
     :root{
+      --hdr-h:72px;          /* gleiche Headerhöhe wie Startseite */
       --brand:#13206f;
       --accent:#0a1770;
       --ink:#111827;
@@ -21,80 +22,174 @@
       --shadow:0 4px 12px rgba(0,0,0,0.05);
       --radius:14px;
       --max:1100px;
-      --hdr-h:72px;
     }
+
     *{box-sizing:border-box}
+
+    html{
+      scroll-padding-top:var(--hdr-h);
+    }
     body{
       margin:0;
       font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;
       background:var(--bg);
       color:var(--ink);
-      padding-top:var(--hdr-h);
-    }
-    header.atx-header{position:fixed !important;top:0;left:0;right:0;z-index:1000;}
-    html{scroll-padding-top:var(--hdr-h)}
-
-    .titleband{
-      background:var(--brand);color:#fff;text-align:center;
-      padding:22px 12px 28px;border-bottom:1px solid rgba(255,255,255,.1)
-    }
-    .titleband h1{
-      margin:0;font-family:"Bebas Neue",sans-serif;
-      letter-spacing:.08em;font-size:42px;text-transform:uppercase
+      padding-top:var(--hdr-h);   /* Platz für den fixen Header */
     }
 
-    main{width:min(100%,var(--max));margin:auto;padding:180px 16px}
+    /* Header oben fixieren – Rest (Burger, Nav etc.) kommt aus header.js */
+    header.atx-header{
+      position:fixed !important;
+      top:0;
+      left:0;
+      right:0;
+      z-index:1000;
+    }
+
+    /* Sicherheit: Burger auf Mobile erzwingen, falls irgendwas überschreibt */
+    @media (max-width: 920px){
+      .hdr-burger{
+        display:inline-flex !important;
+      }
+    }
+
+    main{
+      width:min(100%,var(--max));
+      margin:auto;
+      padding:120px 16px 80px;  /* 120px top = etwas Luft unter dem Header */
+    }
+
     .contacts{
-      display:flex;flex-wrap:wrap;justify-content:center;gap:40px;margin-bottom:40px;
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:40px;
+      margin-bottom:40px;
     }
-    .person{text-align:center;background:var(--card);border:1px solid var(--border);
-      border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);width:320px;}
-    .person img{width:160px;height:auto;border-radius:10px;margin-bottom:10px}
-    .person h3{margin:8px 0 4px;color:var(--brand)}
-    .person .role{font-weight:600;font-size:15px;color:#4b587c;margin-bottom:6px}
-    .contact-line{display:flex;align-items:center;justify-content:center;gap:6px;margin:4px 0;font-size:14px}
+    .person{
+      text-align:center;
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:20px;
+      box-shadow:var(--shadow);
+      width:320px;
+    }
+    .person img{
+      width:160px;
+      height:auto;
+      border-radius:10px;
+      margin-bottom:10px;
+    }
+    .person h3{
+      margin:8px 0 4px;
+      color:var(--brand);
+    }
+    .person .role{
+      font-weight:600;
+      font-size:15px;
+      color:#4b587c;
+      margin-bottom:6px;
+    }
+    .contact-line{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:6px;
+      margin:4px 0;
+      font-size:14px;
+    }
     .contact-line i{color:var(--brand)}
-    .contact-line a{text-decoration:none;color:var(--brand);font-weight:600}
-
-    form{background:var(--card);padding:24px;border:1px solid var(--border);
-      border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:40px;}
-    form .row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:14px}
-    input,textarea{
-      width:100%;padding:10px 12px;border:1px solid var(--border);
-      border-radius:8px;font-family:inherit;font-size:15px;
+    .contact-line a{
+      text-decoration:none;
+      color:var(--brand);
+      font-weight:600;
     }
-    textarea{min-height:100px;resize:vertical}
+
+    form{
+      background:var(--card);
+      padding:24px;
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      margin-bottom:40px;
+    }
+    form .row{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+      margin-bottom:14px;
+    }
+    input,textarea{
+      width:100%;
+      padding:10px 12px;
+      border:1px solid var(--border);
+      border-radius:8px;
+      font-family:inherit;
+      font-size:15px;
+    }
+    textarea{
+      min-height:100px;
+      resize:vertical;
+    }
     button{
-      background:var(--brand);color:#fff;border:none;border-radius:8px;
-      padding:12px 18px;font-weight:700;cursor:pointer;width:100%;
+      background:var(--brand);
+      color:#fff;
+      border:none;
+      border-radius:8px;
+      padding:12px 18px;
+      font-weight:700;
+      cursor:pointer;
+      width:100%;
     }
     button:hover{opacity:.92}
 
-    .map{border-radius:12px;overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow);margin-bottom:10px}
+    .map{
+      border-radius:12px;
+      overflow:hidden;
+      border:1px solid var(--border);
+      box-shadow:var(--shadow);
+      margin-bottom:10px;
+    }
 
     /* Routenplaner Button */
     .route-btn{
-      display:inline-flex;align-items:center;gap:10px;
-      background:#ffffff;border:3px solid #02083e;border-radius:12px;
-      box-shadow:0 8px 0 #02083e;padding:12px 18px;
-      color:var(--brand);font-weight:900;letter-spacing:.02em;text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      background:#ffffff;
+      border:3px solid #02083e;
+      border-radius:12px;
+      box-shadow:0 8px 0 #02083e;
+      padding:12px 18px;
+      color:var(--brand);
+      font-weight:900;
+      letter-spacing:.02em;
+      text-decoration:none;
     }
     .route-btn:hover{transform:translateY(1px)}
-    .route-btn:active{transform:translateY(3px);box-shadow:0 5px 0 #02083e}
+    .route-btn:active{
+      transform:translateY(3px);
+      box-shadow:0 5px 0 #02083e;
+    }
 
     @media(max-width:700px){
       .row{grid-template-columns:1fr!important}
       .person{width:100%}
-      .titleband h1{font-size:34px}
+    }
+
+    /* --- Chat-Button unten rechts etwas sauberer positionieren (Crisp o.ä.) --- */
+    .crisp-client .crisp-standalone,
+    .crisp-client .crisp-standalone .crisp-widget{
+      bottom:16px !important;
+      right:16px !important;
     }
   </style>
 </head>
 <body>
 
-  <!-- Header -->
+  <!-- Header Mount -->
   <div id="header"></div>
-
-
 
   <main>
     <!-- Ansprechpartner -->
@@ -140,7 +235,7 @@
         referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
 
-    <!-- Expliziter Routenplaner-Button (öffnet Google Maps mit Ziel) -->
+    <!-- Routenplaner-Button -->
     <a class="route-btn" href="https://www.google.com/maps/dir/?api=1&destination=Artex-Trans+Autoagentur%2C+Norderneystra%C3%9Fe+7%2C+28217+Bremen" target="_blank" rel="noopener">
       <i class="fa-solid fa-location-arrow"></i> Routenplaner
     </a>
@@ -149,9 +244,29 @@
   <!-- Footer -->
   <div id="footer"></div>
 
-  <!-- Scripts -->
+  <!-- Icons + Header/Footer-Skripte -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js" defer></script>
-  <script src="js/header.js" defer></script>
-  <script src="js/footer.js" defer></script>
+
+  <!-- Nutzt deinen bestehenden js/header.js (mit Fallback, falls du später wieder assets/js nutzt) -->
+  <script>
+    (function () {
+      function loadScript(src, cb){
+        var s=document.createElement('script');
+        s.src=src;
+        s.defer=true;
+        s.onload=function(){cb && cb(true)};
+        s.onerror=function(){cb && cb(false)};
+        document.head.appendChild(s);
+      }
+
+      // Hauptpfad, den du genannt hast:
+      loadScript('js/header.js', function(ok){
+        if(!ok) loadScript('assets/js/header.js');
+      });
+      loadScript('js/footer.js', function(ok){
+        if(!ok) loadScript('assets/js/footer.js');
+      });
+    })();
+  </script>
 </body>
 </html>

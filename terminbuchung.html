@@ -12,6 +12,28 @@
 
   <style>
     :root{
+  --hdr-h:72px;
+}
+html{
+  scroll-padding-top:var(--hdr-h);
+}
+body{
+  padding-top:var(--hdr-h);
+}
+header.atx-header{
+  position:fixed !important;
+  top:0;
+  left:0;
+  right:0;
+  z-index:1000;
+}
+@media (max-width: 920px){
+  .hdr-burger{
+    display:inline-flex !important;
+  }
+}
+
+    :root{
       --brand:#13206f;
       --border:#e5e7eb;
       --bg:#f5f6fa;
