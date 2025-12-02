@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AGB – Artex-Trans Autoagentur</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --hdr-h:72px;
+      --brand:#13206f;
+      --ink:#111827;
+      --bg:#f5f6fa;
+      --card:#ffffff;
+      --border:#e5e7eb;
+      --shadow:0 4px 18px rgba(0,0,0,.06);
+      --radius:16px;
+      --max:1100px;
+    }
+
+    *{box-sizing:border-box;}
+
+    html{
+      scroll-padding-top:var(--hdr-h);
+    }
+
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:var(--bg);
+      color:var(--ink);
+      padding-top:var(--hdr-h);
+    }
+
+    /* fester Header wie auf den anderen Seiten */
+    header.atx-header{
+      position:fixed !important;
+      top:0;
+      left:0;
+      right:0;
+      z-index:1000;
+    }
+
+    /* Burger auf Mobile erzwingen */
+    @media (max-width: 920px){
+      .hdr-burger{
+        display:inline-flex !important;
+      }
+    }
+
+    main{
+      width:min(100%,var(--max));
+      margin:auto;
+      padding:140px 16px 80px;
+    }
+
+    .legal-card{
+      background:var(--card);
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      box-shadow:var(--shadow);
+      padding:28px 22px 32px;
+      line-height:1.6;
+      font-size:15px;
+    }
+
+    .legal-card h1{
+      margin-top:0;
+      margin-bottom:6px;
+      font-family:"Bebas Neue",sans-serif;
+      letter-spacing:.08em;
+      font-size:40px;
+      text-transform:uppercase;
+      text-align:center;
+      color:var(--brand);
+    }
+
+    .legal-card h2{
+      margin-top:24px;
+      margin-bottom:6px;
+      font-size:19px;
+      color:var(--brand);
+    }
+
+    .legal-card h3{
+      margin-top:18px;
+      margin-bottom:4px;
+      font-size:16px;
+      font-weight:700;
+    }
+
+    .legal-card p{
+      margin:4px 0 10px;
+    }
+
+    .legal-card ul{
+      margin:4px 0 12px 20px;
+      padding:0;
+    }
+
+    .legal-card li{
+      margin-bottom:4px;
+    }
+
+    @media (max-width:700px){
+      main{padding:130px 12px 70px;}
+      .legal-card{padding:22px 16px 26px;}
+    }
+  </style>
+</head>
+<body class="page-agb">
+
+  <!-- Header Mount -->
+  <div id="header"></div>
+
+  <main>
+    <article class="legal-card">
+      <h1>Allgemeine Geschäftsbedingungen</h1>
+
+      <h2>Allgemeine Geschäftsbedingungen für den Verkauf gebrauchter Kraftfahrzeuge</h2>
+
+      <h3>1. Geltungsbereich</h3>
+      <p>1.1 Die Allgemeinen Geschäftsbedingungen (folgend „AGB“ genannt) gelten in der zum Zeitpunkt des Kaufvertragsschlusses gültigen Fassung auch für alle zukünftigen Kaufvertragsabschlüsse, wenn zuvor ein eindeutiger Hinweis auf die Einbeziehung der AGB erfolgt ist, selbst wenn sie vorher nicht noch einmal ausdrücklich vereinbart werden.</p>
+      <p>1.2 Von den hier vorliegenden AGB abweichende, diesen entgegenstehenden oder sie ergänzenden Geschäftsbedingungen werden grundsätzlich, selbst bei Kenntnis, nicht Vertragsbestandteil, außer ihrer Geltung wird ausdrücklich zugestimmt.</p>
+
+      <h3>2. Vertragsabschluss</h3>
+      <p>2.1 Unsere Angebote sind unverbindlich.</p>
+      <p>2.2 Die in den Produktbeschreibungen enthaltenen Gewichts- und Maßangaben, Zeichnungen, Erläuterungen, Beschreibungen und Abbildungen sind branchenübliche Näherungswerte und daher keine Zusicherung dieser Eigenschaften.</p>
+      <p>2.3 Der Erfüllungsort bei Verträgen mit Unternehmenskunden, ist für alle vertraglichen und gesetzlichen Ansprüche grundsätzlich unser Geschäftssitz.</p>
+      <p>2.4 Der Erfüllungsort für die Nacherfüllung im Gewährleistungsfalle ist unser Geschäftssitz.</p>
+      <p>2.5 Die Vertrags- und Kommunikationssprache ist deutsch.</p>
+
+      <h3>3. Kaufpreis, Aufrechnung, Zurückbehaltung, Abtretung und Verzug</h3>
+      <p>3.1 Soweit wir mit unserem Kunden nichts anderes vereinbart haben, ist der Kaufpreis mit Zustandekommen des Vertrages sofort fällig.</p>
+      <p>3.2 Der Kunde darf gegenüber unseren Ansprüchen nur mit unstreitigen oder rechtskräftig festgestellten Forderungen aufrechnen. Der Kunde ist nicht berechtigt, gegenüber unseren Forderungen aus einem Vertrag ein Zurückbehaltungsrecht wegen eines anderen, nicht aus diesem Vertrag stammenden Anspruchs auszuüben.</p>
+      <p>3.3 Das kaufmännische Zurückbehaltungsrecht gemäß § 369 HGB gilt für den Kunden nicht. Der Kunde kann seine gegenüber uns bestehenden Forderungen unbeschadet der Regelung des § 354 a HGB nicht an Dritte abtreten.</p>
+      <p>3.4 Ist unser Kunde mit der Zahlung des Kaufpreises in Verzug, so hat er für jede unserer Mahnungen bis zur Zahlung des Kaufpreises Schadensersatz in Höhe von 5,00 EUR zu zahlen. Unserem Kunden bleibt es unbenommen nachzuweisen, uns sei durch die Mahnung kein oder nur ein Schaden in geringerer Höhe entstanden. Haben wir einen höheren Mahnaufwand als 5,00 EUR, sind wir an die Schadenpauschale nicht gebunden.</p>
+      <p>3.5 Ziehen wir unsere Forderungen auf Wunsch des Kunden im Wege der Lastschrift ein, hat der Kunde für jeden Fall einer Rücklastschrift den für uns damit verbundenen Bearbeitungsaufwand mit 5,- € zu erstatten. Unserem Kunden bleibt die Möglichkeit des Nachweises belassen, uns sei kein oder nur ein geringerer Schaden entstanden.</p>
+
+      <h3>4. Lieferung und Gefahrenübergang</h3>
+      <p>4.1 Soweit wir einen Liefertermin nicht ausdrücklich als verbindliche Lieferfrist vereinbart haben, sind die von uns genannten Liefertermine nur unverbindlich. Eine Lieferfrist beginnt mit dem Eingang aller erforderlicher Unterlagen und Informationen des Kunden bei uns. Unser Kunde kann im Falle des Lieferverzugs erst vom Vertrag zurücktreten, wenn er uns eine angemessene, mindestens dreiwöchige Nachfrist zur Lieferung gesetzt hat und diese Frist fruchtlos verstrichen ist.</p>
+      <p>4.2 Wir liefern durch Bereitstellung des Fahrzeugs an unserem Sitz.</p>
+      <p>4.3 Ist im Einzelfall Versand vereinbart, versenden wir die Ware stets auf Wunsch und auf Kosten des Kunden. Wenn der Kunde Unternehmer ist, hat er gemäß § 447 BGB die Gefahr der Versendung zu tragen.</p>
+
+      <h3>5. Eigentumsvorbehalt</h3>
+      <p>5.1 Das Fahrzeug geht erst dann in das Eigentum des Kunden über, wenn der Kunde, der Unternehmer ist, seine gesamten Verbindlichkeiten aus der mit uns bestehenden Geschäftsverbindung erfüllt hat. Ist der Kunde Verbraucher, geht das Eigentum auf ihn über, wenn er unsere Forderung aus diesem Geschäft erfüllt hat. Solange der Eigentumsvorbehalt besteht, sind wir berechtigt, die Zulassungsbescheinigung Teil II zu besitzen und die Herausgabe dieser Bescheinigung zum Zwecke der Besitzausübung zu fordern.</p>
+      <p>5.2 Der Eigentumsvorbehalt bleibt auch dann bestehen, wenn einzelne unserer Forderungen in eine laufende Rechnung aufgenommen werden und der Saldo gezogen und anerkannt ist.</p>
+      <p>5.3 In der Rücknahme einer Vorbehaltsware liegt ein Rücktritt vom Vertrag nur dann, wenn wir dies ausdrücklich schriftlich erklären. Treten wir vom Vertrag zurück, so können wir für die Dauer der Überlassung zum Gebrauch des Fahrzeugs eine angemessene Vergütung verlangen.</p>
+      <p>5.4 Ist der Kunde Unternehmer, gilt: Der Kunde ist berechtigt, das Fahrzeug in seinem ordentlichen Geschäftsgang weiter zu veräußern. Er tritt uns bereits jetzt eine Forderung in Höhe unseres Rechnungsbetrages ab, die er aus der Weiterveräußerung gegen einen Dritten erwirkt. Wir nehmen die Abtretung an. Nach der Abtretung ist der Kunde zur Einziehung der Forderung ermächtigt. Wir behalten uns vor, die Forderung selbst einzuziehen, sobald der Kunde seinen Zahlungsverpflichtungen nicht ordnungsgemäß nachkommt und in Zahlungsverzug gerät. Andere Verfügungen als die genannten darf der Kunde nicht treffen, insbesondere das Fahrzeug nicht anderweitig verpfänden oder zur Sicherheit übereignen.</p>
+      <p>5.5 Solange der Kunde seine uns gegenüber bestehenden Verbindlichkeiten ordnungsgemäß erfüllt, ist er zur Weiterverwendung des Fahrzeugs im üblichen Geschäftsgang befugt; dies gilt jedoch nicht, wenn uns, soweit zwischen dem Kunden und seinen Abnehmern ein Abtretungsverbot bezüglich der Kaufpreisforderung vereinbart ist. Zu Verpfändungen, Sicherungsübereignungen oder sonstigen Belastungen ist der Kunde nicht berechtigt.</p>
+      <p>5.6 Bei Nichteinhaltung der Zahlungsbedingungen, unberechtigten Verfügungen, bei einer wesentlichen Verschlechterung der Vermögenslage des Käufers, bei Wechsel- und Scheckprotesten und wenn der Käufer selbst oder von Dritten gegen ihn ein Insolvenzverfahren beantragt wird, sind wir berechtigt, von unserem Kunden eine Sicherheit für unsere Restforderung zu verlangen oder das Fahrzeug in Besitz zu nehmen und zu diesem Zweck den Betrieb bzw. Grundstücke des Kunden zu betreten, zweckdienliche Auskünfte zu verlangen sowie notwendige Einsicht in Bücher zu erhalten.</p>
+      <p>5.7 Dieser Kunde ist im Falle eines Weiterverkaufs verpflichtet, ein Eigentumsvorbehalt mit seinem Kunden zu vereinbaren, ohne den mit uns vereinbarten Eigentumsvorbehalt offen zu legen.</p>
+      <p>5.8 Der Kunde tritt hiermit die durch eine Weiterveräußerung der Fahrzeuge entstehenden Ansprüche zur Sicherung aller unserer Forderungen an uns ab.</p>
+      <p>5.9 Der Kunde ist bei ordnungsgemäßem Geschäftsgang zur Einziehung der Forderung aus einem Weiterverkauf des Fahrzeugs ermächtigt. Haben wir konkreten Anlass zur Sorge, dass unser Kunde seine Verpflichtungen uns gegenüber nicht ordnungsgemäß erfüllt oder erfüllen wird, so hat der Kunde auf unser Verlangen hin die Abtretung seinen Abnehmern mitzuteilen, sich jeder Verfügung über die Forderung zu enthalten, uns alle erforderlichen Auskünfte über den Bestand der in seinem Eigentum stehenden Waren und über die an uns abgetretenen Forderungen zu geben sowie uns die Unterlagen zur Geltendmachung der abgetretenen Forderung auszuhändigen. Zugriffe Dritter auf die vorbehaltsweise gelieferten Fahrzeuge und die abgetretenen Forderungen sind uns unverzüglich mitzuteilen.</p>
+
+      <h3>6. Gewährleistung</h3>
+      <p>6.1 Ist der Kunde Unternehmer, sind wir nicht verpflichtet, Gewähr zu leisten. Wir verkaufen unsere Gebrauchtfahrzeuge an Unternehmer unter Ausschluss jeglicher Gewährleistung. Ziff. 6.2 gilt für den Unternehmerkunden nicht.</p>
+      <p>6.2 Ist der Kunde Verbraucher, geht das Wahlrecht zwischen Nachlieferung und Nachbesserung auf uns mit Ablauf einer von uns dem Verbraucher gesetzten, angemessenen Frist zur Erklärung seiner Wahl zwischen Nachlieferung und Nachbesserung über. Wir sind berechtigt, die Art der vom Kunden gewählten Nacherfüllung zu verweigern, wenn sie nur mit unverhältnismäßigen Kosten möglich ist und die andere Art der Nacherfüllung ohne erhebliche Nachteile bleibt. Schlägt die Nacherfüllung fehl, kann der Kunde nach seiner Wahl Herabsetzung der Vergütung (Minderung) oder Rückgängigmachung des Vertrages (Rücktritt) verlangen. Das Recht des Kunden, neben dem Rücktritt in der gesetzlichen Weise Schadensersatz oder Aufwendungsersatz zu verlangen, bleibt unberührt, mit Ausnahme der Einschränkung durch Schadensersatzansprüche des Kunden gemäß Ziffer 7 dieser Geschäftsbedingungen.</p>
+      <p>6.3 Sollten wir im Einzelfall eine Gewährleistung mit dem Unternehmerkunden vereinbart oder vom Gewährleistungsausschluss abgesehen haben, kann die gemäß § 377 HGB vorgesehene Rüge nur in Schriftform wirksam erklärt werden. Die weiteren gesetzlichen Voraussetzungen des § 377 HGB bleiben unberührt. Unabhängig davon sind Gewährleistungsansprüche des Verbraucherkunden ausgeschlossen, wenn er die Mängel bei Vertragsschluss kannte. Sind dem Verbraucherkunden Mängel infolge grober Fahrlässigkeit unbekannt geblieben, kann der Verbraucherkunde seine Rechte wegen dieser Mängel nur geltend machen, wenn wir den Mangel arglistig verschwiegen oder eine Garantie für die Beschaffenheit des Fahrzeugs übernommen haben.</p>
+      <p>6.4 Erbringen wir Leistungen bei der Mängelsuche, -prüfung oder -beseitigung, ohne hierzu verpflichtet zu sein und hat der Kunde vorsätzlich oder grob fahrlässig zu Unrecht Mängel gerügt, so hat der Kunde die uns hierdurch entstehenden Kosten zu ersetzen.</p>
+      <p>6.5 Die Ansprüche unserer Verbraucherkunden wegen Sachmängel an gebrauchten Fahrzeugen verjähren entsprechend den gesetzlichen Regelungen in einem Jahr ab Ablieferung des Fahrzeugs. Diese Haftungsbeschränkung gilt nicht für Ansprüche unserer Kunden aus dem Produkthaftungsgesetz und uns zurechenbaren Körper- und Gesundheitsschäden oder bei Verlust des Lebens des Kunden und im Falle einer Haftung wegen Vorsatzes oder grober Fahrlässigkeit. Andere gesetzliche Schadensersatzausschlusstatbestände bleiben ebenso unberührt.</p>
+
+      <h3>7. Haftung</h3>
+      <p>In Fällen vertraglicher und außervertraglicher Haftung leisten wir Schadensersatz und Ersatz vergeblicher Aufwendungen nach folgenden Regeln:</p>
+      <p>7.1 Wir haften auf Schadensersatz in voller Höhe bei Vorsatz und grober Fahrlässigkeit.</p>
+      <p>7.2 Bei Fehlen einer Beschaffenheit, für deren Vorhandensein wir eine Garantie übernommen oder die wir dem Kunden zugesichert haben, haften wir nur in Höhe des vorhersehbaren typischen Schadens, der durch die Garantie bzw. die Zusicherung verhindert werden sollte, soweit das Fehlen der garantierten/zugesicherten Beschaffenheit nicht seinerseits auf Vorsatz/grober Fahrlässigkeit beruht.</p>
+      <p>7.3 Bei leicht fahrlässigen Pflichtverletzungen beschränkt sich unsere Haftung auf den nach Art der Ware vorhersehbaren, vertragstypischen unmittelbaren Durchschnittsschadens. Dies gilt auch bei leicht fahrlässigen Pflichtverletzungen unserer gesetzlichen Vertreter oder Erfüllungsgehilfen. Gegenüber Unternehmerkunden haften wir bei leicht fahrlässiger Verletzung, soweit keine Hauptleistungspflicht (z. B. beim Kaufvertrag: Übergabe der Kaufsache und Eigentumsverschaffung durch den Verkäufer sowie Kaufpreiszahlung und Abnahme der Kaufsache durch Käufer) verletzt wurde, nicht. Weitergehende Ansprüche gegen uns oder unsere Beauftragten, insbesondere auch auf Schadensersatz oder Aufwendungsersatz, gleich aus welchem Rechtsgrund, sind ausgeschlossen.</p>
+      <p>7.4 Die vorstehenden Haftungsbeschränkungen gelten nicht für Ansprüche des Kunden aus dem Produkthaftungsgesetz und bei uns zurechenbaren Körper- und Gesundheitsschäden oder bei Verlust des Lebens des Kunden und im Falle einer Haftung gemäß Ziffer 7.1. Andere gesetzliche Schadensersatzausschlusstatbestände bleiben ebenso unberührt.</p>
+      <p>7.5 Führen wir unsere Leistungen aus Gründen nicht aus, die der Kunde zu vertreten hat, so hat der Kunde Schadensersatz in Höhe von 15 % des vereinbarten Kaufpreises zu zahlen. Ist uns ein höherer Schaden entstanden, sind wir an die Schadenpauschale nicht gebunden.</p>
+
+      <h3>8. Sonstiges</h3>
+      <p>8.1 Für sämtliche Ansprüche aus der Geschäftsverbindung mit Kaufleuten, juristischen Personen des öffentlichen Rechts oder öffentlich-rechtlichen Sondervermögen ist Gerichtsstand unser Sitz. Dies gilt ebenfalls, wenn der Vertragspartner keinen allgemeinen Gerichtsstand in Deutschland hat oder sein Wohnsitz oder gewöhnlicher Aufenthaltsort im Zeitpunkt der Klageerhebung unbekannt ist. Bei Vertragspartnern mit Geschäfts- oder Wohnsitz außerhalb von Deutschland können wir wahlweise Klage auch am Wohn- oder Geschäftssitz des Vertragspartners erheben.</p>
+      <p>8.2 Es gilt ausschließlich deutsches Recht mit Ausnahme des CISG.</p>
+      <p>8.3 Sollten einzelne Klauseln dieser AGB ganz oder teilweise ungültig oder lückenhaft sein, berührt das die Wirksamkeit der übrigen Klauseln bzw. der übrigen Teile solcher Klauseln nicht.</p>
+    </article>
+  </main>
+
+  <!-- Footer Mount -->
+  <div id="footer"></div>
+
+  <!-- Icons (für Header/Footer) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js" defer></script>
+
+  <!-- Header/Footer Loader wie auf den anderen Seiten -->
+  <script>
+    (function () {
+      function loadScript(src, cb){
+        var s = document.createElement('script');
+        s.src = src;
+        s.defer = true;
+        s.onload = function(){ cb && cb(true); };
+        s.onerror = function(){ cb && cb(false); };
+        document.head.appendChild(s);
+      }
+
+      loadScript('js/header.js', function(ok){
+        if (!ok) loadScript('assets/js/header.js');
+      });
+      loadScript('js/footer.js', function(ok){
+        if (!ok) loadScript('assets/js/footer.js');
+      });
+    })();
+  </script>
+</body>
+</html>

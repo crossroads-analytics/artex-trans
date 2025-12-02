@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Impressum – Artex-Trans Autoagentur</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --hdr-h:72px;
+      --brand:#13206f;
+      --ink:#111827;
+      --bg:#f5f6fa;
+      --card:#ffffff;
+      --border:#e5e7eb;
+      --shadow:0 4px 18px rgba(0,0,0,.06);
+      --radius:16px;
+      --max:900px;
+    }
+
+    *{box-sizing:border-box;}
+
+    html{
+      scroll-padding-top:var(--hdr-h);
+    }
+
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:var(--bg);
+      color:var(--ink);
+      padding-top:var(--hdr-h);
+    }
+
+    /* fester Header wie auf den anderen Seiten */
+    header.atx-header{
+      position:fixed !important;
+      top:0;
+      left:0;
+      right:0;
+      z-index:1000;
+    }
+
+    /* Burger auf Mobile */
+    @media (max-width: 920px){
+      .hdr-burger{
+        display:inline-flex !important;
+      }
+    }
+
+    main{
+      width:min(100%,var(--max));
+      margin:auto;
+      padding:140px 16px 80px;
+    }
+
+    .legal-card{
+      background:var(--card);
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      box-shadow:var(--shadow);
+      padding:28px 22px 32px;
+      line-height:1.6;
+      font-size:15px;
+    }
+
+    .legal-card h1{
+      margin-top:0;
+      margin-bottom:12px;
+      font-family:"Bebas Neue",sans-serif;
+      letter-spacing:.08em;
+      font-size:40px;
+      text-transform:uppercase;
+      text-align:center;
+      color:var(--brand);
+    }
+
+    .legal-card h2{
+      margin-top:18px;
+      margin-bottom:4px;
+      font-size:18px;
+      color:var(--brand);
+    }
+
+    .legal-card p{
+      margin:4px 0 10px;
+    }
+
+    .legal-card address{
+      font-style:normal;
+      margin:4px 0 12px;
+      white-space:pre-line;
+    }
+
+    @media (max-width:700px){
+      main{padding:130px 12px 70px;}
+      .legal-card{padding:22px 16px 26px;}
+    }
+  </style>
+</head>
+<body class="page-impressum">
+
+  <!-- Header Mount -->
+  <div id="header"></div>
+
+  <main>
+    <article class="legal-card">
+      <h1>Impressum</h1>
+
+      <h2>Angaben gemäß § 5 TMG</h2>
+      <p><strong>ARTEX-TRANS Autoagentur – A. Tatoyan &amp; E. Gutjahr GbR</strong></p>
+
+      <address>
+Norderneystraße 7 / Utbremer Straße 38
+DE-28217 Bremen
+      </address>
+
+      <p>Vertreten durch die Geschäftsführer: <br>
+      Aram Tatoyan &amp; Eduard Gutjahr</p>
+
+      <h2>Kontakt</h2>
+      <p>Telefon: +49 (0) 421-3965171<br>
+         Fax: +49 (0) 421-3965185</p>
+
+      <p>Mobil: +49 (0) 152-59649308<br>
+         Mobil: +49 (0) 171-2759067</p>
+
+      <p>E-Mail: <a href="mailto:info@artex-trans.de">info@artex-trans.de</a></p>
+
+      <h2>Umsatzsteuer-ID</h2>
+      <p>Umsatzsteuer-Identifikationsnummer gemäß § 27a Umsatzsteuergesetz:<br>
+      <strong>DE263185678</strong></p>
+    </article>
+  </main>
+
+  <!-- Footer Mount -->
+  <div id="footer"></div>
+
+  <!-- Icons (für Header/Footer) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js" defer></script>
+
+  <!-- Header/Footer Loader -->
+  <script>
+    (function () {
+      function loadScript(src, cb){
+        var s = document.createElement('script');
+        s.src = src;
+        s.defer = true;
+        s.onload = function(){ cb && cb(true); };
+        s.onerror = function(){ cb && cb(false); };
+        document.head.appendChild(s);
+      }
+
+      loadScript('js/header.js', function(ok){
+        if (!ok) loadScript('assets/js/header.js');
+      });
+      loadScript('js/footer.js', function(ok){
+        if (!ok) loadScript('assets/js/footer.js');
+      });
+    })();
+  </script>
+</body>
+</html>

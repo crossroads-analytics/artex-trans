@@ -48,9 +48,9 @@
     </div>
 
     <div class="footer-bottom">
-      <a href="/datenschutz.html">Datenschutz</a><span class="sep">·</span>
-      <a href="/agb.html">AGB</a><span class="sep">·</span>
-      <a href="/impressum.html">Impressum</a>
+      <a href="datenschutz.html">Datenschutz</a><span class="sep">·</span>
+      <a href="agb.html">AGB</a><span class="sep">·</span>
+      <a href="impressum.html">Impressum</a>
     </div>
   </div>
 </footer>`;
