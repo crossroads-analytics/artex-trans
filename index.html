@@ -476,7 +476,44 @@
       }
       .btn,.svc,.card{transition:none;}
     }
+
+    /* --- Einheitlicher Stil für Map + Kontakt Buttons (NEU) --- */
+    .card .btn, 
+    .card .btn-small,
+    .contact-actions .btn,
+    .contact-actions .btn-small {
+      border-radius:999px !important;
+      border:2px solid var(--brand) !important;
+      background:#fff !important;
+      color:var(--brand) !important;
+      font-weight:800 !important;
+      padding:.7rem 1.4rem !important;
+      box-shadow:none !important;
+      min-width:180px;
+      text-align:center;
+    }
+
+    .card .btn:hover,
+    .card .btn-small:hover,
+    .contact-actions .btn:hover,
+    .contact-actions .btn-small:hover {
+      background:var(--brand) !important;
+      color:#fff !important;
+      border-color:var(--brand) !important;
+      transform:none !important;
+      box-shadow:none !important;
+    }
+
+    .contact-actions {
+      gap:.7rem;
+    }
+
+    .card .btn-small {
+      font-size:.9rem !important;
+    }
+
   </style>
+
 </head>
 <body class="page-home">
 
