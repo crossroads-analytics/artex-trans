@@ -8,7 +8,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet">
 
   <style>
     :root{
@@ -46,7 +46,7 @@
       z-index:1000;
     }
 
-    /* Sicherheit: Burger auf Mobile erzwingen, falls irgendwas überschreibt */
+    /* Burger auf Mobile erzwingen */
     @media (max-width: 920px){
       .hdr-burger{
         display:inline-flex !important;
@@ -56,7 +56,7 @@
     main{
       width:min(100%,var(--max));
       margin:auto;
-      padding:120px 16px 80px;  /* 120px top = etwas Luft unter dem Header */
+      padding:180px 16px 80px;  /* 120px top = etwas Luft unter dem Header */
     }
 
     .contacts{
@@ -132,7 +132,9 @@
       min-height:100px;
       resize:vertical;
     }
-    button{
+
+    /* Nur Buttons IM MAIN-BEREICH stylen, nicht den Header-Burger */
+    main button{
       background:var(--brand);
       color:#fff;
       border:none;
@@ -142,7 +144,7 @@
       cursor:pointer;
       width:100%;
     }
-    button:hover{opacity:.92}
+    main button:hover{opacity:.92}
 
     .map{
       border-radius:12px;
@@ -178,7 +180,7 @@
       .person{width:100%}
     }
 
-    /* --- Chat-Button unten rechts etwas sauberer positionieren (Crisp o.ä.) --- */
+    /* Chat-Button unten rechts */
     .crisp-client .crisp-standalone,
     .crisp-client .crisp-standalone .crisp-widget{
       bottom:16px !important;
@@ -186,7 +188,7 @@
     }
   </style>
 </head>
-<body>
+<body class="page-kontakt">
 
   <!-- Header Mount -->
   <div id="header"></div>
@@ -241,30 +243,29 @@
     </a>
   </main>
 
-  <!-- Footer -->
+  <!-- Footer Mount -->
   <div id="footer"></div>
 
-  <!-- Icons + Header/Footer-Skripte -->
+  <!-- Icons -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js" defer></script>
 
-  <!-- Nutzt deinen bestehenden js/header.js (mit Fallback, falls du später wieder assets/js nutzt) -->
+  <!-- Smart loader wie auf index.html -->
   <script>
     (function () {
       function loadScript(src, cb){
-        var s=document.createElement('script');
-        s.src=src;
-        s.defer=true;
-        s.onload=function(){cb && cb(true)};
-        s.onerror=function(){cb && cb(false)};
+        var s = document.createElement('script');
+        s.src = src;
+        s.defer = true;
+        s.onload = function(){ cb && cb(true); };
+        s.onerror = function(){ cb && cb(false); };
         document.head.appendChild(s);
       }
 
-      // Hauptpfad, den du genannt hast:
       loadScript('js/header.js', function(ok){
-        if(!ok) loadScript('assets/js/header.js');
+        if (!ok) loadScript('assets/js/header.js');
       });
       loadScript('js/footer.js', function(ok){
-        if(!ok) loadScript('assets/js/footer.js');
+        if (!ok) loadScript('assets/js/footer.js');
       });
     })();
   </script>

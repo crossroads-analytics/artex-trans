@@ -12,28 +12,7 @@
 
   <style>
     :root{
-  --hdr-h:72px;
-}
-html{
-  scroll-padding-top:var(--hdr-h);
-}
-body{
-  padding-top:var(--hdr-h);
-}
-header.atx-header{
-  position:fixed !important;
-  top:0;
-  left:0;
-  right:0;
-  z-index:1000;
-}
-@media (max-width: 920px){
-  .hdr-burger{
-    display:inline-flex !important;
-  }
-}
-
-    :root{
+      --hdr-h:72px;
       --brand:#13206f;
       --border:#e5e7eb;
       --bg:#f5f6fa;
@@ -41,19 +20,37 @@ header.atx-header{
       --radius:18px;
       --shadow:0 6px 24px rgba(0,0,0,.06);
       --max:1100px;
-      --hdr-h:72px;
     }
+
     *{box-sizing:border-box}
+
+    html{
+      scroll-padding-top:var(--hdr-h);
+    }
     body{
       margin:0;
+      padding-top:var(--hdr-h);
       font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       background:var(--bg);
-      padding-top:var(--hdr-h);
     }
-    header.atx-header{position:fixed !important; top:0; left:0; right:0; z-index:1000;}
 
-    html{scroll-padding-top:var(--hdr-h)}
+    /* Header fixieren (wie auf allen Seiten) */
+    header.atx-header{
+      position:fixed !important;
+      top:0;
+      left:0;
+      right:0;
+      z-index:1000;
+    }
 
+    /* Burger erzwingen */
+    @media (max-width: 920px){
+      .hdr-burger{
+        display:inline-flex !important;
+      }
+    }
+
+    /* Hero / Titelband */
     .titleband{
       background:var(--brand);
       color:#fff;
@@ -91,7 +88,7 @@ header.atx-header{
       color:var(--brand);
     }
     .card ul{
-      margin:0 0 28px 20px;   /* ← mehr Abstand nach Bulletliste */
+      margin:0 0 28px 20px;
       padding:0;
     }
 
@@ -100,7 +97,7 @@ header.atx-header{
       display:flex;
       flex-wrap:wrap;
       gap:16px;
-      margin-top:32px;        /* ← deutlich mehr Abstand */
+      margin-top:32px;
     }
 
     .cta{
@@ -121,8 +118,9 @@ header.atx-header{
       background:var(--brand);
       color:#fff;
     }
-    .cta.phone:hover{opacity:.92;}
-
+    .cta.phone:hover{
+      opacity:.92;
+    }
     .cta.whatsapp{
       background:#fff;
       color:var(--brand);
@@ -148,12 +146,14 @@ header.atx-header{
       font-size:22px;
       font-weight:800;
     }
+
     .row{
       display:grid;
       grid-template-columns:1fr 1fr;
       gap:16px;
       margin-bottom:16px;
     }
+
     input,textarea{
       width:100%;
       padding:12px;
@@ -162,9 +162,13 @@ header.atx-header{
       font-family:inherit;
       font-size:15px;
     }
-    textarea{min-height:120px; resize:vertical;}
+    textarea{
+      min-height:120px;
+      resize:vertical;
+    }
 
-    button{
+    /* 👉 WICHTIG: Nur Buttons im MAIN stylen, nicht den Burger! */
+    main button{
       background:var(--brand);
       border:none;
       border-radius:10px;
@@ -174,9 +178,11 @@ header.atx-header{
       font-weight:700;
       cursor:pointer;
       font-size:16px;
-      transition:.2s;
+      transition:.2s ease;
     }
-    button:hover{opacity:.92;}
+    main button:hover{
+      opacity:.92;
+    }
 
     @media(max-width:700px){
       .row{grid-template-columns:1fr}
@@ -204,27 +210,45 @@ header.atx-header{
         <li><strong>Rückruf-Wunsch</strong> – nutzen Sie das Formular im Footer, wir melden uns bei Ihnen.</li>
       </ul>
 
-      <!-- BUTTONS -->
       <div class="cta-row">
         <a class="cta phone" href="tel:+491712759067">
           📞 Jetzt anrufen &nbsp; +49&nbsp;171&nbsp;2759067
         </a>
 
-        <a class="cta whatsapp" href="https://wa.me/491712759067?text=Hallo%2C%20ich%20möchte%20gerne%20einen%20Besichtigungstermin%20vereinbaren." target="_blank">
+        <a class="cta whatsapp" 
+           href="https://wa.me/491712759067?text=Hallo%2C%20ich%20möchte%20gerne%20einen%20Besichtigungstermin%20vereinbaren." 
+           target="_blank">
           💬 WhatsApp Termin
         </a>
       </div>
 
     </section>
 
-
   </main>
 
   <div id="footer"></div>
 
-  <!-- Scripts -->
-  <script src="js/header.js" defer></script>
-  <script src="js/footer.js" defer></script>
+  <!-- Scripts (am Ende, identisch wie Startseite) -->
+  <script>
+    (function () {
+      function loadScript(src, cb){
+        var s=document.createElement('script');
+        s.src=src;
+        s.defer=true;
+        s.onload=()=>cb&&cb(true);
+        s.onerror=()=>cb&&cb(false);
+        document.head.appendChild(s);
+      }
+
+      loadScript('js/header.js', ok => {
+        if(!ok) loadScript('assets/js/header.js');
+      });
+
+      loadScript('js/footer.js', ok => {
+        if(!ok) loadScript('assets/js/footer.js');
+      });
+    })();
+  </script>
 
 </body>
 </html>
