@@ -424,7 +424,7 @@
 
   /* Logo noch kleiner – aber immer noch sauber */
   .atx-header.is-shrink .hdr-logo img{
-    height:26px !important;      /* vorher 32px */
+    height:40px !important;      /* vorher 32px */
     transform:none;
   }
 
