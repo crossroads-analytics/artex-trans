@@ -80,12 +80,15 @@
 `;
 
   function render() {
+    // Styles einfügen
     if (!document.querySelector("#atx-footer-style")) {
       const s = document.createElement("style");
       s.id = "atx-footer-style";
       s.textContent = style;
       document.head.appendChild(s);
     }
+
+    // HTML einfügen
     const target = document.getElementById("footer");
     if (target) {
       target.innerHTML = html;
@@ -93,14 +96,66 @@
       document.body.insertAdjacentHTML("beforeend", html);
     }
 
-    // simple success message (no backend wiring)
+    // --- Formular mit API verknüpfen ---
     const form = document.getElementById("atx-callback-form");
     const note = document.getElementById("atx-form-note");
-    if (form && note) {
-      form.addEventListener("submit", (e) => {
+
+    if (form) {
+      const API_URL = "https://pnulxe8n0b.execute-api.eu-central-1.amazonaws.com/prod/sendMail";
+
+      form.addEventListener("submit", async (e) => {
         e.preventDefault();
-        note.style.display = "block";
-        form.reset();
+
+        const submitBtn = form.querySelector("button[type='submit']");
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.textContent = "Wird gesendet...";
+        }
+        if (note) {
+          note.style.display = "none";
+          note.style.color = "#6b7280";
+          note.textContent = "Danke! Wir melden uns zeitnah.";
+        }
+
+        const fd = new FormData(form);
+        const payload = {
+          name:    fd.get("name")  || "",
+          phone:   fd.get("phone") || "",
+          email:   fd.get("email") || "",
+          message: fd.get("msg")   || "",
+          source:  "Footer Rückruf-Service"
+        };
+
+        try {
+          const res = await fetch(API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          });
+
+          if (!res.ok) {
+            throw new Error("HTTP " + res.status);
+          }
+
+          form.reset();
+          if (note) {
+            note.style.display = "block";
+            note.style.color = "#16a34a"; // grün
+            note.textContent = "Danke! Ihre Anfrage wurde versendet.";
+          }
+        } catch (err) {
+          console.error("Fehler beim Senden des Formulars:", err);
+          if (note) {
+            note.style.display = "block";
+            note.style.color = "#b91c1c"; // rot
+            note.textContent = "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.";
+          }
+        } finally {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Senden";
+          }
+        }
       });
     }
   }
