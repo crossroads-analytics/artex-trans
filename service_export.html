@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>KFZ-Aufbereitung – Artex-Trans Autoagentur</title>
+  <title>Export-Service – Artex-Trans Autoagentur</title>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,99 +28,128 @@
       margin:0;
       font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       color:var(--ink);
-      background:#fff;
+      background:var(--bg);
       padding-top:var(--hdr-h);
     }
-    header.atx-header{position:fixed !important; top:0; left:0; right:0; z-index:1000}
-
-    .hero{
-      position:relative; height:46vh; min-height:380px;
-      background:url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=2100&auto=format&fit=crop") center/cover no-repeat;
-      display:grid; place-items:center; overflow:hidden;
-    }
-    .hero::before{
-      content:""; position:absolute; inset:0;
-      background:linear-gradient(180deg, rgba(19,32,111,.55) 0%, rgba(19,32,111,.82) 55%, rgba(19,32,111,.92) 100%);
-    }
-    .hero h1{
-      position:relative; margin:0; color:#fff; font-weight:900;
-      letter-spacing:.06em; text-transform:uppercase; text-align:center; line-height:1.05; font-size:48px;
+    header.atx-header{
+      position:fixed !important;
+      top:0; left:0; right:0;
+      z-index:1000;
     }
 
     main{
-  background:var(--bg);
-  padding-top:150px;   /* or 50–60px if you want more space */
-}
+      padding:180px 0 60px;
+    }
 
     .wrap{
-      max-width:var(--max); margin:26px auto 48px; padding:0 16px;
-      display:grid; grid-template-columns:1fr 360px; gap:24px;
+      max-width:var(--max);
+      margin:0 auto;
+      padding:0 16px;
+      display:grid;
+      grid-template-columns:1fr 360px;
+      gap:24px;
     }
-    .card{background:var(--card); border:1px solid #e6e8f1; border-radius:var(--radius); box-shadow:var(--shadow)}
-    .card h2{margin:0; padding:16px 18px 0; color:var(--blue); font-weight:800; font-size:22px}
-    .card-body{padding:14px 16px 18px}
-    .list{display:grid; gap:12px}
-    .li{background:#fafbff; border:1px solid #e6e8f1; border-radius:12px; padding:12px 14px; font-weight:700; color:#0e1744}
 
-    /* Export info card */
-    .export-info{
-      background:#fff;
+    .card{
+      background:var(--card);
       border:1px solid #e6e8f1;
       border-radius:var(--radius);
       box-shadow:var(--shadow);
-      margin-top:24px;
-      padding:22px 24px;
+    }
+    .card h2{
+      margin:0;
+      padding:16px 18px 0;
+      color:var(--blue);
+      font-weight:800;
+      font-size:22px;
+    }
+    .card-body{
+      padding:14px 16px 18px;
+    }
+
+    /* Export-Text */
+    .export-info{
       line-height:1.6;
       color:#0e1744;
       font-weight:600;
       font-size:15px;
     }
-    .export-info p{margin:0 0 14px}
-    .export-info p:last-child{margin-bottom:0}
+    .export-info p{
+      margin:0 0 14px;
+    }
+    .export-info p:last-child{
+      margin-bottom:0;
+    }
 
     /* Sidebar form */
-    .rcard h3{margin:0; padding:16px; color:var(--blue); font-weight:900; text-align:center}
-    .form-row{display:grid; grid-template-columns:1fr; gap:10px}
-    .input{width:100%; padding:12px; border:1px solid #d8dff0; border-radius:10px; background:#fff; font:inherit}
-    .btn{width:100%; padding:12px 14px; background:var(--blue); color:#fff; border:none; border-radius:10px; font-weight:800; cursor:pointer}
-    .btn:hover{opacity:.92}
-    .note{font-size:.9rem; color:#5b6685; margin-top:8px; text-align:center}
+    .rcard h3{
+      margin:0;
+      padding:16px;
+      color:var(--blue);
+      font-weight:900;
+      text-align:center;
+    }
+    .form-row{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:10px;
+    }
+    .input{
+      width:100%;
+      padding:12px;
+      border:1px solid #d8dff0;
+      border-radius:10px;
+      background:#fff;
+      font:inherit;
+    }
+    .btn{
+      width:100%;
+      padding:12px 14px;
+      background:var(--blue);
+      color:#fff;
+      border:none;
+      border-radius:10px;
+      font-weight:800;
+      cursor:pointer;
+    }
+    .btn:hover{
+      opacity:.92;
+    }
+    .note{
+      font-size:.9rem;
+      color:#5b6685;
+      margin-top:8px;
+      text-align:center;
+    }
 
     @media (max-width:980px){
-      .hero{min-height:320px; height:40vh}
-      .hero h1{font-size:40px}
-      .wrap{grid-template-columns:1fr}
+      .wrap{
+        grid-template-columns:1fr;
+      }
     }
   </style>
 </head>
 <body>
 
+  <!-- Header mount -->
+  <div id="header"></div>
 
   <main>
     <div class="wrap">
       <div>
+        <!-- Export-Info Card -->
         <section class="card">
-          <h2>Unsere Leistungen</h2>
-          <div class="card-body">
-            <div class="list">
-              <div class="li">Professionelle Innenraumreinigung inkl. Polster- und Lederpflege</div>
-              <div class="li">Außenaufbereitung: Vorwäsche, Lackreinigung, maschinelles Polieren</div>
-              <div class="li">Lackversiegelung / Wachs für langanhaltenden Glanz & Schutz</div>
-              <div class="li">Felgen- & Reifenpflege, Kunststoff- und Gummiaufbereitung</div>
-              <div class="li">Geruchsneutralisation & Ozonbehandlung (auf Wunsch)</div>
-            </div>
+          <h2>Export-Service</h2>
+          <div class="card-body export-info">
+            <p>– Zum Zwecke des Exports erhalten unsere Kunden alle notwendigen Zolldokumente (z.B. Ausfuhranmeldung). Auf Wunsch können die entsprechenden Ausfuhrkennzeichen besorgt werden.</p>
+            <p>– Kunden aus nicht EU-Ländern entrichten den Netto – Export – Preis und eine Kaution in Höhe der gesetzlichen MwSt. von 19%. Nach der automatischen elektronischen Benachrichtigung des EU-Zolls an unsere Firma über die Ausfuhr des Fahrzeuges aus dem Geltungsbereich der EU wird die Kaution unverzüglich ausgezahlt.</p>
+            <p>– Unsere Kunden aus den benachbarten EU-Ländern bezahlen nur den Netto – Export – Preis inkl. unverzüglich der Kaution in Höhe von 19% der gesetzlichen MwSt.</p>
+            <p>– Dies gilt nur für Gewerbeträger mit gültiger EU-Umsatzsteuernummer / nicht Gewerbebetreibende zahlen den Brutto-Kaufpreis.</p>
           </div>
-        </section>
-
-        <!-- Export information section -->
-        <section class="export-info">
-          <p>– Zum Zwecke des Exports erhalten unsere Kunden alle notwendigen Zolldokumente (z.B. Ausfuhranmeldung). Auf Wunsch können die entsprechenden Ausfuhrkennzeichen besorgt werden.</p>
-          <p>– Kunden aus nicht EU-Ländern entrichten den Netto – Export – Preis und eine Kaution in Höhe der gesetzlichen MwSt. von 19%. Nach der automatischen elektronischen Benachrichtigung des EU-Zolls an unsere Firma über die Ausfuhr des Fahrzeuges aus dem Geltungsbereich der EU wird die Kaution unverzüglich ausgezahlt.</p>
-          <p>– Unsere Kunden aus den benachbarten EU-Ländern bezahlen nur den Netto – Export – Preis inkl. unverzüglich der Kaution in Höhe von 19% der gesetzlichen MwSt.</p>
-          <p>– Dies gilt nur für Gewerbeträger mit gültiger EU-Umsatzsteuernummer / nicht Gewerbebetreibende zahlen den Brutto-Kaufpreis.</p>
         </section>
       </div>
 
+      <!-- Sidebar: Rückruf-Service -->
       <aside class="card rcard">
         <h3>Rückruf-Service</h3>
         <div class="card-body">
@@ -139,6 +168,7 @@
     </div>
   </main>
 
+  <!-- Footer mount -->
   <div id="footer"></div>
 
   <!-- Load header/footer dynamically -->
@@ -146,7 +176,8 @@
     (function () {
       function loadScript(src, cb){
         var s=document.createElement('script');
-        s.src=src; s.defer=true;
+        s.src=src;
+        s.defer=true;
         s.onload=function(){ cb && cb(true); };
         s.onerror=function(){ cb && cb(false); };
         document.head.appendChild(s);

@@ -398,30 +398,58 @@
   background:rgba(19,32,111,.99);
 }
 
-/* ===== DESKTOP-SHRINK (mild, Titel weiter oben) ===== */
+/* ---------------- SHRINK ANIMATION BEIM SCROLLEN ---------------- */
+.atx-header.is-shrink::after{
+  background:rgba(19,32,111,.40);
+}
+.page-home .atx-header.is-shrink::after{
+  background:rgba(19,32,111,.99);
+}
+
+/* ---------------- SHRINK ANIMATION BEIM SCROLLEN ---------------- */
+.atx-header.is-shrink::after{
+  background:rgba(19,32,111,.40);
+}
+.page-home .atx-header.is-shrink::after{
+  background:rgba(19,32,111,.99);
+}
+
+/* ===== DESKTOP-SHRINK (ultra compact) ===== */
 @media (min-width: 921px){
+
+  /* Header extrem kompakt */
   .atx-header.is-shrink .hdr{
-    padding:10px 20px;
+    padding:2px 10px !important; /* vorher 4px 12px */
   }
+
+  /* Logo noch kleiner – aber immer noch sauber */
   .atx-header.is-shrink .hdr-logo img{
-    height:44px;
+    height:26px !important;      /* vorher 32px */
     transform:none;
   }
+
+  /* Top-Bar fast flach */
   .atx-header.is-shrink .hdr-top-inner{
-    padding:4px 18px;
+    padding:1px 8px !important;  /* noch kompakter */
   }
   .atx-header.is-shrink .hdr-top-item{
-    font-size:13px;
+    font-size:11px !important;
   }
+
+  /* TITEL so hoch wie möglich */
   .atx-header.is-shrink .hdr-title{
-    margin-top:-8px;
+    margin-top:-26px !important; /* vorher -18px */
   }
+
+  /* Titelband super schlank */
   .atx-header.is-shrink .hdr-title-inner{
-    padding:4px 20px 8px;
-    font-size:clamp(1.25rem,2.2vw,1.8rem);
-    letter-spacing:.15em;
+    padding:1px 14px 2px !important; /* nahezu flach */
+    font-size:clamp(1rem, 1.8vw, 1.45rem) !important;
+    letter-spacing:.13em;
   }
 }
+
+
 
 /* ===== MOBIL-SHRINK ===== */
 @media (max-width: 920px){
