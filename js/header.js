@@ -11,6 +11,31 @@
   }
   ensureHeadAsset("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700");
 
+
+  /* 👉 NEU: Favicon einmalig setzen */
+  function ensureFavicon() {
+    const href = "assets/images/logos/favicon3.png";
+
+    if (!document.querySelector('link[rel="icon"]')) {
+      const link = document.createElement("link");
+      link.rel  = "icon";
+      link.type = "image/png";
+      link.href = href;
+      document.head.appendChild(link);
+    }
+
+    if (!document.querySelector('link[rel="shortcut icon"]')) {
+      const link2 = document.createElement("link");
+      link2.rel  = "shortcut icon";
+      link2.type = "image/png";
+      link2.href = href;
+      document.head.appendChild(link2);
+    }
+  }
+
+  ensureFavicon();
+  
+
   const html = `
 <header class="atx-header">
   <!-- Top Info Bar -->
