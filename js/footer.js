@@ -133,9 +133,12 @@
             body: JSON.stringify(payload)
           });
 
+          const text = await res.text(); // für Debugging
           if (!res.ok) {
-            throw new Error("HTTP " + res.status);
+            throw new Error("HTTP " + res.status + " – " + text);
           }
+
+          console.log("Formular erfolgreich gesendet:", text);
 
           form.reset();
           if (note) {
