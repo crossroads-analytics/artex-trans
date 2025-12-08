@@ -34,7 +34,7 @@
     }
     header.atx-header{position:fixed !important; top:0; left:0; right:0; z-index:1000}
 
-    /* Title band */
+    /* Title band (falls du später wieder eins einbauen willst – aktuell nicht verwendet) */
     .titleband{
       background:var(--brand);
       padding:26px 16px 34px;
@@ -51,10 +51,14 @@
 
     /* Layout */
     main{
-  background:var(--bg);
-  padding-top:160px;   /* or 50–60px if you want more space */
-}
-    .wrap{max-width:var(--max); margin:26px auto 48px; padding:0 16px}
+      background:var(--bg);
+      padding-top:160px;   /* Abstand unter dem Header */
+    }
+    .wrap{
+      max-width:var(--max);
+      margin:26px auto 48px;
+      padding:0 16px;
+    }
 
     .card{
       background:var(--card);
@@ -83,7 +87,10 @@
       display:flex; flex-wrap:wrap; gap:14px 18px;
       padding:10px 12px; border:1px solid #d8dff0; border-radius:10px; background:#fafbff;
     }
-    .checks label{display:flex; align-items:center; gap:8px; font-weight:700; color:#0e1744; font-size:14px}
+    .checks label{
+      display:flex; align-items:center; gap:8px;
+      font-weight:700; color:#0e1744; font-size:14px;
+    }
 
     .consent{
       display:flex; align-items:flex-start; gap:10px;
@@ -125,84 +132,63 @@
   <!-- Header Mount -->
   <div id="header"></div>
 
-
   <main>
-    <div class="wrap">
+  <div class="wrap">
 
-      <!-- Hauptformular -->
-      <section class="card">
-        <div class="card-body">
-          <form onsubmit="return fakeSubmit(this)">
-            <div class="form-grid">
-              <input class="input" type="text" name="vorname"    placeholder="Vorname" required>
-              <input class="input" type="text" name="nachname"   placeholder="Nachname" required>
+    <!-- Hauptformular Inzahlungnahme -->
+    <section class="card">
+      <div class="card-body">
+        <form id="inzahlungnahme-form">
+          <div class="form-grid">
 
-              <input class="input" type="tel"  name="telefon"    placeholder="Telefonnummer" pattern="[0-9()#&+\-*. ]+">
-              <input class="input" type="email" name="email"     placeholder="E-Mail" required>
+            <input class="input" type="text" name="vorname" placeholder="Vorname" required>
+            <input class="input" type="text" name="nachname" placeholder="Nachname" required>
 
-              <input class="input" type="text" name="marke"      placeholder="Marke" required>
-              <input class="input" type="text" name="modell"     placeholder="Modell" required>
+            <input class="input" type="tel" name="telefon" placeholder="Telefonnummer" pattern="[0-9()#&+\-*. ]+">
+            <input class="input" type="email" name="email" placeholder="E-Mail" required>
 
-              <input class="input" type="number" name="baujahr"  placeholder="Baujahr" min="1950" max="2099" step="1">
-              <input class="input" type="text" name="preis"      placeholder="Wunschpreis">
+            <input class="input" type="text" name="marke" placeholder="Marke" required>
+            <input class="input" type="text" name="modell" placeholder="Modell" required>
 
-              <input class="input" type="number" name="km"       placeholder="Kilometerstand" min="0" step="100">
-              <div></div>
+            <input class="input" type="number" name="baujahr" placeholder="Baujahr" min="1950" max="2099" step="1">
+            <input class="input" type="text" name="preis" placeholder="Wunschpreis">
 
-              <div class="checks" style="grid-column:1/-1">
-                <label><input type="checkbox" name="features" value="navi"> Navigationssystem</label>
-                <label><input type="checkbox" name="features" value="sportabgasanlage"> Sportabgasanlage</label>
-                <label><input type="checkbox" name="features" value="scheckheft"> Scheckheft gepflegt</label>
-                <label><input type="checkbox" name="features" value="schiebedach"> Schiebedach</label>
-                <label><input type="checkbox" name="features" value="unfallfrei"> Unfallfrei</label>
-                <label><input type="checkbox" name="features" value="leder"> Lederausstattung</label>
-              </div>
+            <input class="input" type="number" name="km" placeholder="Kilometerstand" min="0" step="100">
+            <div></div>
 
-              <textarea class="textarea" name="nachricht" placeholder="Nachricht" style="grid-column:1/-1"></textarea>
-
-              <input class="file" type="file" name="fotos" accept="image/*,application/pdf" style="grid-column:1/-1">
+            <div class="checks" style="grid-column:1/-1">
+              <label><input type="checkbox" name="features" value="Navigationssystem"> Navigationssystem</label>
+              <label><input type="checkbox" name="features" value="Sportabgasanlage"> Sportabgasanlage</label>
+              <label><input type="checkbox" name="features" value="Scheckheft gepflegt"> Scheckheft gepflegt</label>
+              <label><input type="checkbox" name="features" value="Schiebedach"> Schiebedach</label>
+              <label><input type="checkbox" name="features" value="Unfallfrei"> Unfallfrei</label>
+              <label><input type="checkbox" name="features" value="Lederausstattung"> Lederausstattung</label>
             </div>
 
-            <label class="consent" style="margin-top:10px;">
-              <input type="checkbox" required>
-              <span>Meine Kontaktdaten werden zwecks Bearbeitung der Anfrage von der Artex Trans GbR gespeichert. Ich habe die Datenschutzerklärung zur Kenntnis genommen und erkläre mich hiermit einverstanden.</span>
-            </label>
+            <textarea class="textarea" name="nachricht" placeholder="Nachricht" style="grid-column:1/-1"></textarea>
 
-            <button class="btn" type="submit" style="margin-top:12px">Senden</button>
-            <p id="formNote" class="note" style="display:none">Danke! Wir melden uns zeitnah.</p>
-          </form>
-        </div>
-      </section>
-
-      <!-- Kontakt & Rückruf -->
-      <div class="bottom-grid">
-        <section class="card contact">
-          <h3>Kontakt</h3>
-          <p>Norderneystraße 7<br>28217 Bremen<br>Deutschland</p>
-          <p>Tel.: <a href="tel:+494213965171">+49 (0) 421 3965171</a></p>
-          <p>E-Mail: <a href="mailto:info@artex-trans.de">info@artex-trans.de</a></p>
-        </section>
-
-        <aside class="card">
-          <h3 class="rcard">Rückruf-Service</h3>
-          <div class="card-body">
-            <form onsubmit="return fakeSubmit(this)">
-              <div class="form-row" style="display:grid; gap:10px">
-                <input class="input" type="text"  name="rname" placeholder="Ihr Name" required>
-                <input class="input" type="tel"   name="rtel"  placeholder="Ihre Telefonnummer" pattern="[0-9()#&+\-*. ]+">
-                <input class="input" type="email" name="remail" placeholder="Ihre E-Mail" required>
-                <button class="btn" type="submit">Senden</button>
-              </div>
-              <p class="note" id="rNote" style="display:none">Danke! Wir melden uns zeitnah.</p>
-            </form>
+            <input class="file" type="file" name="fotos" accept="image/*,application/pdf" style="grid-column:1/-1">
           </div>
-        </aside>
+
+          <label class="consent" style="margin-top:10px;">
+            <input type="checkbox" required>
+            <span>
+              Meine Kontaktdaten werden zwecks Bearbeitung der Anfrage gespeichert.
+              Ich habe die Datenschutzerklärung gelesen und stimme zu.
+            </span>
+          </label>
+
+          <button class="btn" type="submit" style="margin-top:12px">Senden</button>
+          <p id="inzahlungnahme-note" class="note" style="display:none">Danke! Wir melden uns zeitnah.</p>
+        </form>
       </div>
+    </section>
 
-    </div>
-  </main>
+  </div>
+</main>
 
-  <!-- Footer Mount -->
+
+  <!-- Footer Mount (gleich wie auf allen anderen Seiten) -->
   <div id="footer"></div>
 
   <!-- Header/Footer Loader (mit Fallback) -->
@@ -219,12 +205,120 @@
       loadScript('js/footer.js', function(ok){ if(!ok){ loadScript('assets/js/footer.js'); } });
     })();
 
+    // kleiner Fake-Rückruf nur für die rechte Box (optisches Feedback)
     function fakeSubmit(form){
-      const note = form.parentElement.querySelector('.note') || document.getElementById('formNote');
+      const note = form.parentElement.querySelector('.note') || document.getElementById('rNote');
       if (note) note.style.display = 'block';
       form.reset();
       return false;
     }
+  </script>
+
+  <!-- Inzahlungnahme-Formular -> Lambda / SES -->
+  <script>
+    (function () {
+      const API_URL = "https://pnulxe8n0b.execute-api.eu-central-1.amazonaws.com/prod/sendMail";
+
+      const form = document.getElementById("inzahlungnahme-form");
+      const note = document.getElementById("inzahlungnahme-note");
+
+      if (!form) return;
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const submitBtn = form.querySelector("button[type='submit']");
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.textContent = "Wird gesendet...";
+        }
+        if (note) {
+          note.style.display = "none";
+          note.style.color = "#6b7280";
+          note.textContent = "";
+        }
+
+        const fd = new FormData(form);
+        const vorname   = fd.get("vorname")   || "";
+        const nachname  = fd.get("nachname")  || "";
+        const telefon   = fd.get("telefon")   || "";
+        const email     = fd.get("email")     || "";
+        const marke     = fd.get("marke")     || "";
+        const modell    = fd.get("modell")    || "";
+        const baujahr   = fd.get("baujahr")   || "";
+        const preis     = fd.get("preis")     || "";
+        const km        = fd.get("km")        || "";
+        const nachricht = fd.get("nachricht") || "";
+
+        const features  = fd.getAll("features"); // alle aktivierten Checkboxen
+
+        const fileInput = form.querySelector('input[name="fotos"]');
+        const fileName  = fileInput && fileInput.files && fileInput.files[0]
+          ? fileInput.files[0].name
+          : "";
+
+        const fullName = (vorname + " " + nachname).trim();
+
+        const featureList = features.length ? features.join(", ") : "Keine Auswahl";
+
+        const msgText =
+          "Anfrage zur Inzahlungnahme:\n\n" +
+          `Name: ${fullName || "Unbekannt"}\n` +
+          `Telefon: ${telefon || "-"}\n` +
+          `E-Mail: ${email || "-"}\n\n` +
+          "Fahrzeugdaten:\n" +
+          `- Marke: ${marke || "-"}\n` +
+          `- Modell: ${modell || "-"}\n` +
+          `- Baujahr: ${baujahr || "-"}\n` +
+          `- Kilometerstand: ${km || "-"}\n` +
+          `- Wunschpreis: ${preis || "-"}\n` +
+          `- Besonderheiten: ${featureList}\n` +
+          (fileName ? `\nHinweis: Kunde hat eine Datei ausgewählt: ${fileName}` : "") +
+          (nachricht
+            ? `\n\nNachricht des Kunden:\n${nachricht}`
+            : ""
+          );
+
+        const payload = {
+          name:   fullName || "Unbekannt",
+          phone:  telefon,
+          email:  email,
+          msg:    msgText,
+          source: "Inzahlungnahme Formular"
+        };
+
+        try {
+          const res = await fetch(API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          });
+
+          if (!res.ok) {
+            throw new Error("HTTP " + res.status);
+          }
+
+          form.reset();
+          if (note) {
+            note.style.display = "block";
+            note.style.color = "#16a34a"; // grün
+            note.textContent = "Danke! Ihre Anfrage zur Inzahlungnahme wurde versendet.";
+          }
+        } catch (err) {
+          console.error("Fehler beim Senden des Inzahlungnahme-Formulars:", err);
+          if (note) {
+            note.style.display = "block";
+            note.style.color = "#b91c1c"; // rot
+            note.textContent = "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.";
+          }
+        } finally {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Senden";
+          }
+        }
+      });
+    })();
   </script>
 </body>
 </html>
