@@ -216,7 +216,7 @@
     </div>
 
     <!-- Kontaktformular -->
-    <form>
+    <form id="kontakt-form">
       <div class="row">
         <input type="text" name="vorname" placeholder="Vorname" required>
         <input type="text" name="nachname" placeholder="Nachname" required>
@@ -227,6 +227,7 @@
       </div>
       <textarea name="nachricht" placeholder="Nachricht"></textarea>
       <button type="submit">Senden</button>
+      <p id="kontakt-note" style="display:none;margin-top:8px;font-size:0.9rem;color:#6b7280"></p>
     </form>
 
     <!-- Karte -->
@@ -266,6 +267,81 @@
       });
       loadScript('js/footer.js', function(ok){
         if (!ok) loadScript('assets/js/footer.js');
+      });
+    })();
+  </script>
+
+  <!-- Formular -> Lambda / SES -->
+  <script>
+    (function () {
+      const API_URL = "https://pnulxe8n0b.execute-api.eu-central-1.amazonaws.com/prod/sendMail";
+
+      const form = document.getElementById("kontakt-form");
+      const note = document.getElementById("kontakt-note");
+
+      if (!form) return;
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const submitBtn = form.querySelector("button[type='submit']");
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.textContent = "Wird gesendet...";
+        }
+        if (note) {
+          note.style.display = "none";
+          note.style.color = "#6b7280";
+          note.textContent = "";
+        }
+
+        const fd = new FormData(form);
+        const vorname   = fd.get("vorname")   || "";
+        const nachname  = fd.get("nachname")  || "";
+        const telefon   = fd.get("telefon")   || "";
+        const email     = fd.get("email")     || "";
+        const nachricht = fd.get("nachricht") || "";
+
+        const fullName = (vorname + " " + nachname).trim();
+
+        const payload = {
+          name:   fullName || "Unbekannt",
+          phone:  telefon,
+          email:  email,
+          msg:    nachricht,
+          source: "Kontaktseite Formular"
+        };
+
+        try {
+          const res = await fetch(API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          });
+
+          if (!res.ok) {
+            throw new Error("HTTP " + res.status);
+          }
+
+          form.reset();
+          if (note) {
+            note.style.display = "block";
+            note.style.color = "#16a34a"; // grün
+            note.textContent = "Danke! Ihre Anfrage wurde versendet.";
+          }
+        } catch (err) {
+          console.error("Fehler beim Senden des Kontaktformulars:", err);
+          if (note) {
+            note.style.display = "block";
+            note.style.color = "#b91c1c"; // rot
+            note.textContent = "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.";
+          }
+        } finally {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Senden";
+          }
+        }
       });
     })();
   </script>
