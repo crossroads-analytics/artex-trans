@@ -5,26 +5,44 @@
   <div class="footer-inner">
     <div class="footer-grid">
       <div class="footer-left">
-  <img class="ft-logo" src="https://artex-trans.de/wp-content/uploads/2021/07/LOGO-ARTEX-TRANS-2-300x67.jpg" alt="Artex-Trans Autoagentur">
-  <h3>Kontakt</h3>
-  <p>
-    Norderneystraße 7<br>
-    28217 Bremen<br>
-    Deutschland
-  </p>
-  <p>Tel.: <a href="tel:+494213965171">+49 (0) 421 3965171</a></p>
-  <p>E-Mail: <a href="mailto:info@artex-trans.de">info@artex-trans.de</a></p>
-  <p>
-    <strong>Öffnungszeiten:</strong><br>
-    Montag – Samstag: 10:00 – 18:00 Uhr<br>
-    Sonntag: geschlossen
-  </p>
-</div>
-
+        <img class="ft-logo" src="https://artex-trans.de/wp-content/uploads/2021/07/LOGO-ARTEX-TRANS-2-300x67.jpg" alt="Artex-Trans Autoagentur">
+        <h3>Kontakt</h3>
+        <p>
+          Norderneystraße 7<br>
+          28217 Bremen<br>
+          Deutschland
+        </p>
+        <p>Tel.: <a href="tel:+494213965171">+49 (0) 421 3965171</a></p>
+        <p>E-Mail: <a href="mailto:info@artex-trans.de">info@artex-trans.de</a></p>
+        <p>
+          <strong>Öffnungszeiten:</strong><br>
+          Montag – Samstag: 10:00 – 18:00 Uhr<br>
+          Sonntag: geschlossen
+        </p>
+      </div>
 
       <div class="footer-right">
         <h3>Rückruf-Service</h3>
-        <form id="atx-callback-form">
+
+        <!-- Netlify Forms -->
+        <form id="atx-callback-form"
+              name="callback"
+              method="POST"
+              data-netlify="true"
+              netlify-honeypot="bot-field"
+              action="/danke/">
+
+          <!-- required by Netlify -->
+          <input type="hidden" name="form-name" value="callback">
+
+          <!-- honeypot (spam trap) -->
+          <p style="display:none;">
+            <label>Bitte nicht ausfüllen: <input name="bot-field"></label>
+          </p>
+
+          <!-- extra context -->
+          <input type="hidden" name="source" value="Footer Rückruf-Service">
+
           <div class="f-row">
             <div class="f-col">
               <label for="f_name">Ihr Name</label>
@@ -50,7 +68,11 @@
             <button type="submit" class="btn-primary">Senden</button>
             <a href="tel:+494213965171" class="btn-ghost">Kontaktiere uns</a>
           </div>
-          <p class="f-note">Mit dem Absenden stimmen Sie zu, dass wir Sie zum Zweck der Kontaktaufnahme zurückrufen dürfen.</p>
+
+          <p class="f-note">
+            Mit dem Absenden stimmen Sie zu, dass wir Sie zum Zweck der Kontaktaufnahme zurückrufen dürfen.
+          </p>
+
           <p id="atx-form-note" style="display:none;color:#6b7280;margin-top:8px">Danke! Wir melden uns zeitnah.</p>
         </form>
       </div>
@@ -88,6 +110,13 @@
 @media(max-width:800px){.footer-grid{grid-template-columns:1fr}.f-row{grid-template-columns:1fr}}
 `;
 
+  function encodeForm(formEl) {
+    const fd = new FormData(formEl);
+    const params = new URLSearchParams();
+    for (const [k, v] of fd.entries()) params.append(k, v);
+    return params.toString();
+  }
+
   function render() {
     // Styles einfügen
     if (!document.querySelector("#atx-footer-style")) {
@@ -99,77 +128,60 @@
 
     // HTML einfügen
     const target = document.getElementById("footer");
-    if (target) {
-      target.innerHTML = html;
-    } else {
-      document.body.insertAdjacentHTML("beforeend", html);
-    }
+    if (target) target.innerHTML = html;
+    else document.body.insertAdjacentHTML("beforeend", html);
 
-    // --- Formular mit API verknüpfen ---
+    // --- Formular -> Netlify Forms ---
     const form = document.getElementById("atx-callback-form");
     const note = document.getElementById("atx-form-note");
 
-    if (form) {
-      const API_URL = "https://pnulxe8n0b.execute-api.eu-central-1.amazonaws.com/prod/sendMail";
+    if (!form) return;
 
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault();
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
 
-        const submitBtn = form.querySelector("button[type='submit']");
-        if (submitBtn) {
-          submitBtn.disabled = true;
-          submitBtn.textContent = "Wird gesendet...";
-        }
+      const submitBtn = form.querySelector("button[type='submit']");
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Wird gesendet...";
+      }
+      if (note) {
+        note.style.display = "none";
+        note.style.color = "#6b7280";
+        note.textContent = "Danke! Wir melden uns zeitnah.";
+      }
+
+      try {
+        const body = encodeForm(form);
+
+        const res = await fetch("/", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body
+        });
+
+        if (!res.ok) throw new Error("HTTP " + res.status);
+
+        form.reset();
         if (note) {
-          note.style.display = "none";
-          note.style.color = "#6b7280";
-          note.textContent = "Danke! Wir melden uns zeitnah.";
+          note.style.display = "block";
+          note.style.color = "#16a34a";
+          note.textContent = "Danke! Ihre Anfrage wurde versendet.";
         }
-
-        const fd = new FormData(form);
-        const payload = {
-          name:    fd.get("name")  || "",
-          phone:   fd.get("phone") || "",
-          email:   fd.get("email") || "",
-          message: fd.get("msg")   || "",
-          source:  "Footer Rückruf-Service"
-        };
-
-        try {
-          const res = await fetch(API_URL, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload)
-          });
-
-          const text = await res.text(); // für Debugging
-          if (!res.ok) {
-            throw new Error("HTTP " + res.status + " – " + text);
-          }
-
-          console.log("Formular erfolgreich gesendet:", text);
-
-          form.reset();
-          if (note) {
-            note.style.display = "block";
-            note.style.color = "#16a34a"; // grün
-            note.textContent = "Danke! Ihre Anfrage wurde versendet.";
-          }
-        } catch (err) {
-          console.error("Fehler beim Senden des Formulars:", err);
-          if (note) {
-            note.style.display = "block";
-            note.style.color = "#b91c1c"; // rot
-            note.textContent = "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.";
-          }
-        } finally {
-          if (submitBtn) {
-            submitBtn.disabled = false;
-            submitBtn.textContent = "Senden";
-          }
+      } catch (err) {
+        console.error("Netlify Forms Fehler:", err);
+        if (note) {
+          note.style.display = "block";
+          note.style.color = "#b91c1c";
+          note.textContent = "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.";
         }
-      });
-    }
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Senden";
+        }
+      }
+    });
   }
 
   if (document.readyState === "loading") {
@@ -178,7 +190,6 @@
     render();
   }
 })();
-
 
 
 // --- Quick Contact FAB (Phone + WhatsApp) with custom icons & rotate animation ---
@@ -193,7 +204,6 @@
         font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       }
 
-      /* List is non-clickable until opened (prevents accidental taps) */
       .qc-list {
         display: flex;
         flex-direction: column;
@@ -225,14 +235,12 @@
         width: 28px; height: 28px; display: block;
       }
 
-      /* Larger WhatsApp image */
       .qc-btn.qc-wa img { width: 52px; height: 52px; object-fit: contain; }
 
       .qc-phone { background: #25d366; color: #fff; }
       .qc-wa { background: #1ebe5d; color: #fff; }
       .qc-toggle { background: #13206f; color: #fff; position: relative; }
 
-      /* Toggle animation: chat icon rotates; close icon crossfades in */
       .qc-toggle .qc-chat-icon {
         transition: transform .25s ease, opacity .2s ease;
         transform: rotate(0deg);
@@ -254,7 +262,6 @@
         transform: rotate(0deg);
       }
 
-      /* Hover label (desktop) */
       .qc-label {
         position: absolute;
         right: 66px;
@@ -321,14 +328,12 @@
 
   const toggle = wrap.querySelector('.qc-toggle');
 
-  // open/close on toggle click
   toggle.addEventListener('click', () => {
     const open = wrap.classList.toggle('open');
     toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
     toggle.setAttribute('aria-label', open ? 'Schnellkontakt schließen' : 'Schnellkontakt öffnen');
   });
 
-  // close when clicking outside
   document.addEventListener('click', (e) => {
     if (!wrap.contains(e.target) && wrap.classList.contains('open')) {
       wrap.classList.remove('open');
@@ -337,7 +342,6 @@
     }
   });
 
-  // close on Escape
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && wrap.classList.contains('open')) {
       wrap.classList.remove('open');
