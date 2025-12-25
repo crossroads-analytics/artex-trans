@@ -34,7 +34,6 @@
     }
     header.atx-header{position:fixed !important; top:0; left:0; right:0; z-index:1000}
 
-    /* Title band (falls du später wieder eins einbauen willst – aktuell nicht verwendet) */
     .titleband{
       background:var(--brand);
       padding:26px 16px 34px;
@@ -49,10 +48,9 @@
       font-size:44px; letter-spacing:.08em; text-transform:uppercase;
     }
 
-    /* Layout */
     main{
       background:var(--bg);
-      padding-top:160px;   /* Abstand unter dem Header */
+      padding-top:160px;
     }
     .wrap{
       max-width:var(--max);
@@ -68,7 +66,6 @@
     }
     .card-body{padding:18px}
 
-    /* Form */
     .form-grid{
       display:grid; grid-template-columns:1fr 1fr; gap:12px;
     }
@@ -106,24 +103,19 @@
     }
     .btn:hover{opacity:.92}
 
-    /* Bottom two columns: Kontakt + Rückruf */
-    .bottom-grid{
-      display:grid; grid-template-columns:1fr 360px; gap:24px; margin-top:26px;
-      align-items:start;
-    }
-    .contact{
-      text-align:center; padding:18px;
-    }
-    .contact h3{margin:0 0 10px; color:var(--brand); font-weight:900}
-    .contact p{margin:6px 0}
-
-    .rcard h3{margin:0; padding:16px; color:var(--brand); font-weight:900; text-align:center}
     .note{font-size:.9rem; color:var(--muted); margin-top:8px; text-align:center}
+
+    /* kleine Info für Datei-Upload */
+    .file-hint{
+      grid-column:1/-1;
+      font-size:.85rem;
+      color:var(--muted);
+      margin-top:-4px;
+    }
 
     @media (max-width:980px){
       .title-chip{font-size:38px}
       .form-grid{grid-template-columns:1fr}
-      .bottom-grid{grid-template-columns:1fr}
     }
   </style>
 </head>
@@ -133,62 +125,86 @@
   <div id="header"></div>
 
   <main>
-  <div class="wrap">
+    <div class="wrap">
 
-    <!-- Hauptformular Inzahlungnahme -->
-    <section class="card">
-      <div class="card-body">
-        <form id="inzahlungnahme-form">
-          <div class="form-grid">
+      <!-- Hauptformular Inzahlungnahme (NETLIFY FORMS) -->
+      <section class="card">
+        <div class="card-body">
 
-            <input class="input" type="text" name="vorname" placeholder="Vorname" required>
-            <input class="input" type="text" name="nachname" placeholder="Nachname" required>
+          <form id="inzahlungnahme-form"
+                name="inzahlungnahme"
+                method="POST"
+                data-netlify="true"
+                netlify-honeypot="bot-field"
+                action="/danke/">
 
-            <input class="input" type="tel" name="telefon" placeholder="Telefonnummer" pattern="[0-9()#&+\-*. ]+">
-            <input class="input" type="email" name="email" placeholder="E-Mail" required>
+            <!-- required by Netlify -->
+            <input type="hidden" name="form-name" value="inzahlungnahme">
 
-            <input class="input" type="text" name="marke" placeholder="Marke" required>
-            <input class="input" type="text" name="modell" placeholder="Modell" required>
+            <!-- honeypot (spam trap) -->
+            <p style="display:none;">
+              <label>Bitte nicht ausfüllen: <input name="bot-field"></label>
+            </p>
 
-            <input class="input" type="number" name="baujahr" placeholder="Baujahr" min="1950" max="2099" step="1">
-            <input class="input" type="text" name="preis" placeholder="Wunschpreis">
+            <!-- extra context -->
+            <input type="hidden" name="source" value="Inzahlungnahme Formular">
 
-            <input class="input" type="number" name="km" placeholder="Kilometerstand" min="0" step="100">
-            <div></div>
+            <div class="form-grid">
+              <input class="input" type="text" name="vorname" placeholder="Vorname" required>
+              <input class="input" type="text" name="nachname" placeholder="Nachname" required>
 
-            <div class="checks" style="grid-column:1/-1">
-              <label><input type="checkbox" name="features" value="Navigationssystem"> Navigationssystem</label>
-              <label><input type="checkbox" name="features" value="Sportabgasanlage"> Sportabgasanlage</label>
-              <label><input type="checkbox" name="features" value="Scheckheft gepflegt"> Scheckheft gepflegt</label>
-              <label><input type="checkbox" name="features" value="Schiebedach"> Schiebedach</label>
-              <label><input type="checkbox" name="features" value="Unfallfrei"> Unfallfrei</label>
-              <label><input type="checkbox" name="features" value="Lederausstattung"> Lederausstattung</label>
+              <input class="input" type="tel" name="telefon" placeholder="Telefonnummer" pattern="[0-9()#&+\-*. ]+">
+              <input class="input" type="email" name="email" placeholder="E-Mail" required>
+
+              <input class="input" type="text" name="marke" placeholder="Marke" required>
+              <input class="input" type="text" name="modell" placeholder="Modell" required>
+
+              <input class="input" type="number" name="baujahr" placeholder="Baujahr" min="1950" max="2099" step="1">
+              <input class="input" type="text" name="preis" placeholder="Wunschpreis">
+
+              <input class="input" type="number" name="km" placeholder="Kilometerstand" min="0" step="100">
+              <div></div>
+
+              <div class="checks" style="grid-column:1/-1">
+                <label><input type="checkbox" name="features" value="Navigationssystem"> Navigationssystem</label>
+                <label><input type="checkbox" name="features" value="Sportabgasanlage"> Sportabgasanlage</label>
+                <label><input type="checkbox" name="features" value="Scheckheft gepflegt"> Scheckheft gepflegt</label>
+                <label><input type="checkbox" name="features" value="Schiebedach"> Schiebedach</label>
+                <label><input type="checkbox" name="features" value="Unfallfrei"> Unfallfrei</label>
+                <label><input type="checkbox" name="features" value="Lederausstattung"> Lederausstattung</label>
+              </div>
+
+              <textarea class="textarea" name="nachricht" placeholder="Nachricht" style="grid-column:1/-1"></textarea>
+
+              <!-- Hinweis: Netlify Forms unterstützt File Uploads nicht "einfach so" (ohne extra Lösung).
+                   Wir lassen das Feld drin, schicken aber nur den Dateinamen als Textfeld mit. -->
+              <input class="file" id="fotos" type="file" name="fotos" accept="image/*,application/pdf" style="grid-column:1/-1">
+              <div class="file-hint">
+                Hinweis: Datei-Upload wird aktuell nicht direkt übertragen. Wir senden den Dateinamen mit – Fotos können auf Wunsch separat nachgereicht werden.
+              </div>
+
+              <!-- hidden helper: send file name to Netlify -->
+              <input type="hidden" name="fotos_name" id="fotos_name" value="">
             </div>
 
-            <textarea class="textarea" name="nachricht" placeholder="Nachricht" style="grid-column:1/-1"></textarea>
+            <label class="consent" style="margin-top:10px;">
+              <input type="checkbox" required>
+              <span>
+                Meine Kontaktdaten werden zwecks Bearbeitung der Anfrage gespeichert.
+                Ich habe die Datenschutzerklärung gelesen und stimme zu.
+              </span>
+            </label>
 
-            <input class="file" type="file" name="fotos" accept="image/*,application/pdf" style="grid-column:1/-1">
-          </div>
+            <button class="btn" type="submit" style="margin-top:12px">Senden</button>
+            <p id="inzahlungnahme-note" class="note" style="display:none">Danke! Wir melden uns zeitnah.</p>
+          </form>
+        </div>
+      </section>
 
-          <label class="consent" style="margin-top:10px;">
-            <input type="checkbox" required>
-            <span>
-              Meine Kontaktdaten werden zwecks Bearbeitung der Anfrage gespeichert.
-              Ich habe die Datenschutzerklärung gelesen und stimme zu.
-            </span>
-          </label>
+    </div>
+  </main>
 
-          <button class="btn" type="submit" style="margin-top:12px">Senden</button>
-          <p id="inzahlungnahme-note" class="note" style="display:none">Danke! Wir melden uns zeitnah.</p>
-        </form>
-      </div>
-    </section>
-
-  </div>
-</main>
-
-
-  <!-- Footer Mount (gleich wie auf allen anderen Seiten) -->
+  <!-- Footer Mount -->
   <div id="footer"></div>
 
   <!-- Header/Footer Loader (mit Fallback) -->
@@ -204,25 +220,39 @@
       loadScript('js/header.js', function(ok){ if(!ok){ loadScript('assets/js/header.js'); } });
       loadScript('js/footer.js', function(ok){ if(!ok){ loadScript('assets/js/footer.js'); } });
     })();
-
-    // kleiner Fake-Rückruf nur für die rechte Box (optisches Feedback)
-    function fakeSubmit(form){
-      const note = form.parentElement.querySelector('.note') || document.getElementById('rNote');
-      if (note) note.style.display = 'block';
-      form.reset();
-      return false;
-    }
   </script>
 
-  <!-- Inzahlungnahme-Formular -> Lambda / SES -->
+  <!-- Inzahlungnahme: AJAX submit (optional) -> Netlify Forms -->
   <script>
     (function () {
-      const API_URL = "https://pnulxe8n0b.execute-api.eu-central-1.amazonaws.com/prod/sendMail";
-
       const form = document.getElementById("inzahlungnahme-form");
       const note = document.getElementById("inzahlungnahme-note");
+      const fileInput = document.getElementById("fotos");
+      const fileNameHidden = document.getElementById("fotos_name");
 
       if (!form) return;
+
+      // Store chosen filename (since actual upload isn't sent)
+      if (fileInput && fileNameHidden) {
+        fileInput.addEventListener("change", () => {
+          const f = fileInput.files && fileInput.files[0] ? fileInput.files[0].name : "";
+          fileNameHidden.value = f;
+        });
+      }
+
+      function encodeForm(formEl) {
+        const fd = new FormData(formEl);
+
+        // If multiple checkboxes, FormData already contains multiple "features" entries.
+        // URLSearchParams will serialize them correctly.
+        const params = new URLSearchParams();
+        for (const [k, v] of fd.entries()) {
+          // Do NOT send the actual File object via URL-encoded body
+          if (k === "fotos" && v instanceof File) continue;
+          params.append(k, v);
+        }
+        return params.toString();
+      }
 
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
@@ -235,80 +265,34 @@
         if (note) {
           note.style.display = "none";
           note.style.color = "#6b7280";
-          note.textContent = "";
+          note.textContent = "Senden...";
         }
 
-        const fd = new FormData(form);
-        const vorname   = fd.get("vorname")   || "";
-        const nachname  = fd.get("nachname")  || "";
-        const telefon   = fd.get("telefon")   || "";
-        const email     = fd.get("email")     || "";
-        const marke     = fd.get("marke")     || "";
-        const modell    = fd.get("modell")    || "";
-        const baujahr   = fd.get("baujahr")   || "";
-        const preis     = fd.get("preis")     || "";
-        const km        = fd.get("km")        || "";
-        const nachricht = fd.get("nachricht") || "";
-
-        const features  = fd.getAll("features"); // alle aktivierten Checkboxen
-
-        const fileInput = form.querySelector('input[name="fotos"]');
-        const fileName  = fileInput && fileInput.files && fileInput.files[0]
-          ? fileInput.files[0].name
-          : "";
-
-        const fullName = (vorname + " " + nachname).trim();
-
-        const featureList = features.length ? features.join(", ") : "Keine Auswahl";
-
-        const msgText =
-          "Anfrage zur Inzahlungnahme:\n\n" +
-          `Name: ${fullName || "Unbekannt"}\n` +
-          `Telefon: ${telefon || "-"}\n` +
-          `E-Mail: ${email || "-"}\n\n` +
-          "Fahrzeugdaten:\n" +
-          `- Marke: ${marke || "-"}\n` +
-          `- Modell: ${modell || "-"}\n` +
-          `- Baujahr: ${baujahr || "-"}\n` +
-          `- Kilometerstand: ${km || "-"}\n` +
-          `- Wunschpreis: ${preis || "-"}\n` +
-          `- Besonderheiten: ${featureList}\n` +
-          (fileName ? `\nHinweis: Kunde hat eine Datei ausgewählt: ${fileName}` : "") +
-          (nachricht
-            ? `\n\nNachricht des Kunden:\n${nachricht}`
-            : ""
-          );
-
-        const payload = {
-          name:   fullName || "Unbekannt",
-          phone:  telefon,
-          email:  email,
-          msg:    msgText,
-          source: "Inzahlungnahme Formular"
-        };
-
         try {
-          const res = await fetch(API_URL, {
+          const body = encodeForm(form);
+
+          // IMPORTANT: post to "/" for Netlify Forms
+          const res = await fetch("/", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload)
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body
           });
 
-          if (!res.ok) {
-            throw new Error("HTTP " + res.status);
-          }
+          // some setups may redirect; treat 200-299 as ok
+          if (!res.ok) throw new Error("HTTP " + res.status);
 
           form.reset();
+          if (fileNameHidden) fileNameHidden.value = "";
           if (note) {
             note.style.display = "block";
-            note.style.color = "#16a34a"; // grün
+            note.style.color = "#16a34a";
             note.textContent = "Danke! Ihre Anfrage zur Inzahlungnahme wurde versendet.";
           }
         } catch (err) {
-          console.error("Fehler beim Senden des Inzahlungnahme-Formulars:", err);
+          console.error("Netlify Forms Fehler (Inzahlungnahme):", err);
           if (note) {
             note.style.display = "block";
-            note.style.color = "#b91c1c"; // rot
+            note.style.color = "#b91c1c";
             note.textContent = "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.";
           }
         } finally {
@@ -320,16 +304,35 @@
       });
     })();
   </script>
-  <!-- Netlify Forms: form definition (must exist in static HTML for detection) -->
-<form name="callback" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
-  <input type="hidden" name="form-name" value="callback" />
-  <input name="bot-field" />
-  <input name="name" />
-  <input name="phone" />
-  <input name="email" />
-  <textarea name="msg"></textarea>
-  <input name="source" />
-</form>
+
+  <!-- Netlify Forms: Hidden definitions (safer detection) -->
+  <form name="callback" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
+    <input type="hidden" name="form-name" value="callback" />
+    <input name="bot-field" />
+    <input name="name" />
+    <input name="phone" />
+    <input name="email" />
+    <textarea name="msg"></textarea>
+    <input name="source" />
+  </form>
+
+  <form name="inzahlungnahme" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
+    <input type="hidden" name="form-name" value="inzahlungnahme" />
+    <input name="bot-field" />
+    <input name="source" />
+    <input name="vorname" />
+    <input name="nachname" />
+    <input name="telefon" />
+    <input name="email" />
+    <input name="marke" />
+    <input name="modell" />
+    <input name="baujahr" />
+    <input name="preis" />
+    <input name="km" />
+    <input name="features" />
+    <textarea name="nachricht"></textarea>
+    <input name="fotos_name" />
+  </form>
 
 </body>
 </html>
