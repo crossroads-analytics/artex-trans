@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Garantie</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --brand:#13206f;
+      --ink:#0c1326;
+      --muted:#5b6685;
+      --bg:#f3f4f6;
+      --card:#ffffff;
+      --radius:22px;
+      --shadow:0 10px 30px rgba(0,0,0,.08);
+      --max:1100px;
+      --hdr-h:72px;
+      --line:#e5e7eb;
+      --soft:rgba(19,32,111,.06);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-padding-top:var(--hdr-h)}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--ink);
+      background:var(--bg);
+      padding-top:var(--hdr-h);
+    }
+
+    header.atx-header{
+      position:fixed !important;
+      top:0;left:0;right:0;
+      z-index:1000;
+    }
+
+    main{ padding:160px 0 60px; }
+    .wrap{ max-width:var(--max); margin:0 auto; padding:0 16px; }
+
+    .section-title{
+      font-family:"Bebas Neue", system-ui, sans-serif;
+      font-size:clamp(2rem,3vw,2.3rem);
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      text-align:center;
+      color:var(--brand);
+      margin:0 0 10px;
+    }
+
+    .section-sub{
+      max-width:860px;
+      margin:0 auto 24px;
+      text-align:center;
+      color:var(--muted);
+      font-size:.95rem;
+      line-height:1.7;
+    }
+
+    /* PDF Notice */
+    .pdf-note{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:16px;
+      box-shadow:0 8px 26px rgba(15,23,42,.06);
+      max-width:900px;
+      margin:0 auto 28px;
+      text-align:center;
+    }
+    .pdf-note a{
+      display:inline-block;
+      margin-top:8px;
+      padding:10px 16px;
+      border-radius:999px;
+      background:var(--brand);
+      color:#fff;
+      font-weight:700;
+      text-decoration:none;
+    }
+
+    /* Cards */
+    .care-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:18px;
+      margin-bottom:32px;
+    }
+    .care-card{
+      background:var(--card);
+      border-radius:var(--radius);
+      border:1px solid var(--line);
+      box-shadow:0 8px 26px rgba(15,23,42,.06);
+      padding:20px 18px;
+      text-align:center;
+    }
+    .care-card h3{
+      margin:0 0 6px;
+      font-size:1.05rem;
+      color:var(--brand);
+    }
+    .care-card p{
+      margin:0;
+      font-size:.9rem;
+      color:var(--muted);
+      line-height:1.55;
+    }
+
+    /* List */
+    .svc-list{
+      list-style:none;
+      padding:0;
+      margin:0 auto 26px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      max-width:900px;
+    }
+    .svc-item{
+      background:#ffffff;
+      border-radius:999px;
+      border:1px solid var(--line);
+      padding:10px 16px;
+      font-size:.9rem;
+      color:var(--ink);
+      box-shadow:0 4px 16px rgba(15,23,42,.05);
+    }
+
+    /* Disclaimer */
+    .blue-note{
+      background:var(--brand);
+      color:#fff;
+      border-radius:16px;
+      padding:18px;
+      line-height:1.7;
+      font-weight:600;
+      box-shadow:var(--shadow);
+      border:1px solid rgba(0,0,0,.06);
+      max-width:900px;
+      margin:0 auto;
+      text-align:center;
+    }
+
+    .small-note{
+      max-width:900px;
+      margin:14px auto 0;
+      color:var(--muted);
+      font-size:.85rem;
+      line-height:1.6;
+      text-align:center;
+    }
+
+    @media (max-width:900px){
+      .care-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+      main{ padding-top:120px; }
+    }
+    @media (max-width:640px){
+      main{ padding-top:70px; }
+      .care-grid{ grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <div id="header"></div>
+
+  <main>
+    <div class="wrap">
+
+      <h1 class="section-title">Garantie – Übersicht</h1>
+      <p class="section-sub">
+        Hier findest du eine kurze Orientierung zur Garantie. Welche Bauteile, Laufzeiten,
+        Voraussetzungen und Erstattungsregeln im Einzelfall gelten, richtet sich
+        nach dem Produktflyer und den Garantiebedingungen. Gern beraten wir dich unverbindlich
+        zur passenden Option.
+      </p>
+
+      <!-- PDF LINK -->
+      <div class="pdf-note">
+        <strong>Produktflyer </strong><br>
+        Alle Details zu Tarifumfang, Laufzeit, Voraussetzungen, Ausschlüssen und Ablauf
+        sind im Produktflyer geregelt.
+        <br>
+        <a href="assets/flyer/garantie.pdf" target="_blank" rel="noopener">
+          Produktflyer (PDF) öffnen
+        </a>
+      </div>
+
+      <!-- CORE CARDS -->
+      <div class="care-grid">
+        <div class="care-card">
+          <h3>Zweck der Garantie</h3>
+          <p>
+            Kann im Garantiezeitraum vor bestimmten, unerwarteten Reparaturkosten schützen
+            und zusätzliche Planungssicherheit bieten.
+          </p>
+        </div>
+
+        <div class="care-card">
+          <h3>Individuelle Ausgestaltung</h3>
+          <p>
+            Umfang und Voraussetzungen hängen u. a. vom gewählten Tarif,
+            Fahrzeugdaten und Laufleistung ab.
+          </p>
+        </div>
+
+        <div class="care-card">
+          <h3>Verbindliche Regeln</h3>
+          <p>
+            Schadenmeldung, Ablauf und Leistungsprüfung sind ausschließlich
+            im Produktflyer geregelt.
+          </p>
+        </div>
+      </div>
+
+      <!-- OPTIONS LIST -->
+      <ul class="svc-list">
+        <li class="svc-item">Tarifoptionen mit unterschiedlichem Leistungsumfang</li>
+        <li class="svc-item">Laufzeit und Absicherung abhängig von Alter und Laufleistung des Fahrzeugs</li>
+        <li class="svc-item">Mögliche Abdeckung bestimmter Fahrzeugkomponenten je nach Tarif</li>
+        <li class="svc-item">Schadenmeldung vor Reparaturstart gemäß den im Produktflyer beschriebenen Schritten</li>
+        <li class="svc-item">Prüfung und Entscheidung über eine Kostenübernahme nach Garantiebedingungen</li>
+        <li class="svc-item">Ausschlüsse und Voraussetzungen sind verbindlich im Produktflyer aufgeführt</li>
+      </ul>
+
+      <!-- DISCLAIMER -->
+      <div class="blue-note">
+        Diese Seite stellt keine Leistungszusage dar.<br>
+      </div>
+
+      <p class="small-note">
+        Bei Fragen unterstützen wir dich gern unverbindlich bei der Auswahl eines passenden Garantiepakets.
+      </p>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <div id="footer"></div>
+
+  <!-- Header/Footer Loader -->
+  <script>
+    (function () {
+      function loadScript(src, cb){
+        const s=document.createElement('script');
+        s.src=src; s.defer=true;
+        s.onload=()=>cb && cb(true);
+        s.onerror=()=>cb && cb(false);
+        document.head.appendChild(s);
+      }
+      loadScript('js/header.js', ok=>{ if(!ok) loadScript('assets/js/header.js'); });
+      loadScript('js/footer.js', ok=>{ if(!ok) loadScript('assets/js/footer.js'); });
+    })();
+  </script>
+</body>
+</html>

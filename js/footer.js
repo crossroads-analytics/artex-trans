@@ -5,13 +5,22 @@
   <div class="footer-inner">
     <div class="footer-grid">
       <div class="footer-left">
-        <img class="ft-logo" src="https://artex-trans.de/wp-content/uploads/2021/07/LOGO-ARTEX-TRANS-2-300x67.jpg" alt="Artex-Trans Autoagentur">
-        <h3>Kontakt</h3>
-        <p>Norderneystraße 7<br>28217 Bremen<br>Deutschland</p>
-        <p>Tel.: <a href="tel:+494213965171">+49 (0) 421 3965171</a></p>
-        <p>E-Mail: <a href="mailto:info@artex-trans.de">info@artex-trans.de</a></p>
-        <p>Öffnungszeiten nach Vereinbarung.</p>
-      </div>
+  <img class="ft-logo" src="https://artex-trans.de/wp-content/uploads/2021/07/LOGO-ARTEX-TRANS-2-300x67.jpg" alt="Artex-Trans Autoagentur">
+  <h3>Kontakt</h3>
+  <p>
+    Norderneystraße 7<br>
+    28217 Bremen<br>
+    Deutschland
+  </p>
+  <p>Tel.: <a href="tel:+494213965171">+49 (0) 421 3965171</a></p>
+  <p>E-Mail: <a href="mailto:info@artex-trans.de">info@artex-trans.de</a></p>
+  <p>
+    <strong>Öffnungszeiten:</strong><br>
+    Montag – Samstag: 10:00 – 18:00 Uhr<br>
+    Sonntag: geschlossen
+  </p>
+</div>
+
 
       <div class="footer-right">
         <h3>Rückruf-Service</h3>

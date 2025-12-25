@@ -88,6 +88,7 @@
             <a class="hdr-dd-item" role="menuitem" href="service_inzahlungnahme.html">Inzahlungnahme</a>
             <a class="hdr-dd-item" role="menuitem" href="service_export.html">Export-Service</a>
             <a class="hdr-dd-item" role="menuitem" href="service_aufbereitung.html">KFZ-Aufbereitung</a>
+            <a class="hdr-dd-item" role="menuitem" href="garantie.html">Garantie</a>
           </div>
         </div>
 
