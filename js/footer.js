@@ -152,15 +152,19 @@
       }
 
       try {
-        const body = encodeForm(form);
+        const postUrl = window.location.pathname || "/";
 
-        const res = await fetch("/", {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body
-        });
+const res = await fetch(postUrl, {
+  method: "POST",
+  headers: { "Content-Type": "application/x-www-form-urlencoded" },
+  body
+});
 
-        if (!res.ok) throw new Error("HTTP " + res.status);
+// Netlify can respond with 200/201 or redirect (302) depending on handling
+if (![200, 201, 302].includes(res.status)) {
+  throw new Error("HTTP " + res.status);
+}
+
 
         form.reset();
         if (note) {
