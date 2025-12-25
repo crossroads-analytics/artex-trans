@@ -115,6 +115,8 @@
       border-color:#fecdd3;
       color:#7f1d1d;
     }
+    .upload-status ul{margin:8px 0 0 16px}
+    .upload-status li{margin:4px 0}
 
     @media (max-width:980px){
       .form-grid{grid-template-columns:1fr}
@@ -140,20 +142,17 @@
                 netlify-honeypot="bot-field"
                 action="/danke/">
 
-            <!-- required by Netlify -->
             <input type="hidden" name="form-name" value="inzahlungnahme">
 
-            <!-- honeypot (spam trap) -->
             <p style="display:none;">
               <label>Bitte nicht ausfüllen: <input name="bot-field"></label>
             </p>
 
-            <!-- extra context -->
             <input type="hidden" name="source" value="Inzahlungnahme Formular">
 
-            <!-- These will be filled by Cloudinary upload -->
+            <!-- Cloudinary results -->
             <input type="hidden" name="uploads_json" id="uploads_json" value="">
-            <input type="hidden" name="uploads_urls" id="uploads_urls" value="">
+            <textarea name="uploads_urls" id="uploads_urls" style="display:none"></textarea>
 
             <div class="form-grid">
               <input class="input" type="text" name="vorname" placeholder="Vorname" required>
@@ -183,11 +182,18 @@
               <textarea class="textarea" name="nachricht" placeholder="Nachricht" style="grid-column:1/-1"></textarea>
 
               <!-- Multi-file upload -->
-              <input class="file" id="fotos" type="file" name="fotos" multiple accept="image/*,application/pdf" style="grid-column:1/-1">
+              <input
+                class="file"
+                id="fotos"
+                type="file"
+                name="fotos"
+                multiple
+                accept="image/*,application/pdf"
+                style="grid-column:1/-1">
 
               <div class="file-hint">
-                Hinweis: Beim Senden werden Ihre Dateien zuerst zu Cloudinary hochgeladen und dann als Links mit der Anfrage übertragen.
-                Unterstützt: Bilder und PDF.
+                Hinweis: Beim Senden werden die Dateien zuerst zu Cloudinary hochgeladen und dann als Links per Formular übertragen.
+                Unterstützt: Bilder & PDF.
               </div>
 
               <div id="uploadStatus" class="upload-status"></div>
@@ -210,10 +216,8 @@
     </div>
   </main>
 
-  <!-- Footer Mount -->
   <div id="footer"></div>
 
-  <!-- Header/Footer Loader (mit Fallback) -->
   <script>
     (function () {
       function loadScript(src, cb){
@@ -228,13 +232,16 @@
     })();
   </script>
 
-  <!-- FINAL: Cloudinary Upload (Unsigned) + Netlify Forms submit -->
   <script>
     (function () {
-      // === YOUR CLOUDINARY SETTINGS ===
+      // === CLOUDINARY SETTINGS ===
       const CLOUD_NAME = "dxmcnwkz5";
       const UPLOAD_PRESET = "artex_upload";
-      const CLOUDINARY_ENDPOINT = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/auto/upload`;
+      const ENDPOINT = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/auto/upload`;
+
+      // === LIMITS (prevent weird failures) ===
+      const MAX_FILES = 10;
+      const MAX_MB_PER_FILE = 10; // 10MB
 
       const form = document.getElementById("inzahlungnahme-form");
       const note = document.getElementById("inzahlungnahme-note");
@@ -245,11 +252,11 @@
 
       if (!form) return;
 
-      function setStatus(msg, type){
+      function setStatus(html, type){
         if (!statusEl) return;
         statusEl.classList.toggle("error", type === "error");
         statusEl.style.display = "block";
-        statusEl.innerHTML = msg;
+        statusEl.innerHTML = html;
       }
       function clearStatus(){
         if (!statusEl) return;
@@ -258,45 +265,60 @@
         statusEl.innerHTML = "";
       }
 
+      function validateFiles(files){
+        if (!files.length) return;
+
+        if (files.length > MAX_FILES) {
+          throw new Error(`Maximal ${MAX_FILES} Anhänge erlaubt. Du hast ${files.length} ausgewählt.`);
+        }
+
+        for (const f of files) {
+          const isPdf = (f.type === "application/pdf") || f.name.toLowerCase().endsWith(".pdf");
+          const isImage = (f.type || "").startsWith("image/");
+          if (!isPdf && !isImage) {
+            throw new Error(`Dateityp nicht erlaubt: ${f.name}`);
+          }
+          const mb = f.size / (1024*1024);
+          if (mb > MAX_MB_PER_FILE) {
+            throw new Error(`Datei zu groß (${mb.toFixed(1)}MB): ${f.name}. Max ${MAX_MB_PER_FILE}MB pro Datei.`);
+          }
+        }
+      }
+
       async function uploadOne(file){
         const fd = new FormData();
         fd.append("file", file);
         fd.append("upload_preset", UPLOAD_PRESET);
         fd.append("folder", "artex-uploads");
 
-        // optional metadata
-        fd.append("context", `filename=${encodeURIComponent(file.name)}`);
+        const res = await fetch(ENDPOINT, { method: "POST", body: fd });
 
-        const res = await fetch(CLOUDINARY_ENDPOINT, { method:"POST", body: fd });
+        // Cloudinary errors can be JSON or text
+        let data;
+        const ct = res.headers.get("content-type") || "";
+        if (ct.includes("application/json")) data = await res.json();
+        else data = { raw: await res.text().catch(()=> "") };
+
         if (!res.ok) {
-          const t = await res.text().catch(()=> "");
-          throw new Error(`Cloudinary upload failed (${res.status}): ${t}`);
+          const msg = data?.error?.message || data?.raw || `HTTP ${res.status}`;
+          throw new Error(msg);
         }
-        const data = await res.json();
 
         return {
           original_filename: file.name,
           bytes: file.size,
-          resource_type: data.resource_type,
-          format: data.format || "",
           secure_url: data.secure_url,
-          public_id: data.public_id
+          public_id: data.public_id,
+          resource_type: data.resource_type,
+          format: data.format || ""
         };
       }
 
       async function uploadAll(files){
         const out = [];
-        for (let i=0; i<files.length; i++){
+        for (let i = 0; i < files.length; i++) {
           const f = files[i];
-
-          // basic safety: limit to images/pdf
-          const isPdf = (f.type === "application/pdf") || f.name.toLowerCase().endsWith(".pdf");
-          const isImage = f.type.startsWith("image/");
-          if (!isPdf && !isImage){
-            throw new Error(`Dateityp nicht erlaubt: ${f.name}`);
-          }
-
-          setStatus(`Upload läuft… <strong>${i+1}</strong> / <strong>${files.length}</strong> (${f.name})`);
+          setStatus(`Upload läuft… <strong>${i+1}</strong> / <strong>${files.length}</strong><br><ul><li>${f.name}</li></ul>`);
           out.push(await uploadOne(f));
         }
         return out;
@@ -307,8 +329,7 @@
         const params = new URLSearchParams();
 
         for (const [k, v] of fd.entries()) {
-          // do NOT send File objects to Netlify; we send URLs instead
-          if (k === "fotos" && v instanceof File) continue;
+          if (k === "fotos" && v instanceof File) continue; // don't send files to Netlify
           params.append(k, v);
         }
         return params.toString();
@@ -332,20 +353,22 @@
         try {
           const files = (fileInput && fileInput.files) ? Array.from(fileInput.files) : [];
 
-          // 1) Upload files to Cloudinary (if any)
+          // DEBUG: shows if browser really selected multiple
+          console.log("Selected files:", files.map(f => `${f.name} (${f.type || "no-type"})`));
+
+          validateFiles(files);
+
           let uploads = [];
           if (files.length) {
             setStatus(`Upload startet… <strong>${files.length}</strong> Datei(en)`);
             uploads = await uploadAll(files);
 
-            // store results into hidden fields for Netlify submission
             uploadsJsonEl.value = JSON.stringify(uploads);
             uploadsUrlsEl.value = uploads.map(u => `${u.original_filename}: ${u.secure_url}`).join("\n");
 
             setStatus(`✅ Upload fertig. Sende Formular…`);
           }
 
-          // 2) Submit to Netlify Forms
           const body = encodeForm(form);
 
           const res = await fetch("/", {
@@ -354,9 +377,8 @@
             body
           });
 
-          if (!res.ok) throw new Error("Netlify HTTP " + res.status);
+          if (!res.ok) throw new Error("Netlify submit failed: HTTP " + res.status);
 
-          // success
           form.reset();
           uploadsJsonEl.value = "";
           uploadsUrlsEl.value = "";
@@ -385,17 +407,7 @@
     })();
   </script>
 
-  <!-- Netlify Forms: Hidden definitions (safer detection) -->
-  <form name="callback" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
-    <input type="hidden" name="form-name" value="callback" />
-    <input name="bot-field" />
-    <input name="name" />
-    <input name="phone" />
-    <input name="email" />
-    <textarea name="msg"></textarea>
-    <input name="source" />
-  </form>
-
+  <!-- Netlify Forms: Hidden definitions -->
   <form name="inzahlungnahme" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
     <input type="hidden" name="form-name" value="inzahlungnahme" />
     <input name="bot-field" />
