@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Export-Service – Artex-Trans Autoagentur</title>
+  <title>Zulassungs- & Export-Service – Artex-Trans Autoagentur</title>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,6 +21,7 @@
       --shadow:0 10px 30px rgba(0,0,0,.08);
       --max:1100px;
       --hdr-h:72px;
+      --line:#e6e8f1;
     }
 
     *{box-sizing:border-box}
@@ -39,11 +40,8 @@
       z-index:1000;
     }
 
-    main{
-      padding:180px 0 60px;
-    }
+    main{ padding:180px 0 60px; }
 
-    /* Layout jetzt EINSPALTIG */
     .wrap{
       max-width:var(--max);
       margin:0 auto;
@@ -52,38 +50,97 @@
 
     .card{
       background:var(--card);
-      border:1px solid #e6e8f1;
+      border:1px solid var(--line);
       border-radius:var(--radius);
       box-shadow:var(--shadow);
       margin-bottom:24px;
+      overflow:hidden;
     }
 
     .card h2{
       margin:0;
-      padding:16px 18px 0;
+      padding:16px 18px;
       color:var(--blue);
-      font-weight:800;
+      font-weight:900;
       font-size:22px;
     }
 
     .card-body{
-      padding:14px 16px 18px;
+      padding:0 16px 18px;
     }
 
-    /* Export-Text */
+    .lead{
+      margin:0 0 14px;
+      color:var(--muted);
+      line-height:1.7;
+      font-size:15px;
+      font-weight:600;
+    }
+
+    /* Export text */
     .export-info{
-      line-height:1.6;
+      line-height:1.7;
       color:#0e1744;
       font-weight:600;
       font-size:15px;
     }
-    .export-info p{
-      margin:0 0 14px;
+    .export-info p{ margin:0 0 14px; }
+    .export-info p:last-child{ margin-bottom:0; }
+
+    /* Price sections */
+    .price-block{
+      background:#f7f8fc;
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:14px;
+      margin-top:14px;
     }
-    .export-info p:last-child{
-      margin-bottom:0;
+    .price-block h3{
+      margin:0 0 10px;
+      color:var(--blue);
+      font-size:16px;
+      font-weight:900;
     }
 
+    table.prices{
+      width:100%;
+      border-collapse:collapse;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:12px;
+      overflow:hidden;
+    }
+    table.prices th, table.prices td{
+      padding:12px 12px;
+      border-bottom:1px solid var(--line);
+      text-align:left;
+      font-size:14px;
+      vertical-align:top;
+    }
+    table.prices th{
+      background:#f2f4ff;
+      color:var(--blue);
+      font-weight:900;
+      width:72%;
+    }
+    table.prices td{
+      font-weight:800;
+      color:#0e1744;
+      white-space:nowrap;
+      text-align:right;
+    }
+    table.prices tr:last-child th,
+    table.prices tr:last-child td{
+      border-bottom:none;
+    }
+
+    .note{
+      margin:10px 2px 0;
+      font-size:12.5px;
+      color:var(--muted);
+      line-height:1.6;
+      font-weight:600;
+    }
   </style>
 </head>
 <body>
@@ -94,7 +151,49 @@
   <main>
     <div class="wrap">
 
-      <!-- Export-Info Card -->
+      <!-- Zulassungs-Service Card -->
+      <section class="card">
+        <h2>Zulassungs-Service</h2>
+        <div class="card-body">
+          <p class="lead">
+            Auf Wunsch übernehmen wir die Zulassung und – falls benötigt – auch die Überführung Ihres Fahrzeugs.
+            Unten findest du unsere aktuelle Service-Preisliste.
+          </p>
+
+          <div class="price-block">
+            <h3>KFZ-Zulassung</h3>
+            <table class="prices" aria-label="Preisliste KFZ-Zulassung">
+              <tr>
+                <th>Bremen (inkl. Wunschkennzeichen)</th>
+                <td>200,00&nbsp;€</td>
+              </tr>
+              <tr>
+                <th>Kurzkennzeichen (5 Tage gültig, inkl. Haftpflicht)</th>
+                <td>160,00&nbsp;€</td>
+              </tr>
+            </table>
+          </div>
+
+          <div class="price-block">
+            <h3>KFZ-Überführung (EU-weit)</h3>
+            <table class="prices" aria-label="Preisliste KFZ-Überführung">
+              <tr>
+                <th>Auf eigener Achse</th>
+                <td>0,89&nbsp;€ / km</td>
+              </tr>
+              <tr>
+                <th>Per Transporter/Anhänger</th>
+                <td>auf Anfrage</td>
+              </tr>
+            </table>
+            <p class="note">
+              Hinweis: Preise beziehen sich auf die Service-Leistung. Weitere externe Gebühren/Abgaben können je nach Fall anfallen.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Export-Service Card -->
       <section class="card">
         <h2>Export-Service</h2>
         <div class="card-body export-info">
