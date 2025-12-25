@@ -37,7 +37,7 @@
 
           <!-- honeypot (spam trap) -->
           <p style="display:none;">
-            <label>Bitte nicht ausfüllen: <input name="bot-field"></label>
+            <label>Bitte nicht ausfüllen: <input name="bot-field" autocomplete="off"></label>
           </p>
 
           <!-- extra context -->
@@ -73,7 +73,9 @@
             Mit dem Absenden stimmen Sie zu, dass wir Sie zum Zweck der Kontaktaufnahme zurückrufen dürfen.
           </p>
 
-          <p id="atx-form-note" style="display:none;color:#6b7280;margin-top:8px">Danke! Wir melden uns zeitnah.</p>
+          <p id="atx-form-note" style="display:none;color:#6b7280;margin-top:8px">
+            Danke! Wir melden uns zeitnah.
+          </p>
         </form>
       </div>
     </div>
@@ -131,10 +133,9 @@
     if (target) target.innerHTML = html;
     else document.body.insertAdjacentHTML("beforeend", html);
 
-    // --- Formular -> Netlify Forms ---
+    // --- Formular -> Netlify Forms (AJAX) ---
     const form = document.getElementById("atx-callback-form");
     const note = document.getElementById("atx-form-note");
-
     if (!form) return;
 
     form.addEventListener("submit", async (e) => {
@@ -152,19 +153,26 @@
       }
 
       try {
+        // ✅ WICHTIG: Payload erzeugen
+        const body = encodeForm(form);
+
+        // ✅ Auf aktueller Seite posten (robuster bei Multi-Page)
         const postUrl = window.location.pathname || "/";
 
-const res = await fetch(postUrl, {
-  method: "POST",
-  headers: { "Content-Type": "application/x-www-form-urlencoded" },
-  body
-});
+        const res = await fetch(postUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+            "Accept": "application/json"
+          },
+          body
+        });
 
-// Netlify can respond with 200/201 or redirect (302) depending on handling
-if (![200, 201, 302].includes(res.status)) {
-  throw new Error("HTTP " + res.status);
-}
-
+        // ✅ Netlify AJAX: i.d.R. 200/201
+        if (![200, 201].includes(res.status)) {
+          const t = await res.text().catch(() => "");
+          throw new Error("HTTP " + res.status + " " + t);
+        }
 
         form.reset();
         if (note) {
@@ -172,6 +180,10 @@ if (![200, 201, 302].includes(res.status)) {
           note.style.color = "#16a34a";
           note.textContent = "Danke! Ihre Anfrage wurde versendet.";
         }
+
+        // Optional: Weiterleitung zur Danke-Seite
+        // window.location.href = "/danke/";
+
       } catch (err) {
         console.error("Netlify Forms Fehler:", err);
         if (note) {
